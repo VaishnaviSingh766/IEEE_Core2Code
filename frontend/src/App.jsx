@@ -13,9 +13,9 @@ import Cursor from './utils/Cursor'
 
 const Structure = () => {
   return (
-    <div className='bg-black text-white select-none min-h-screen flex flex-col justify-between'>
+    <div className='bg-black text-white select-none min-h-screen w-full flex flex-col'>
       <Navbar />
-      <main className='flex-1 flex flex-col'>
+      <main className='flex-1 w-full flex flex-col'>
         <Outlet />
       </main>
       <Footer />
@@ -57,7 +57,7 @@ const App = () => {
   }
 
   return (
-    <div>
+    <div className="w-full min-h-screen flex flex-col bg-black text-white">
       <RouterProvider router={router} />
       <Cursor />
     </div>
