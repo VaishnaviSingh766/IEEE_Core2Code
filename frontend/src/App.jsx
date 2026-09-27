@@ -1,0 +1,67 @@
+import React, { useState, useEffect } from 'react'
+import { createBrowserRouter, Outlet, RouterProvider } from 'react-router-dom'
+import Navbar from './components/Navbar'
+import Footer from './components/Footer'
+import Loader from './components/Loader'
+import IntroLoader from "./components/IntroLoader";
+
+import Home from './pages/Home'
+import AboutUs from './pages/AboutUs'
+import ContactUs from './pages/ContactUs'
+import Timeline from './components/Timeline'
+import Cursor from './utils/Cursor'
+
+const Structure = () => {
+  return (
+    <div className='bg-black text-white select-none min-h-screen flex flex-col justify-between'>
+      <Navbar />
+      <main className='flex-1 flex flex-col'>
+        <Outlet />
+      </main>
+      <Footer />
+    </div>
+  )
+}
+
+const router = createBrowserRouter([
+  {
+    path: '/',
+    element: <Structure />,
+    children: [
+      {
+        path: '/',
+        element: <Home />
+      },
+      {
+        path: '/about',
+        element: <AboutUs />
+      },
+      {
+        path: '/contactUs',
+        element: <ContactUs />
+      }
+    ]
+  }
+])
+
+const App = () => {
+
+  const [loading, setLoading] = useState(true);
+  if (loading) {
+    return (
+      <>
+        <IntroLoader onComplete={() => setLoading(false)} />
+        <Cursor />
+      </>
+    );
+  }
+
+  return (
+    <div>
+      <RouterProvider router={router} />
+      <Cursor />
+    </div>
+  )
+}
+
+export default App
