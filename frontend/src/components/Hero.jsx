@@ -1,4 +1,8 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useLayoutEffect, useRef, useState } from 'react'
+import gsap from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
+
+gsap.registerPlugin(ScrollTrigger)
 
 // Responsive fragment positioning configuration (desktop = identity / no-op)
 const FRAG_CONFIG = {
@@ -206,244 +210,381 @@ export default function Hero() {
     setTargetMouse({ x: 0, y: 0 })
   }
 
-  // 4. GSAP & ScrollTrigger Dynamic Loading & Lifecycle Management
-  useEffect(() => {
-    let gsapContext = null
+  // GSAP + ScrollTrigger Hero Animation
+  useLayoutEffect(() => {
+    if (!heroRef.current || !heroInnerRef.current) return
 
-    const loadScript = (src) => {
-      return new Promise((resolve, reject) => {
-        if (document.querySelector(`script[src="${src}"]`)) {
-          resolve()
-          return
-        }
-        const s = document.createElement('script')
-        s.src = src
-        s.async = true
-        s.onload = resolve
-        s.onerror = reject
-        document.head.appendChild(s)
-      })
-    }
+    const ctx = gsap.context(() => {
+      // Initial setup
+      gsap.set('.hero-content-layer', { opacity: 1 })
+      gsap.set('.fragment-svg', { opacity: 1 })
 
-    const initHeroAnimation = () => {
-      const gsap = window.gsap
-      if (!gsap) return
+      if (reducedMotion) {
+        gsap.set(
+          [
+            '.fragment-micro',
+            '.fragment-plate',
+            '.fragment-outline',
+            '.hero-header-bar',
+            '.hero-eyebrow-pill',
+            '.hero-headline-word',
+            '.hero-tagline-wrap',
+            '.hero-description-wrap',
+            '.hero-btn',
+            '.hero-scroll-indicator'
+          ],
+          {
+            opacity: 1,
+            clearProps: 'all'
+          }
+        )
 
-      if (window.ScrollTrigger) {
-        gsap.registerPlugin(window.ScrollTrigger)
+        return
       }
 
-      gsapContext = gsap.context(() => {
-        // ENTRANCE TIMELINE
-        const tl = gsap.timeline({ defaults: { ease: 'power3.out' } })
+      // ==============================
+      // ENTRANCE ANIMATION
+      // ==============================
 
-        // Initial setup
-        gsap.set('.hero-content-layer', { opacity: 1 })
-        gsap.set('.fragment-svg', { opacity: 1 })
-
-        // Sequential cinematic entrance
-        tl
-          // 1. Small atmospheric fragments appear first
-          .fromTo(
-            '.fragment-micro',
-            { opacity: 0, scale: 0.8 },
-            { opacity: 1, scale: 1, duration: 1.2, stagger: 0.05 },
-            0.1
-          )
-          // 2. Golden metallic plates reveal with spatial expansion
-          .fromTo(
-            '.fragment-plate',
-            { opacity: 0, scale: 0.88, rotateZ: 4 },
-            { opacity: 1, scale: 1, rotateZ: 0, duration: 1.8, stagger: 0.08, ease: 'expo.out' },
-            0.3
-          )
-          // 3. Thin architectural outlines draw in
-          .fromTo(
-            '.fragment-outline',
-            { strokeDashoffset: 600, opacity: 0 },
-            { strokeDashoffset: 0, opacity: 1, duration: 1.6, stagger: 0.1, ease: 'power2.inOut' },
-            0.5
-          )
-          // 4. Top HUD bar
-          .fromTo(
-            '.hero-header-bar',
-            { opacity: 0, y: -16 },
-            { opacity: 1, y: 0, duration: 0.8 },
-            0.7
-          )
-          // 5. Eyebrow badge
-          .fromTo(
-            '.hero-eyebrow-pill',
-            { opacity: 0, x: -20 },
-            { opacity: 1, x: 0, duration: 0.7 },
-            0.85
-          )
-          // 6. Main typography reveals
-          .fromTo(
-            '.hero-headline-word',
-            { opacity: 0, y: 40, skewY: 1.5 },
-            { opacity: 1, y: 0, skewY: 0, duration: 0.9, stagger: 0.12, ease: 'expo.out' },
-            1.0
-          )
-          // 7. Tagline & description
-          .fromTo(
-            '.hero-tagline-wrap',
-            { opacity: 0, y: 18 },
-            { opacity: 1, y: 0, duration: 0.7 },
-            1.3
-          )
-          .fromTo(
-            '.hero-description-wrap',
-            { opacity: 0, y: 15 },
-            { opacity: 1, y: 0, duration: 0.7 },
-            1.4
-          )
-          // 8. Buttons appear last
-          .fromTo(
-            '.hero-btn',
-            { opacity: 0, y: 20 },
-            { opacity: 1, y: 0, duration: 0.7, stagger: 0.12 },
-            1.55
-          )
-          // 9. Scroll prompt
-          .fromTo(
-            '.hero-scroll-indicator',
-            { opacity: 0 },
-            { opacity: 1, duration: 0.8 },
-            1.75
-          )
-
-        // SCROLL TRIGGER: ASSEMBLE -> REVEAL -> DISASSEMBLE
-        if (!reducedMotion && window.ScrollTrigger && heroRef.current) {
-          const isDesktop =
-            window.innerWidth >= 1024 && window.innerWidth >= window.innerHeight
-
-          const scrollTl = gsap.timeline({
-            scrollTrigger: {
-              trigger: heroRef.current,
-              start: 'top top',
-              end: isDesktop ? '+=140%' : '+=90%',
-              pin: heroInnerRef.current,
-              pinSpacing: true,
-              pinReparent: true,
-              scrub: 0.9,
-              anticipatePin: 1,
-            },
-          })
-
-          // Phase 1 (0–25%): Scroll indicator vanishes, fragments begin convergent assembly
-          scrollTl.to('.hero-scroll-indicator', { opacity: 0, y: 15, ease: 'none', duration: 0.2 }, 0)
-
-          scrollTl.to('.frag-converge-a', {
-            x: isDesktop ? -40 : -4,
-            y: isDesktop ? 30 : 3,
-            rotateZ: isDesktop ? -4 : 0,
-            ease: 'none',
-            duration: 0.35,
-          }, 0.05)
-
-          scrollTl.to('.frag-converge-b', {
-            x: isDesktop ? 35 : 4,
-            y: isDesktop ? -25 : -3,
-            rotateZ: isDesktop ? 5 : 0,
-            ease: 'none',
-            duration: 0.35,
-          }, 0.05)
-
-          // Phase 2 (25–60%): Secondary rotation, scaling toward viewer, text subtle drift
-          scrollTl.to('.frag-foreground', {
-            scale: isDesktop ? 1.18 : 1.01,
-            filter: 'drop-shadow(0 0 25px rgba(212,175,55,0.45))',
-            ease: 'none',
-            duration: 0.4,
-          }, 0.25)
-
-          scrollTl.to('.frag-midground', {
-            rotateZ: isDesktop ? 8 : 1,
-            scale: isDesktop ? 1.06 : 1.005,
-            ease: 'none',
-            duration: 0.4,
-          }, 0.25)
-
-          scrollTl.to('.hero-text-block', {
-            y: isDesktop ? -35 : -14,
-            opacity: 0.85,
-            ease: 'none',
-            duration: 0.4,
-          }, 0.25)
-
-          // Phase 3 (60–90%): Disassemble — fragments scatter outward, text ascends and fades
-          scrollTl.to('.frag-scatter-left', {
-            x: isDesktop ? -120 : -10,
-            y: isDesktop ? -60 : -6,
-            opacity: isDesktop ? 0.2 : 0.35,
-            scale: isDesktop ? 0.9 : 0.98,
-            ease: 'power2.in',
-            duration: 0.45,
-          }, 0.55)
-
-          scrollTl.to('.frag-scatter-right', {
-            x: isDesktop ? 140 : 10,
-            y: isDesktop ? 80 : 6,
-            opacity: isDesktop ? 0.2 : 0.35,
-            scale: isDesktop ? 1.12 : 1.01,
-            ease: 'power2.in',
-            duration: 0.45,
-          }, 0.55)
-
-          scrollTl.to('.frag-scatter-up', {
-            y: isDesktop ? -110 : -8,
-            opacity: 0.15,
-            ease: 'power2.in',
-            duration: 0.45,
-          }, 0.55)
-
-          scrollTl.to('.hero-text-block', {
-            y: isDesktop ? -80 : -35,
-            opacity: 0.15,
-            filter: 'blur(3px)',
-            ease: 'none',
-            duration: 0.4,
-          }, 0.6)
-
-          // Phase 4 (90–100%): Clean transition into next section
-          scrollTl.to('.hero-content-layer', {
-            opacity: 0,
-            y: isDesktop ? -100 : -30,
-            ease: 'power2.in',
-            duration: 0.25,
-          }, 0.85)
-
-          scrollTl.to('.fragment-svg', {
-            opacity: 0.1,
-            scale: isDesktop ? 1.05 : 1.01,
-            ease: 'power2.in',
-            duration: 0.25,
-          }, 0.85)
+      const tl = gsap.timeline({
+        defaults: {
+          ease: 'power3.out'
         }
-      }, heroRef)
-    }
+      })
 
-    if (window.gsap && window.ScrollTrigger) {
-      initHeroAnimation()
-    } else {
-      loadScript('https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js')
-        .then(() => loadScript('https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js'))
-        .then(() => initHeroAnimation())
-        .catch(() => {
-          // Graceful fallback for offline environments
-          const el = heroRef.current?.querySelectorAll('.hero-content-layer, .fragment-plate, .fragment-micro')
-          el?.forEach((item) => {
-            item.style.opacity = '1'
-          })
-        })
-    }
+      tl
+        // 1. Atmospheric fragments
+        .fromTo(
+          '.fragment-micro',
+          {
+            opacity: 0,
+            scale: 0.8
+          },
+          {
+            opacity: 1,
+            scale: 1,
+            duration: 1.2,
+            stagger: 0.05
+          },
+          0.1
+        )
+
+        // 2. Golden plates
+        .fromTo(
+          '.fragment-plate',
+          {
+            opacity: 0,
+            scale: 0.88,
+            rotateZ: 4
+          },
+          {
+            opacity: 1,
+            scale: 1,
+            rotateZ: 0,
+            duration: 1.8,
+            stagger: 0.08,
+            ease: 'expo.out'
+          },
+          0.3
+        )
+
+        // 3. Architectural outlines
+        .fromTo(
+          '.fragment-outline',
+          {
+            strokeDashoffset: 600,
+            opacity: 0
+          },
+          {
+            strokeDashoffset: 0,
+            opacity: 1,
+            duration: 1.6,
+            stagger: 0.1,
+            ease: 'power2.inOut'
+          },
+          0.5
+        )
+
+        // 4. Header
+        .fromTo(
+          '.hero-header-bar',
+          {
+            opacity: 0,
+            y: -16
+          },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.8
+          },
+          0.7
+        )
+
+        // 5. Eyebrow
+        .fromTo(
+          '.hero-eyebrow-pill',
+          {
+            opacity: 0,
+            x: -20
+          },
+          {
+            opacity: 1,
+            x: 0,
+            duration: 0.7
+          },
+          0.85
+        )
+
+        // 6. Headline
+        .fromTo(
+          '.hero-headline-word',
+          {
+            opacity: 0,
+            y: 40,
+            skewY: 1.5
+          },
+          {
+            opacity: 1,
+            y: 0,
+            skewY: 0,
+            duration: 0.9,
+            stagger: 0.12,
+            ease: 'expo.out'
+          },
+          1
+        )
+
+        // 7. Tagline
+        .fromTo(
+          '.hero-tagline-wrap',
+          {
+            opacity: 0,
+            y: 18
+          },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.7
+          },
+          1.3
+        )
+
+        // 8. Description
+        .fromTo(
+          '.hero-description-wrap',
+          {
+            opacity: 0,
+            y: 15
+          },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.7
+          },
+          1.4
+        )
+
+        // 9. Buttons
+        .fromTo(
+          '.hero-btn',
+          {
+            opacity: 0,
+            y: 20
+          },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.7,
+            stagger: 0.12
+          },
+          1.55
+        )
+
+        // 10. Scroll indicator
+        .fromTo(
+          '.hero-scroll-indicator',
+          {
+            opacity: 0
+          },
+          {
+            opacity: 1,
+            duration: 0.8
+          },
+          1.75
+        )
+
+      // ==============================
+      // SCROLL ANIMATION
+      // ==============================
+
+      const isDesktop =
+        window.innerWidth >= 1024 &&
+        window.innerWidth >= window.innerHeight
+
+      const scrollTl = gsap.timeline({
+        scrollTrigger: {
+          trigger: heroRef.current,
+          start: 'top top',
+          end: isDesktop ? '+=140%' : '+=90%',
+          pin: heroInnerRef.current,
+          pinSpacing: true,
+          scrub: 0.9,
+          anticipatePin: 1
+        }
+      })
+
+      // Phase 1
+      scrollTl.to(
+        '.hero-scroll-indicator',
+        {
+          opacity: 0,
+          y: 15,
+          ease: 'none',
+          duration: 0.2
+        },
+        0
+      )
+
+      scrollTl.to(
+        '.frag-converge-a',
+        {
+          x: isDesktop ? -40 : -4,
+          y: isDesktop ? 30 : 3,
+          rotateZ: isDesktop ? -4 : 0,
+          ease: 'none',
+          duration: 0.35
+        },
+        0.05
+      )
+
+      scrollTl.to(
+        '.frag-converge-b',
+        {
+          x: isDesktop ? 35 : 4,
+          y: isDesktop ? -25 : -3,
+          rotateZ: isDesktop ? 5 : 0,
+          ease: 'none',
+          duration: 0.35
+        },
+        0.05
+      )
+
+      // Phase 2
+      scrollTl.to(
+        '.frag-foreground',
+        {
+          scale: isDesktop ? 1.18 : 1.01,
+          filter:
+            'drop-shadow(0 0 25px rgba(212,175,55,0.45))',
+          ease: 'none',
+          duration: 0.4
+        },
+        0.25
+      )
+
+      scrollTl.to(
+        '.frag-midground',
+        {
+          rotateZ: isDesktop ? 8 : 1,
+          scale: isDesktop ? 1.06 : 1.005,
+          ease: 'none',
+          duration: 0.4
+        },
+        0.25
+      )
+
+      scrollTl.to(
+        '.hero-text-block',
+        {
+          y: isDesktop ? -35 : -14,
+          opacity: 0.85,
+          ease: 'none',
+          duration: 0.4
+        },
+        0.25
+      )
+
+      // Phase 3
+      scrollTl.to(
+        '.frag-scatter-left',
+        {
+          x: isDesktop ? -120 : -10,
+          y: isDesktop ? -60 : -6,
+          opacity: isDesktop ? 0.2 : 0.35,
+          scale: isDesktop ? 0.9 : 0.98,
+          ease: 'power2.in',
+          duration: 0.45
+        },
+        0.55
+      )
+
+      scrollTl.to(
+        '.frag-scatter-right',
+        {
+          x: isDesktop ? 140 : 10,
+          y: isDesktop ? 80 : 6,
+          opacity: isDesktop ? 0.2 : 0.35,
+          scale: isDesktop ? 1.12 : 1.01,
+          ease: 'power2.in',
+          duration: 0.45
+        },
+        0.55
+      )
+
+      scrollTl.to(
+        '.frag-scatter-up',
+        {
+          y: isDesktop ? -110 : -8,
+          opacity: 0.15,
+          ease: 'power2.in',
+          duration: 0.45
+        },
+        0.55
+      )
+
+      scrollTl.to(
+        '.hero-text-block',
+        {
+          y: isDesktop ? -80 : -35,
+          opacity: 0.15,
+          filter: 'blur(3px)',
+          ease: 'none',
+          duration: 0.4
+        },
+        0.6
+      )
+
+      // Phase 4
+      scrollTl.to(
+        '.hero-content-layer',
+        {
+          opacity: 0,
+          y: isDesktop ? -100 : -30,
+          ease: 'power2.in',
+          duration: 0.25
+        },
+        0.85
+      )
+
+      scrollTl.to(
+        '.fragment-svg',
+        {
+          opacity: 0.1,
+          scale: isDesktop ? 1.05 : 1.01,
+          ease: 'power2.in',
+          duration: 0.25
+        },
+        0.85
+      )
+
+      ScrollTrigger.refresh()
+
+    }, heroRef)
 
     return () => {
-      if (gsapContext) {
-        gsapContext.revert()
-      }
+      ctx.revert()
     }
+
   }, [reducedMotion])
 
   return (
