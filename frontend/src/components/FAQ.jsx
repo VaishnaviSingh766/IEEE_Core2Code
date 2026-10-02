@@ -27,49 +27,12 @@ const FAQS = [
 // Typing speed: milliseconds per character (higher = slower)
 const MS_PER_CHAR = 45;
 
-/* ---------- Styles (scoped, no Tailwind needed) ---------- */
-const css = `
-.c2c-faq{background:#0A0A0A;color:#FAFAFA;padding:96px 20px}
-.c2c-faq *,.c2c-faq *::before,.c2c-faq *::after{box-sizing:border-box}
-.c2c-faq .wrap{max-width:768px;margin:0 auto}
-.c2c-faq h2{margin:0 0 12px;font-size:clamp(32px,5vw,52px);line-height:1.08;letter-spacing:-.03em;font-weight:700}
-.c2c-faq .lead{margin:0 0 40px;color:#A1A1AA;font-size:17px}
-.c2c-faq .list{display:grid;gap:12px}
-.c2c-faq .item{position:relative;overflow:hidden;background:#111111;border:1px solid rgba(255,255,255,.09);border-radius:16px;transition:border-color .3s,box-shadow .4s,background .4s}
-.c2c-faq .item:hover{border-color:rgba(212,175,55,.5)}
-.c2c-faq .item.open{border-color:#D4AF37;background:linear-gradient(180deg,#1a1608,#111111);box-shadow:0 26px 70px -36px rgba(255,215,0,.4)}
-.c2c-faq .item::before{content:"";position:absolute;left:0;top:0;height:2px;width:0;background:#FFD700;box-shadow:0 0 12px #FFD700;transition:width .9s cubic-bezier(.2,.8,.2,1)}
-.c2c-faq .item.open::before{width:100%}
-.c2c-faq .btn{display:flex;align-items:center;gap:16px;width:100%;margin:0;padding:20px 22px;background:none;border:0;border-radius:16px;color:#FAFAFA;font:inherit;font-size:18px;font-weight:500;text-align:left;cursor:pointer}
-.c2c-faq .btn:focus-visible{outline:2px solid #FFD700;outline-offset:-2px}
-.c2c-faq .prompt{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:15px;color:#FFD700;transition:transform .35s,text-shadow .35s}
-.c2c-faq .btn:hover .prompt,.c2c-faq .open .prompt{transform:translateX(4px);text-shadow:0 0 12px #FFD700}
-.c2c-faq .q{flex:1;transition:color .3s}
-.c2c-faq .btn:hover .q,.c2c-faq .open .q{color:#FFD700}
-.c2c-faq .pm{position:relative;flex:none;width:30px;height:30px;border-radius:50%;border:1px solid rgba(255,255,255,.09);transition:transform .4s,background .4s,border-color .4s}
-.c2c-faq .pm::before,.c2c-faq .pm::after{content:"";position:absolute;left:50%;top:50%;width:12px;height:1.5px;margin:-.75px 0 0 -6px;background:#FFD700;transition:transform .4s,background .4s}
-.c2c-faq .pm::after{transform:rotate(90deg)}
-.c2c-faq .open .pm{background:#FFD700;border-color:#FFD700;transform:rotate(180deg)}
-.c2c-faq .open .pm::before,.c2c-faq .open .pm::after{background:#0A0A0A}
-.c2c-faq .open .pm::after{transform:rotate(0)}
-.c2c-faq .panel{display:grid;grid-template-rows:0fr;visibility:hidden;transition:grid-template-rows .45s ease,visibility 0s .45s}
-.c2c-faq .open .panel{grid-template-rows:1fr;visibility:visible;transition:grid-template-rows .45s ease,visibility 0s}
-.c2c-faq .panel>div{overflow:hidden}
-.c2c-faq .out{margin:0;padding:0 22px 22px 56px;min-height:1.7em;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:14px;line-height:1.7;color:#F5E6A8}
-.c2c-faq .dollar{margin-right:8px;color:#FFD700}
-.c2c-faq .cr{display:inline-block;width:8px;height:1.1em;margin-left:2px;background:#FFD700;vertical-align:-.15em;animation:c2cBlink .8s steps(2) infinite}
-.c2c-faq .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
-@keyframes c2cBlink{50%{opacity:0}}
-@media(max-width:520px){.c2c-faq .out{padding-left:22px}.c2c-faq .btn{font-size:16px}}
-@media(prefers-reduced-motion:reduce){.c2c-faq *,.c2c-faq *::before,.c2c-faq *::after{transition:none!important;animation:none!important}}
-`;
-
 /* ---------- Typed answer ---------- */
 function Answer({ text, open, reduce }) {
   const [count, setCount] = useState(0);
 
   useEffect(() => {
-    if (!open) return; // keep text as-is while the panel collapses
+    if (!open) return;
     if (reduce) {
       setCount(text.length);
       return;
@@ -85,12 +48,16 @@ function Answer({ text, open, reduce }) {
   }, [open, text, reduce]);
 
   return (
-    <p className="out">
-      <span className="sr">{text}</span>
+    <p className="m-0 px-[22px] pb-[22px] pl-14 min-h-[1.7em] font-mono text-sm leading-[1.7] text-[#F5E6A8] max-[520px]:pl-[22px]">
+      <span className="absolute w-px h-px overflow-hidden [clip:rect(0_0_0_0)] whitespace-nowrap">
+        {text}
+      </span>
       <span aria-hidden="true">
-        <span className="dollar">$</span>
+        <span className="mr-2 text-[#D4AF37]">$</span>
         {text.slice(0, count)}
-        {open && count < text.length && <span className="cr" />}
+        {open && count < text.length && (
+          <span className="inline-block w-2 h-[1.1em] ml-0.5 bg-[#D4AF37] align-[-0.15em] animate-[c2cBlink_0.8s_steps(2)_infinite]" />
+        )}
       </span>
     </p>
   );
@@ -106,38 +73,115 @@ export default function Faqs({ items = FAQS }) {
   );
 
   return (
-    <section id="faq" className="c2c-faq" aria-labelledby="faq-heading">
-      <style>{css}</style>
-      <div className="wrap">
-        <h2 id="faq-heading">Questions, answered.</h2>
-        <p className="lead">Can't find yours? Reach the organizers below.</p>
+    <section
+      id="faq"
+      className="bg-[#000000] text-[#FFFFFF] py-24 px-5"
+      aria-labelledby="faq-heading"
+    >
+      {/* Single keyframe rule — cannot be expressed as a Tailwind utility */}
+      <style>{`@keyframes c2cBlink { 50% { opacity: 0; } }`}</style>
 
-        <div className="list">
+      <div className="max-w-3xl mx-auto">
+        <h2
+          id="faq-heading"
+          className="m-0 mb-3 text-[clamp(32px,5vw,52px)] leading-[1.08] tracking-[-0.03em] font-bold text-[#FFFFFF]"
+        >
+          Questions, answered.
+        </h2>
+        <p className="m-0 mb-10 text-[#D4AF37]/70 text-[17px]">
+          Can't find yours? Reach the organizers below.
+        </p>
+
+        <div className="grid gap-3">
           {items.map((item, i) => {
             const open = openIndex === i;
             return (
-              <div key={item.q} className={`item${open ? " open" : ""}`}>
-                <h3 style={{ margin: 0 }}>
+              <div
+                key={item.q}
+                className={[
+                  "relative overflow-hidden rounded-2xl border transition-all duration-300",
+                  open
+                    ? "border-[#D4AF37] bg-gradient-to-b from-[#1a1608] to-[#111111] shadow-[0_26px_70px_-36px_rgba(212,175,55,0.4)]"
+                    : "border-[#FFFFFF]/[0.09] bg-[#111111] hover:border-[#D4AF37]/50",
+                ].join(" ")}
+              >
+                {/* Golden top progress bar */}
+                <span
+                  className={[
+                    "absolute left-0 top-0 h-0.5 bg-[#D4AF37] shadow-[0_0_12px_#D4AF37] transition-[width] duration-[900ms] [transition-timing-function:cubic-bezier(0.2,0.8,0.2,1)]",
+                    open ? "w-full" : "w-0",
+                  ].join(" ")}
+                />
+
+                <h3 className="m-0">
                   <button
                     type="button"
                     id={`faq-btn-${i}`}
-                    className="btn"
+                    className="flex items-center gap-4 w-full m-0 px-[22px] py-5 bg-transparent border-0 rounded-2xl text-[#FFFFFF] font-[inherit] text-lg font-medium text-left cursor-pointer focus-visible:outline-2 focus-visible:outline-[#D4AF37] focus-visible:-outline-offset-2"
                     aria-expanded={open}
                     aria-controls={`faq-panel-${i}`}
                     onClick={() => setOpenIndex(open ? null : i)}
                   >
-                    <span className="prompt" aria-hidden="true">&gt;_</span>
-                    <span className="q">{item.q}</span>
-                    <i className="pm" aria-hidden="true" />
+                    {/* Prompt symbol */}
+                    <span
+                      aria-hidden="true"
+                      className={[
+                        "font-mono text-[15px] text-[#D4AF37] transition-[transform,text-shadow] duration-[350ms]",
+                        open ? "translate-x-1 [text-shadow:0_0_12px_#D4AF37]" : "",
+                      ].join(" ")}
+                    >
+                      &gt;_
+                    </span>
+
+                    {/* Question text */}
+                    <span
+                      className={[
+                        "flex-1 transition-colors duration-300",
+                        open ? "text-[#D4AF37]" : "text-[#FFFFFF]",
+                      ].join(" ")}
+                    >
+                      {item.q}
+                    </span>
+
+                    {/* Plus / Minus toggle icon */}
+                    <span
+                      aria-hidden="true"
+                      className={[
+                        "relative flex-none w-[30px] h-[30px] rounded-full border transition-[transform,background,border-color] duration-[400ms]",
+                        open
+                          ? "bg-[#D4AF37] border-[#D4AF37] rotate-180"
+                          : "bg-transparent border-[#FFFFFF]/[0.09]",
+                      ].join(" ")}
+                    >
+                      {/* Horizontal bar */}
+                      <span
+                        className={[
+                          "absolute left-1/2 top-1/2 w-3 h-[1.5px] -translate-x-1/2 -translate-y-1/2 transition-colors duration-[400ms]",
+                          open ? "bg-[#000000]" : "bg-[#D4AF37]",
+                        ].join(" ")}
+                      />
+                      {/* Vertical bar */}
+                      <span
+                        className={[
+                          "absolute left-1/2 top-1/2 w-3 h-[1.5px] -translate-x-1/2 -translate-y-1/2 transition-[transform,background] duration-[400ms]",
+                          open ? "bg-[#000000] rotate-0" : "bg-[#D4AF37] rotate-90",
+                        ].join(" ")}
+                      />
+                    </span>
                   </button>
                 </h3>
+
+                {/* Answer panel — CSS grid trick for smooth height animation */}
                 <div
                   id={`faq-panel-${i}`}
-                  className="panel"
                   role="region"
                   aria-labelledby={`faq-btn-${i}`}
+                  className={[
+                    "grid transition-[grid-template-rows] duration-[450ms] ease-[ease]",
+                    open ? "grid-rows-[1fr] visible" : "grid-rows-[0fr] invisible",
+                  ].join(" ")}
                 >
-                  <div>
+                  <div className="overflow-hidden">
                     <Answer text={item.a} open={open} reduce={reduce} />
                   </div>
                 </div>
