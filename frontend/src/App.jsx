@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { createBrowserRouter, Outlet, RouterProvider } from 'react-router-dom'
-import Header from './components/Header'
+import Navbar from './components/Navbar'
 import Footer from './components/Footer'
 
 import Loader from './components/Loader'
@@ -15,7 +15,7 @@ import Cursor from './utils/Cursor'
 const Structure = () => {
   return (
     <div className='bg-black text-white select-none min-h-screen w-full flex flex-col'>
-      <Header eventName="TECHSUMMIT" year="2026-27" />
+      <Navbar />
       <main className='flex-1 w-full flex flex-col'>
         <Outlet />
       </main>
