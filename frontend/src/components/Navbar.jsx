@@ -34,6 +34,7 @@ export default function Header() {
   const navRef = useRef(null);
   const borderLineRef = useRef(null);
   const particlesRef = useRef(null);
+  const goldDotsLayerRef = useRef(null);
   const glowRef = useRef(null);
   const mobileMenuInnerRef = useRef(null);
   const hamburgerRef = useRef(null);
@@ -118,17 +119,6 @@ export default function Header() {
         });
       }
 
-      // 7. Gold Energy Border
-      const borderGlow = document.querySelector('.border-energy-glow');
-      if (!reducedMotion && borderGlow) {
-        gsap.to(borderGlow, {
-          left: '100%',
-          duration: 5,
-          repeat: -1,
-          ease: 'linear'
-        });
-      }
-
       // 9. Scroll Animation
       ScrollTrigger.create({
         start: 'top -30',
@@ -140,6 +130,75 @@ export default function Header() {
 
     return () => ctx.revert();
   }, [reducedMotion]);
+
+  // ═══════════ GOLD FLOWING LINE & FLOATING DOTS ANIMATION ═══════════
+  useLayoutEffect(() => {
+    if (reducedMotion) return;
+
+    const ctx = gsap.context(() => {
+      // ── Flowing Gold Light at bottom border ──
+      const borderGlowEl = document.querySelector('.border-energy-glow-enhanced');
+      if (borderGlowEl) {
+        gsap.to(borderGlowEl, {
+          left: '110%',
+          duration: 7,
+          ease: 'none',
+          repeat: -1,
+          delay: 0.2,
+        });
+      }
+
+      // ── Floating Gold Dots ──
+      const dotsContainer = goldDotsLayerRef.current;
+      if (dotsContainer) {
+        const dots = dotsContainer.children;
+        gsap.utils.toArray(dots).forEach((dot) => {
+          gsap.to(dot, {
+            x: `random(-12, 12)`,
+            y: `random(-6, 6)`,
+            opacity: `random(0.15, 0.7)`,
+            scale: `random(0.7, 1.3)`,
+            duration: `random(4, 10)`,
+            delay: `random(0, 3)`,
+            repeat: -1,
+            yoyo: true,
+            ease: 'sine.inOut',
+          });
+        });
+      }
+    }, containerRef);
+
+    return () => ctx.revert();
+  }, [reducedMotion]);
+
+  // Generate responsive gold dot count
+  const getGoldDotCount = () => {
+    if (typeof window === 'undefined') return 25;
+    const w = window.innerWidth;
+    if (w < 640) return 14;
+    if (w < 1024) return 22;
+    return 35;
+  };
+
+  const goldDots = Array.from({ length: getGoldDotCount() }).map((_, i) => {
+    const size = 1 + Math.random() * 2;
+    const opacity = 0.1 + Math.random() * 0.4;
+    return (
+      <div
+        key={`gd-${i}`}
+        className="absolute rounded-full"
+        style={{
+          width: `${size}px`,
+          height: `${size}px`,
+          left: `${2 + Math.random() * 96}%`,
+          top: `${5 + Math.random() * 90}%`,
+          backgroundColor: ['#F5D76E', '#D4AF37', '#FFD700'][Math.floor(Math.random() * 3)],
+          opacity,
+          boxShadow: size > 2 ? `0 0 ${size * 2}px rgba(212,175,55,0.4)` : 'none',
+        }}
+      />
+    );
+  });
 
   // Scroll-based active section detection
   useEffect(() => {
@@ -456,17 +515,28 @@ export default function Header() {
         `}</style>
 
         {/* Background Ambient Glow */}
-        <div className="absolute inset-0 overflow-hidden pointer-events-none -z-10">
+        <div className="absolute inset-0 overflow-hidden pointer-events-none" style={{ zIndex: 0 }}>
           <div
             ref={glowRef}
             className="absolute top-1/2 left-1/4 w-[24rem] h-16 bg-gold/10 blur-[80px] rounded-full -translate-y-1/2"
           />
         </div>
 
-        {/* Floating Particles */}
+
+        {/* ═══ Floating Gold Dots ═══ */}
+        <div
+          ref={goldDotsLayerRef}
+          className="absolute inset-0 overflow-hidden pointer-events-none"
+          style={{ zIndex: 1 }}
+        >
+          {goldDots}
+        </div>
+
+        {/* Floating Particles (original) */}
         <div
           ref={particlesRef}
-          className="absolute inset-0 overflow-hidden pointer-events-none -z-10 hidden md:block"
+          className="absolute inset-0 overflow-hidden pointer-events-none hidden md:block"
+          style={{ zIndex: 1 }}
         >
           {particles}
         </div>
@@ -547,9 +617,19 @@ export default function Header() {
 
         </div>
 
-        {/* Bottom Energy Border */}
-        <div ref={borderLineRef} className="absolute bottom-0 left-0 w-full h-[1px] bg-white/[0.03] hidden md:block">
-          <div className="border-energy-glow absolute top-0 -left-[100px] w-[100px] h-full bg-gradient-to-r from-transparent via-gold to-transparent opacity-50" />
+        {/* Bottom Energy Border with Flowing Gold Light */}
+        <div ref={borderLineRef} className="absolute bottom-0 left-0 w-full h-[3px] pointer-events-none" style={{ zIndex: 2 }}>
+          {/* Static subtle gold baseline */}
+          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-[rgba(212,175,55,0.12)] to-transparent" />
+          {/* Flowing gold light orb */}
+          <div
+            className="border-energy-glow-enhanced absolute top-1/2 -translate-y-1/2 -left-[60px] w-[60px] h-[3px] pointer-events-none"
+            style={{
+              background: 'linear-gradient(90deg, transparent 0%, rgba(212,175,55,0.15) 15%, rgba(245,215,110,0.9) 40%, #FFD700 50%, rgba(245,215,110,0.9) 60%, rgba(212,175,55,0.15) 85%, transparent 100%)',
+              boxShadow: '0 0 12px 3px rgba(245,215,110,0.4), 0 0 30px 6px rgba(212,175,55,0.15)',
+              borderRadius: '50%',
+            }}
+          />
         </div>
       </header>
 
