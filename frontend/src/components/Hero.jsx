@@ -833,7 +833,7 @@ export default function Hero() {
         <div className="hero-content-layer relative z-10 w-full min-h-[100svh] flex flex-col justify-between px-5 sm:px-8 md:px-12 lg:px-16 xl:px-24 py-6 sm:py-8 lg:py-10">
 
           {/* TOP HUD BAR */}
-          <header className="hero-header-bar w-full flex items-center justify-between font-mono text-xs tracking-widest text-[#A3A3A3] pb-4 border-b border-neutral-900/80">
+          {/* <header className="hero-header-bar w-full flex items-center justify-between font-mono text-xs tracking-widest text-[#A3A3A3] pb-4 border-b border-neutral-900/80">
             <div className="flex items-center gap-3">
               <span className="relative flex h-2 w-2">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#F0C75E] opacity-75" />
@@ -852,7 +852,7 @@ export default function Hero() {
                 EST. 2026
               </span>
             </div>
-          </header>
+          </header> */}
 
           {/* MAIN EDITORIAL HERO BODY (40-50% width on desktop, centered left) */}
           <div className="hero-text-block flex-1 flex flex-col justify-center text-left my-auto w-full py-8 sm:py-12 lg:py-6 max-w-2xl xl:max-w-3xl">
