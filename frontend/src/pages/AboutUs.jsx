@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react';
 
-// IMAGES: put these files in  frontend/src/assets/about/  (rename the imports if your file names differ)
+//Images for the photos section
 import img4 from '../assets/about/img4.jpeg';
 import club from '../assets/about/club.jpg';
 import img2 from '../assets/about/img2.jpg';
@@ -15,7 +15,7 @@ const stripImages = [
   { src: img3, alt: 'Photo 4' },
 ];
 
-// All styles for this page live here (no separate .css file needed)
+// Css part
 const css = `
 @import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;700&family=DM+Sans:wght@400;500&display=swap');
 
