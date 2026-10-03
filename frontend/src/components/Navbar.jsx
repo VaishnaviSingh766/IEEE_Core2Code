@@ -1,4 +1,5 @@
 import React, { useRef, useLayoutEffect, useState, useEffect } from 'react';
+import { NavLink } from 'react-router-dom';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
@@ -12,11 +13,15 @@ import computerSociety from '../assets/logos/computer-society.png';
 
 gsap.registerPlugin(ScrollTrigger);
 
+// Import Nav Icons (mask images)
+import homeIcon from '../assets/logos/home.png';
+import aboutIcon from '../assets/logos/about_us.png';
+import contactIcon from '../assets/logos/contact_us.png';
+
 const navItems = [
-  { label: 'Home', href: '/', id: 'home' },
-  { label: 'About Us', href: '/aboutUs', id: 'about' },
-  { label: 'Contact Us', href: '/contactUs', id: 'contact' },
-  { label: 'FAQs', href: '/faqs', id: 'faqs' }
+  { label: 'Home', href: '/', id: 'home', icon: homeIcon },
+  { label: 'About Us', href: '/about', id: 'about', icon: aboutIcon },
+  { label: 'Contact Us', href: '/contactUs', id: 'contact', icon: contactIcon }
 ];
 
 const logosData = [
@@ -26,6 +31,84 @@ const logosData = [
   { src: wieLogo, alt: 'IEEE WIE', height: 'h-6 sm:h-8 lg:h-9' },
   { src: computerSociety, alt: 'IEEE Computer Society', height: 'h-6 sm:h-8 lg:h-9' }
 ];
+
+/* ═══ NavPill – Expanding circle-to-pill nav link ═══ */
+const NavPill = ({ item, onClick, className = '' }) => (
+  <li className={`nb-item ${className}`}>
+    <NavLink
+      to={item.href}
+      end={item.href === '/'}
+      aria-current="page"
+      className={({ isActive }) => `nb-link hover-nav-link ${isActive ? 'active' : ''}`}
+      onClick={(e) => {
+        onClick();
+      }}
+      aria-label={item.label}
+    >
+      {({ isActive }) => (
+        <>
+          <span className="nb-icon" style={{ '--icon': `url(${item.icon})` }} />
+          <span className="nb-title">{item.label}</span>
+          {isActive && <span className="nb-active-indicator" />}
+        </>
+      )}
+    </NavLink>
+  </li>
+);
+
+/* ═══ MobileBlobItem – Gooey hover/tap link for mobile menu ═══ */
+const MobileBlobItem = ({ item, onClick, isRegister = false, className = '' }) => {
+  const handleClick = (e) => {
+    // NavLink handles routing; we delay closing the menu so tap animation is seen
+    setTimeout(() => {
+      onClick();
+    }, 250);
+  };
+
+  const innerContent = (
+    <>
+      <span className="nb-m-inner">
+        <span className="nb-m-blobs">
+          {[0, 1, 2, 3].map((n) => (
+            <span key={n} className="nb-m-blob" style={{ left: `${n * 24}%`, transitionDelay: `${n * 0.07}s` }} />
+          ))}
+        </span>
+      </span>
+      {item.icon && <span className="nb-icon" style={{ '--icon': `url(${item.icon})` }} />}
+      <span className="nb-m-title">{item.label}</span>
+    </>
+  );
+
+  return (
+    <div className={`nb-m-item ${className}`}>
+      {isRegister ? (
+        <a
+          href="PASTE_YOUR_FORM_LINK_HERE"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="nb-m-link nb-m-register"
+          onClick={handleClick}
+          aria-label={item.label}
+        >
+          {innerContent}
+        </a>
+      ) : (
+        <NavLink
+          to={item.href}
+          end={item.href === '/'}
+          aria-current="page"
+          className={({ isActive }) => `nb-m-link ${isActive ? 'active' : ''}`}
+          onClick={handleClick}
+          aria-label={item.label}
+        >
+          {innerContent}
+        </NavLink>
+      )}
+    </div>
+  );
+};
+
+const REGISTER_URL = "PASTE_YOUR_FORM_LINK_HERE";
 
 export default function Header() {
   const containerRef = useRef(null);
@@ -41,9 +124,7 @@ export default function Header() {
   const mobileMenuOverlayRef = useRef(null);
 
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [activeLink, setActiveLink] = useState('#home');
   const [reducedMotion, setReducedMotion] = useState(false);
-  const prevActiveLinkRef = useRef('#home');
   const isInitialMount = useRef(true);
 
   // Check for reduced motion
@@ -200,124 +281,7 @@ export default function Header() {
     );
   });
 
-  // Scroll-based active section detection
-  useEffect(() => {
-    const sectionIds = navItems.map(item => item.id);
-    const observers = [];
 
-    sectionIds.forEach(id => {
-      const section = document.getElementById(id);
-      if (!section) return;
-
-      const observer = new IntersectionObserver(
-        ([entry]) => {
-          if (entry.isIntersecting) {
-            setActiveLink(`#${id}`);
-          }
-        },
-        { rootMargin: '-40% 0px -55% 0px', threshold: 0 }
-      );
-
-      observer.observe(section);
-      observers.push(observer);
-    });
-
-    return () => observers.forEach(obs => obs.disconnect());
-  }, []);
-
-  // GSAP smooth active-state color transition
-  // This is the SINGLE SOURCE OF TRUTH for nav text color.
-  // Hover handlers must NOT animate color/textShadow — only scale, capsule, sweep, letterSpacing.
-  useEffect(() => {
-    const allLinks = document.querySelectorAll('.hover-nav-link');
-    allLinks.forEach(link => {
-      const text = link.querySelector('.nav-text');
-      const href = link.getAttribute('href');
-      const shouldBeActive = href === activeLink;
-
-      link.setAttribute('data-active', shouldBeActive ? 'true' : 'false');
-
-      if (text) {
-        // overwrite: true kills any competing tween on these properties
-        gsap.to(text, {
-          color: shouldBeActive ? '#F5D76E' : '#FFFFFF',
-          textShadow: shouldBeActive ? '0 0 6px rgba(245,215,110,0.25)' : 'none',
-          duration: 0.3,
-          ease: 'power2.out',
-          overwrite: 'auto'
-        });
-      }
-    });
-
-    prevActiveLinkRef.current = activeLink;
-  }, [activeLink]);
-
-  // Unified Magnifier Hover Setup (Shared for Desktop and Mobile)
-  // IMPORTANT: Hover ONLY controls scale, capsule, sweep, and letterSpacing.
-  // Text color is exclusively owned by the active-state effect above.
-  useLayoutEffect(() => {
-    const ctx = gsap.context(() => {
-      const links = document.querySelectorAll('.hover-nav-link');
-      const cleanups = [];
-
-      links.forEach(link => {
-        const text = link.querySelector('.nav-text');
-        const capsule = link.querySelector('.nav-capsule');
-        const sweep = link.querySelector('.nav-sweep');
-
-        if (reducedMotion) return;
-
-        const handleHoverIn = () => {
-          gsap.killTweensOf([link, capsule, sweep]);
-
-          gsap.to(link, { scale: 1.12, duration: 0.4, ease: 'power3.out' });
-          gsap.to(capsule, { opacity: 1, duration: 0.4, ease: 'power3.out' });
-          gsap.to(text, { letterSpacing: '0.17em', duration: 0.4, ease: 'power3.out' });
-
-          gsap.fromTo(sweep,
-            { left: '-100%' },
-            { left: '150%', duration: 0.8, ease: 'power2.out' }
-          );
-        };
-
-        const handleHoverOut = () => {
-          gsap.killTweensOf([link, capsule, sweep]);
-
-          gsap.to(link, { scale: 1, duration: 0.4, ease: 'power3.out' });
-          gsap.to(capsule, { opacity: 0, duration: 0.4, ease: 'power3.out' });
-          gsap.to(text, { letterSpacing: '0.15em', duration: 0.4, ease: 'power3.out' });
-        };
-
-        const handleMouseMove = (e) => {
-          const rect = link.getBoundingClientRect();
-          const x = e.clientX - rect.left;
-          const y = e.clientY - rect.top;
-          link.style.setProperty('--mouse-x', `${x}px`);
-          link.style.setProperty('--mouse-y', `${y}px`);
-        };
-
-        link.addEventListener('mouseenter', handleHoverIn);
-        link.addEventListener('mouseleave', handleHoverOut);
-        link.addEventListener('mousemove', handleMouseMove);
-        link.addEventListener('focus', handleHoverIn);
-        link.addEventListener('blur', handleHoverOut);
-
-        cleanups.push(() => {
-          link.removeEventListener('mouseenter', handleHoverIn);
-          link.removeEventListener('mouseleave', handleHoverOut);
-          link.removeEventListener('mousemove', handleMouseMove);
-          link.removeEventListener('focus', handleHoverIn);
-          link.removeEventListener('blur', handleHoverOut);
-        });
-      });
-
-      return () => {
-        cleanups.forEach(cleanup => cleanup());
-      };
-    }, containerRef);
-
-    return () => ctx.revert();
-  }, [reducedMotion]);
 
   // Logo Group Hover Setup
   useLayoutEffect(() => {
@@ -461,17 +425,12 @@ export default function Header() {
     setIsMobileMenuOpen(!isMobileMenuOpen);
   };
 
-  const handleNavClick = (href) => {
-    setActiveLink(href);
+  const handleNavClick = () => {
     if (isMobileMenuOpen) {
       setIsMobileMenuOpen(false);
     }
-    // Smooth scroll to section
-    const sectionId = href.replace('#', '');
-    const section = document.getElementById(sectionId);
-    if (section) {
-      section.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
+    // Smooth scroll to top
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   // Particles generator
@@ -500,6 +459,7 @@ export default function Header() {
         className="fixed top-0 left-0 w-full z-50 transition-all duration-500 bg-[#030303] py-2 sm:py-3"
         style={{ isolation: 'isolate' }}
       >
+        {/* ═══ All nb- styles: expanding circle-to-pill effect ═══ */}
         <style>{`
           .header-scrolled {
             background-color: rgba(3, 3, 3, 1);
@@ -512,7 +472,438 @@ export default function Header() {
           }
           .no-scrollbar::-webkit-scrollbar { display: none; }
           .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+          /* ═══ nb- expanding circle pill nav ═══ */
+          .nb-list {
+            display: flex;
+            gap: 18px;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            align-items: center;
+          }
+          .nb-item {
+            isolation: isolate;
+            display: flex;
+          }
+
+          /* Idle: ONLY the gold icon floating on the navbar */
+          .nb-link {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            border-radius: 50px;
+            background: transparent;
+            border: none;
+            box-shadow: none;
+            text-decoration: none;
+            overflow: visible;
+            transition: width 0.5s cubic-bezier(.4,0,.2,1);
+          }
+
+          /* Gold gradient fill (::before) – fully opaque on hover */
+          .nb-link::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(45deg, #B8860B, #F5D76E, #D4AF37);
+            border-radius: inherit;
+            opacity: 0;
+            z-index: 0;
+            transition: opacity 0.5s ease;
+          }
+
+          /* Soft gold glow (::after) – shadow under pill */
+          .nb-link::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            top: 8px;
+            background: linear-gradient(45deg, #B8860B, #F5D76E, #D4AF37);
+            border-radius: inherit;
+            filter: blur(15px);
+            opacity: 0;
+            z-index: -1;
+            transition: opacity 0.5s ease;
+          }
+
+          /* CSS mask icon */
+          .nb-icon {
+            position: absolute;
+            z-index: 2;
+            width: 28px;
+            height: 28px;
+            display: block;
+            background-color: #D4AF37;
+            -webkit-mask: var(--icon) center / contain no-repeat;
+            mask: var(--icon) center / contain no-repeat;
+            transform: scale(1);
+            transition: transform 0.5s ease, background-color 0.3s ease;
+            transition-delay: 0.25s; /* Idle: delayed scale up */
+          }
+
+          /* Title – centered, hidden at idle */
+          .nb-title {
+            position: absolute;
+            z-index: 2;
+            color: #000 !important;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            white-space: nowrap;
+            font-size: 0.85em;
+            transform: scale(0);
+            transition: transform 0.5s ease;
+            transition-delay: 0s;
+          }
+
+          /* Active Route Indicator - small dot */
+          .nb-active-indicator {
+            position: absolute;
+            bottom: 4px;
+            width: 4px;
+            height: 4px;
+            border-radius: 50%;
+            background-color: #D4AF37;
+            box-shadow: 0 0 6px rgba(212, 175, 55, 0.8);
+            z-index: 3;
+            pointer-events: none;
+          }
+
+          /* ─── Hover / Focus (desktop only) ─── */
+          @media (hover: hover) {
+            .nb-link:hover,
+            .nb-link:focus-visible {
+              width: 160px;
+            }
+            .nb-link:hover::before,
+            .nb-link:focus-visible::before {
+              opacity: 1;
+            }
+            .nb-link:hover::after,
+            .nb-link:focus-visible::after {
+              opacity: 0.5;
+            }
+            .nb-link:hover .nb-icon,
+            .nb-link:focus-visible .nb-icon {
+              transform: scale(0);
+              transition-delay: 0s;
+            }
+            .nb-link:hover .nb-title,
+            .nb-link:focus-visible .nb-title {
+              transform: scale(1);
+              transition-delay: 0.25s;
+            }
+          }
+
+          /* ─── Active route: no expanded pill, just the dot ─── */
+          /* No special expansion needed for active state, the dot is handled by React component */
+
+          /* ─── Mobile: icon + label side-by-side ─── */
+          .mobile-nav-wrapper .nb-item {
+            width: 100%;
+          }
+          .mobile-nav-wrapper .nb-link {
+            width: 100%;
+            border-radius: 14px;
+            height: 60px;
+            gap: 12px;
+            justify-content: center;
+          }
+          /* Remove the absolute positioning on mobile to let them sit side-by-side */
+          .mobile-nav-wrapper .nb-icon {
+            position: relative;
+            transform: scale(1) !important;
+            background-color: #D4AF37;
+            transition: none;
+          }
+          .mobile-nav-wrapper .nb-title {
+            position: relative;
+            transform: scale(1) !important;
+            color: #D4AF37 !important;
+            font-size: 1.1rem;
+            transition: none;
+          }
+          .mobile-nav-wrapper .nb-active-indicator {
+            display: none; /* Hide dot on mobile, use full fill instead */
+          }
+          /* Mobile tap/active state */
+          .mobile-nav-wrapper .nb-link:active::before,
+          .mobile-nav-wrapper .nb-link.active::before {
+            opacity: 1;
+          }
+          .mobile-nav-wrapper .nb-link:active .nb-icon,
+          .mobile-nav-wrapper .nb-link.active .nb-icon {
+            background-color: #000;
+          }
+          .mobile-nav-wrapper .nb-link:active .nb-title,
+          .mobile-nav-wrapper .nb-link.active .nb-title {
+            color: #000 !important;
+          }
+
+          /* ─── nb-register button ─── */
+          .nb-register {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 12px 28px;
+            border-radius: 50px;
+            background: linear-gradient(45deg, #B8860B, #F5D76E, #D4AF37);
+            color: #000 !important;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            font-size: 0.85em;
+            white-space: nowrap;
+            text-decoration: none;
+            border: none;
+            box-shadow: 0 0 0 rgba(212,175,55,0);
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+          }
+
+          /* Glossy shine */
+          .nb-register::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(120deg, transparent 30%, rgba(255,255,255,0.55) 50%, transparent 70%);
+            transform: translateX(-120%);
+            z-index: 1;
+            transition: transform 0.7s ease;
+          }
+
+          /* Slow gold pulse ring */
+          .nb-register::before {
+            content: "";
+            position: absolute;
+            inset: -4px;
+            border-radius: 54px;
+            box-shadow: 0 0 0 0 rgba(212,175,55,0.7);
+            z-index: -1;
+            animation: nb-pulse-ring 2.5s infinite cubic-bezier(0.215, 0.61, 0.355, 1);
+          }
+
+          @keyframes nb-pulse-ring {
+            0% { box-shadow: 0 0 0 0 rgba(212,175,55,0.7); }
+            70% { box-shadow: 0 0 0 15px rgba(212,175,55,0); }
+            100% { box-shadow: 0 0 0 0 rgba(212,175,55,0); }
+          }
+
+          /* ─── Hover / Focus (desktop only) ─── */
+          @media (hover: hover) {
+            .nb-register:hover,
+            .nb-register:focus-visible {
+              transform: translateY(-2px);
+              box-shadow: 0 8px 22px rgba(212,175,55,0.55);
+            }
+            .nb-register:hover::after,
+            .nb-register:focus-visible::after {
+              transform: translateX(120%);
+            }
+          }
+          
+          .nb-register:active {
+            transform: scale(0.97) !important;
+          }
+
+          /* ─── Reduced motion ─── */
+          @media (prefers-reduced-motion: reduce) {
+            .nb-link, .nb-link::before, .nb-link::after, .nb-icon, .nb-title {
+              transition: none !important;
+            }
+            .nb-register::before {
+              animation: none !important;
+              display: none;
+            }
+          }
+
+          /* ─── Mobile Menu Blob Items ─── */
+          @media (max-width: 1279px) {
+            .nb-m-link {
+              position: relative;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              gap: 12px;
+              width: 100%;
+              height: 100%;
+              border-radius: 30px;
+              text-transform: uppercase;
+              font-weight: bold;
+              letter-spacing: 0.1em;
+              background: rgba(255, 255, 255, 0.05);
+              backdrop-filter: blur(10px);
+              -webkit-backdrop-filter: blur(10px);
+              border: 1.5px solid rgba(212, 175, 55, 0.5);
+              color: #D4AF37 !important;
+              box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2);
+              overflow: hidden;
+              isolation: isolate;
+              text-decoration: none;
+              transition: box-shadow 0.3s ease;
+            }
+
+            .nb-m-inner {
+              position: absolute;
+              inset: 0;
+              overflow: hidden;
+              border-radius: inherit;
+              z-index: 1;
+              pointer-events: none;
+            }
+
+            .nb-m-blobs {
+              position: relative;
+              display: block;
+              height: 100%;
+              filter: url(#nb-goo);
+            }
+
+            .nb-m-blob {
+              position: absolute;
+              top: 0;
+              width: 30%;
+              height: 140%;
+              border-radius: 100%;
+              background-color: #F5D76E;
+              transform: translate3d(0, 160%, 0) scale(1.5);
+              transition: transform 0.5s cubic-bezier(0.65, 0, 0.35, 1);
+            }
+
+            .nb-m-link::before {
+              content: "";
+              position: absolute;
+              inset: 0;
+              z-index: 0;
+              border-radius: inherit;
+              background: linear-gradient(135deg, #B8860B, #F5D76E, #D4AF37);
+              transform: translateY(101%);
+              transition: transform 0.5s 0.15s cubic-bezier(0.65, 0, 0.35, 1);
+            }
+
+            .nb-m-title {
+              position: relative;
+              z-index: 3;
+              transition: color 0.3s ease;
+            }
+
+            /* Register Now Idle (Inverted) */
+            .nb-m-link.nb-m-register {
+              background: linear-gradient(135deg, #B8860B, #F5D76E, #D4AF37);
+              color: #000 !important;
+              border: 1.5px solid transparent;
+            }
+            .nb-m-link.nb-m-register::before {
+              background: #000;
+            }
+            .nb-m-link.nb-m-register .nb-m-blob {
+              background-color: #000;
+            }
+
+            /* Hover / Tap / Active States */
+            .nb-m-link:active,
+            .nb-m-link:focus-visible,
+            .nb-m-link.active {
+              box-shadow: 0 0 22px rgba(212, 175, 55, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+            }
+            @media (hover: hover) {
+              .nb-m-link:hover {
+                box-shadow: 0 0 22px rgba(212, 175, 55, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+              }
+            }
+
+            .nb-m-link:active .nb-m-blob,
+            .nb-m-link:focus-visible .nb-m-blob,
+            .nb-m-link.active .nb-m-blob {
+              transform: translate3d(0, -10%, 0) scale(1.9);
+            }
+            @media (hover: hover) {
+              .nb-m-link:hover .nb-m-blob {
+                transform: translate3d(0, -10%, 0) scale(1.9);
+              }
+            }
+
+            .nb-m-link:active::before,
+            .nb-m-link:focus-visible::before,
+            .nb-m-link.active::before {
+              transform: translateY(0);
+            }
+            @media (hover: hover) {
+              .nb-m-link:hover::before {
+                transform: translateY(0);
+              }
+            }
+
+            .nb-m-link:active .nb-m-title,
+            .nb-m-link:focus-visible .nb-m-title,
+            .nb-m-link.active .nb-m-title {
+              color: #000 !important;
+            }
+            @media (hover: hover) {
+              .nb-m-link:hover .nb-m-title {
+                color: #000 !important;
+              }
+            }
+
+            .nb-m-link:active .nb-icon,
+            .nb-m-link:focus-visible .nb-icon,
+            .nb-m-link.active .nb-icon {
+              background-color: #000;
+            }
+            @media (hover: hover) {
+              .nb-m-link:hover .nb-icon {
+                background-color: #000;
+              }
+            }
+
+            /* Register Now Hover (Inverted colors) */
+            .nb-m-link.nb-m-register:active,
+            .nb-m-link.nb-m-register:focus-visible,
+            .nb-m-link.nb-m-register.active {
+              border-color: rgba(212, 175, 55, 0.5);
+            }
+            @media (hover: hover) {
+              .nb-m-link.nb-m-register:hover {
+                border-color: rgba(212, 175, 55, 0.5);
+              }
+            }
+            .nb-m-link.nb-m-register:active .nb-m-title,
+            .nb-m-link.nb-m-register:focus-visible .nb-m-title,
+            .nb-m-link.nb-m-register.active .nb-m-title {
+              color: #D4AF37 !important;
+            }
+            @media (hover: hover) {
+              .nb-m-link.nb-m-register:hover .nb-m-title {
+                color: #D4AF37 !important;
+              }
+            }
+
+            /* Reduced motion */
+            @media (prefers-reduced-motion: reduce) {
+              .nb-m-link, .nb-m-blob, .nb-m-link::before, .nb-m-title {
+                transition: none !important;
+              }
+              .nb-m-blobs {
+                filter: none;
+              }
+            }
+          }
         `}</style>
+
+        {/* Hidden Goo Filter */}
+        <svg width="0" height="0" style={{ position: 'absolute' }}>
+          <defs>
+            <filter id="nb-goo">
+              <feGaussianBlur in="SourceGraphic" stdDeviation="6" result="b" />
+              <feColorMatrix in="b" mode="matrix" values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 20 -8" />
+            </filter>
+          </defs>
+        </svg>
 
         {/* Background Ambient Glow */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none" style={{ zIndex: 0 }}>
@@ -563,47 +954,37 @@ export default function Header() {
             ))}
           </div>
 
-          {/* Desktop Navigation */}
-          <nav ref={navRef} className="hidden md:flex items-center gap-1 lg:gap-3 flex-shrink-0" aria-label="Main Navigation">
-            {navItems.map((item, index) => {
-              const isActive = activeLink === item.href;
-              return (
+          {/* Desktop Navigation – expanding pill items */}
+          <nav ref={navRef} className="hidden xl:flex items-center gap-1 lg:gap-3 flex-shrink-0" aria-label="Main Navigation">
+            <ul className="nb-list">
+              {navItems.map((item, index) => {
+                return (
+                  <NavPill
+                    key={index}
+                    item={item}
+                    onClick={handleNavClick}
+                  />
+                );
+              })}
+              {/* Register Now Button (Desktop) */}
+              <li className="nb-item ml-2">
                 <a
-                  key={index}
-                  href={item.href}
-                  data-active={isActive}
-                  className="hover-nav-link relative group py-2 px-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold flex justify-center items-center rounded-full"
+                  href="/register"
+                  className="nb-register"
                   onClick={(e) => {
                     e.preventDefault();
-                    handleNavClick(item.href);
+                    handleNavClick('/register');
                   }}
                 >
-                  {/* Glassy Gold Lens Hover */}
-                  <div className="nav-capsule absolute inset-0 rounded-full opacity-0 pointer-events-none border border-[rgba(245,215,110,0.55)] bg-[rgba(212,175,55,0.14)] backdrop-blur-[15px] shadow-[0_0_20px_rgba(212,175,55,0.2),inset_0_0_15px_rgba(245,215,110,0.1)] overflow-hidden transition-colors">
-                    {/* Interactive mouse hotspot glow */}
-                    <div className="absolute inset-0 opacity-50 pointer-events-none" style={{ background: 'radial-gradient(circle 50px at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(245,215,110,0.5), transparent)' }} />
-                    {/* Metallic Sweep */}
-                    <div className="nav-sweep absolute top-0 -left-[100%] w-[150%] h-full bg-gradient-to-r from-transparent via-[rgba(245,215,110,0.25)] to-transparent skew-x-[-20deg]" />
-                  </div>
-
-                  {/* Terminal Typography Container */}
-                  <div className="relative z-10 flex items-center pointer-events-none">
-                    <span className={`nav-text text-xs lg:text-sm font-medium tracking-[0.15em] uppercase whitespace-nowrap ${isActive ? 'text-[#F5D76E]' : 'text-[#FFFFFF]'}`}
-                      style={{ textShadow: isActive ? '0 0 6px rgba(245,215,110,0.25)' : 'none' }}
-                    >
-                      {item.label}
-                    </span>
-                  </div>
-
-
+                  Register Now
                 </a>
-              );
-            })}
+              </li>
+            </ul>
           </nav>
 
           {/* Mobile Hamburger Button */}
           <button
-            className="md:hidden relative z-50 w-10 h-10 flex flex-col items-center justify-center gap-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold rounded flex-shrink-0 ml-auto"
+            className="xl:hidden relative z-50 w-10 h-10 flex flex-col items-center justify-center gap-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold rounded flex-shrink-0 ml-auto"
             onClick={toggleMobileMenu}
             aria-expanded={isMobileMenuOpen}
             aria-label="Toggle navigation menu"
@@ -675,42 +1056,31 @@ export default function Header() {
             ))}
           </div> */}
 
+          {/* Mobile nav – full-width pills with icon + label always visible */}
           <nav className="flex flex-col items-center gap-4 sm:gap-6 w-[min(88vw,420px)] mx-auto flex-shrink-0" aria-label="Mobile Navigation">
-            {navItems.map((item, index) => {
-              const isActive = activeLink === item.href;
-              return (
-                <div key={index} className="mobile-nav-wrapper overflow-hidden p-3 w-full flex justify-center">
-                  <a
-                    href={item.href}
-                    data-active={isActive}
-                    className="hover-nav-link relative group py-5 px-10 sm:px-14 w-fit flex flex-col items-center justify-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold rounded-3xl"
-                    onClick={(e) => {
-                      e.preventDefault();
-                      handleNavClick(item.href);
-                    }}
-                  >
-                    {/* Glassy Gold Lens (Hidden by default, shown on hover/focus) */}
-                    <div className="nav-capsule absolute inset-0 rounded-3xl opacity-0 pointer-events-none border border-[rgba(245,215,110,0.55)] bg-[rgba(212,175,55,0.14)] backdrop-blur-[15px] shadow-[0_0_20px_rgba(212,175,55,0.2),inset_0_0_15px_rgba(245,215,110,0.1)] overflow-hidden transition-colors">
-                      {/* Interactive mouse hotspot glow */}
-                      <div className="absolute inset-0 opacity-50 pointer-events-none" style={{ background: 'radial-gradient(circle 80px at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(245,215,110,0.5), transparent)' }} />
-                      {/* Metallic Sweep */}
-                      <div className="nav-sweep absolute top-0 -left-[100%] w-[150%] h-full bg-gradient-to-r from-transparent via-[rgba(245,215,110,0.25)] to-transparent skew-x-[-20deg]" />
-                    </div>
+            <ul className="nb-list" style={{ flexDirection: 'column', width: '100%' }}>
+              {navItems.map((item, index) => {
+                return (
+                  <div key={index} className="mobile-nav-wrapper overflow-hidden p-3 w-full flex justify-center h-[84px]">
+                    <MobileBlobItem
+                      item={item}
+                      onClick={handleNavClick}
+                      className="w-full h-full"
+                    />
+                  </div>
+                );
+              })}
 
-                    <div className="flex flex-col items-center gap-1.5 relative z-10 pointer-events-none">
-
-                      <span className={`nav-text text-2xl sm:text-3xl font-medium tracking-[0.15em] uppercase whitespace-nowrap ${isActive ? 'text-[#F5D76E]' : 'text-[#FFFFFF]'}`}
-                        style={{ textShadow: isActive ? '0 0 6px rgba(245,215,110,0.25)' : 'none' }}
-                      >
-                        {item.label}
-                      </span>
-                    </div>
-
-
-                  </a>
-                </div>
-              );
-            })}
+              {/* Register Now Button (Mobile Blob) */}
+              <div className="mobile-nav-wrapper overflow-hidden p-3 w-full flex justify-center mt-2 h-[84px]">
+                <MobileBlobItem
+                  item={{ label: 'Register Now', href: REGISTER_URL }}
+                  onClick={handleNavClick}
+                  isRegister={true}
+                  className="w-full h-full"
+                />
+              </div>
+            </ul>
           </nav>
         </div>
       </div>
