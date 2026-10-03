@@ -10,100 +10,96 @@ const FRAG_CONFIG = {
   frag1: {
     cx: 1300,
     cy: 220,
-    tablet: { dx: -160, dy: -10, scale: 0.82 },
-    largeMobile: { dx: -220, dy: -25, scale: 0.74 },
-    smallMobile: { dx: -270, dy: -40, scale: 0.68 },
+    tablet: { dx: 0, dy: -10, scale: 1.2 },
+    largeMobile: { dx: 10, dy: -5, scale: 1.15 },
+    smallMobile: { dx: 15, dy: -10, scale: 1.15 },
   },
   // Fragment 2: Upper-Left Architectural Prism Beam (original center ~260, 125)
   frag2: {
     cx: 260,
     cy: 125,
-    tablet: { dx: 220, dy: -10, scale: 0.82 },
-    largeMobile: { dx: 320, dy: -5, scale: 0.72 },
-    smallMobile: { dx: 370, dy: 0, scale: 0.65 },
+    tablet: { dx: 0, dy: -10, scale: 1.2 },
+    largeMobile: { dx: -10, dy: -5, scale: 1.15 },
+    smallMobile: { dx: -15, dy: -10, scale: 1.15 },
   },
   // Fragment 3: Center-Right Monolithic Plate (original center ~1170, 480)
-  // Kept toward right edge, scaled down, wide black space between it, heading, and other cards
   frag3: {
     cx: 1170,
     cy: 480,
-    tablet: { dx: -70, dy: -10, scale: 0.78 },
-    largeMobile: { dx: -110, dy: -10, scale: 0.68 },
-    smallMobile: { dx: -125, dy: -10, scale: 0.58 },
+    tablet: { dx: 40, dy: 580, scale: 1.2 },
+    largeMobile: { dx: 80, dy: 760, scale: 1.15 },
+    smallMobile: { dx: 140, dy: 900, scale: 1.15 },
   },
   // Fragment 4: Lower-Right Architectural Wedge Plate (original center ~1320, 740)
-  // Shifted away from CTA buttons and Center-Right card
   frag4: {
     cx: 1320,
     cy: 740,
-    tablet: { dx: -150, dy: 15, scale: 0.8 },
-    largeMobile: { dx: -220, dy: 25, scale: 0.7 },
-    smallMobile: { dx: -260, dy: 40, scale: 0.6 },
+    tablet: { dx: 0, dy: 350, scale: 1.2 },
+    largeMobile: { dx: 10, dy: 350, scale: 1.15 },
+    smallMobile: { dx: 15, dy: 480, scale: 1.15 },
   },
   // Fragment 5: Lower-Left Geometric Plate (original center ~320, 780)
-  // Frames left margin alongside tagline, clearly above CTA buttons
   frag5: {
     cx: 320,
     cy: 780,
-    tablet: { dx: 150, dy: -70, scale: 0.78 },
-    largeMobile: { dx: 240, dy: -180, scale: 0.68 },
-    smallMobile: { dx: 270, dy: -250, scale: 0.58 },
+    tablet: { dx: 0, dy: 10, scale: 1.2 },
+    largeMobile: { dx: -10, dy: 10, scale: 1.15 },
+    smallMobile: { dx: -15, dy: 0, scale: 1.15 },
   },
   // Fragment 6: Precision Golden Ring Arc (original center ~1100, 280)
   frag6: {
     cx: 1100,
     cy: 280,
-    tablet: { dx: -70, dy: -10, scale: 0.82 },
-    largeMobile: { dx: -70, dy: -15, scale: 0.72 },
-    smallMobile: { dx: -60, dy: -20, scale: 0.65 },
+    tablet: { dx: 0, dy: -10, scale: 0.88 },
+    largeMobile: { dx: 280, dy: -5, scale: 0.84 },
+    smallMobile: { dx: 340, dy: 0, scale: 0.82 },
   },
   // Fragment 7: Angular Golden Shard (original center ~880, 350)
-  // Shifted toward upper-right perimeter away from the central heading
   frag7: {
     cx: 880,
     cy: 350,
-    tablet: { dx: 40, dy: -30, scale: 0.78 },
-    largeMobile: { dx: 60, dy: -60, scale: 0.65 },
-    smallMobile: { dx: 80, dy: -80, scale: 0.52 },
+    tablet: { dx: 240, dy: -30, scale: 1.15 },
+    largeMobile: { dx: -730, dy: 1220, scale: 1.15 },
+    smallMobile: { dx: -650, dy: 1200, scale: 1.15 },
   },
   // Fragment 8: Top-Center Rectangular Block (original center ~810, 140)
-  // Centered above heading with generous black space
   frag8: {
     cx: 810,
     cy: 140,
-    tablet: { dx: 0, dy: -10, scale: 0.82 },
-    largeMobile: { dx: -15, dy: -25, scale: 0.7 },
-    smallMobile: { dx: -30, dy: -45, scale: 0.6 },
+    tablet: { dx: 0, dy: -20, scale: 1.2 },
+    largeMobile: { dx: 0, dy: -25, scale: 1.15 },
+    smallMobile: { dx: 0, dy: -20, scale: 1.15 },
   },
   // Fragment 9: Lower Center-Right Sharp Shard -> Lower Card (original center ~940, 680)
-  // Anchored in bottom center below CTA buttons with black gap
   frag9: {
     cx: 940,
     cy: 680,
-    tablet: { dx: -70, dy: 80, scale: 0.8 },
-    largeMobile: { dx: -100, dy: 170, scale: 0.72 },
-    smallMobile: { dx: -140, dy: 230, scale: 0.65 },
+    tablet: { dx: 0, dy: 70, scale: 1.15 },
+    largeMobile: { dx: 0, dy: 60, scale: 1.15 },
+    smallMobile: { dx: 0, dy: 250, scale: 1.15 },
   },
   // Fragment 10: Lower Ring Arc (original center ~1170, 780)
   frag10: {
     cx: 1170,
     cy: 780,
-    tablet: { dx: -120, dy: 15, scale: 0.82 },
-    largeMobile: { dx: -120, dy: 30, scale: 0.72 },
-    smallMobile: { dx: -90, dy: 40, scale: 0.62 },
+    tablet: { dx: -220, dy: 10, scale: 0.88 },
+    largeMobile: { dx: 10, dy: 10, scale: 0.84 },
+    smallMobile: { dx: 15, dy: 0, scale: 0.82 },
   },
 }
 
-function getFragTransform(key, tier) {
+function getFragTransform(key, tier, vbHeight) {
   if (tier === 'desktop' || !FRAG_CONFIG[key]) return undefined
   const conf = FRAG_CONFIG[key]
   const p = conf[tier]
   if (!p) return undefined
   const { dx = 0, dy = 0, scale = 1, rotate = 0 } = p
-  if (dx === 0 && dy === 0 && scale === 1 && rotate === 0) return undefined
+  const scaleY = (vbHeight && tier !== 'desktop') ? vbHeight / 1000 : 1
+  const targetX = conf.cx + dx
+  const targetY = conf.cy * scaleY + dy
   const rotStr = rotate !== 0 ? ` rotate(${rotate})` : ''
   const scaleStr = scale !== 1 ? ` scale(${scale})` : ''
-  return `translate(${conf.cx + dx}, ${conf.cy + dy})${rotStr}${scaleStr} translate(-${conf.cx}, -${conf.cy})`
+  return `translate(${targetX}, ${targetY})${rotStr}${scaleStr} translate(-${conf.cx}, -${conf.cy})`
 }
 
 export default function Hero() {
@@ -145,6 +141,12 @@ export default function Hero() {
         : (windowWidth < 1024 || isPortraitTablet)
           ? 'tablet'
           : 'desktop'
+
+  const vbWidth = 1600
+  const vbHeight =
+    tier === 'desktop'
+      ? 1000
+      : Math.round(1600 * ((windowHeight || 900) / (document.documentElement.clientWidth || windowWidth || 1600)))
 
   // 1. Accessibility: Detect prefers-reduced-motion
   useEffect(() => {
@@ -637,9 +639,12 @@ export default function Hero() {
         {/* ================= LAYER 1: SUSPENDED GOLDEN FRAGMENTS (CINEMATIC SCULPTURE) ================= */}
         <div className="absolute inset-0 w-full h-full pointer-events-none overflow-hidden z-[1] flex items-center justify-center">
           <svg
-            viewBox="0 0 1600 1000"
-            preserveAspectRatio="xMidYMid slice"
-            className="fragment-svg h-full w-auto min-w-full max-w-none shrink-0 lg:w-full lg:h-full select-none overflow-visible"
+            viewBox={tier === 'desktop' ? '0 0 1600 1000' : `0 0 ${vbWidth} ${vbHeight}`}
+            preserveAspectRatio={tier === 'desktop' ? 'xMidYMid slice' : 'xMidYMid meet'}
+            className={`fragment-svg select-none overflow-visible ${tier === 'desktop'
+              ? 'h-full w-auto min-w-full max-w-none shrink-0 lg:w-full lg:h-full'
+              : 'w-full h-full'
+              }`}
           >
             <defs>
               {/* 1. Brushed Gold Metallic Gradient A */}
@@ -747,7 +752,7 @@ export default function Hero() {
               }}
             >
               {/* FRAGMENT 1: Upper-Right Major Chiseled Golden Plate */}
-              <g transform={getFragTransform('frag1', tier)} style={{ transition: reducedMotion ? 'none' : 'transform 0.4s cubic-bezier(0.16, 1, 0.3, 1)' }}>
+              <g transform={getFragTransform('frag1', tier, vbHeight)} style={{ transition: reducedMotion ? 'none' : 'transform 0.4s cubic-bezier(0.16, 1, 0.3, 1)' }}>
                 <g className="fragment-plate frag-midground frag-converge-a frag-scatter-right" filter="url(#goldMetallicShadow)">
                   <polygon
                     points="1180,80 1480,140 1390,360 1120,290"
@@ -765,7 +770,7 @@ export default function Hero() {
               </g>
 
               {/* FRAGMENT 2: Upper-Left Architectural Golden Prism Beam */}
-              <g transform={getFragTransform('frag2', tier)} style={{ transition: reducedMotion ? 'none' : 'transform 0.4s cubic-bezier(0.16, 1, 0.3, 1)' }}>
+              <g transform={getFragTransform('frag2', tier, vbHeight)} style={{ transition: reducedMotion ? 'none' : 'transform 0.4s cubic-bezier(0.16, 1, 0.3, 1)' }}>
                 <g className="fragment-plate frag-midground frag-scatter-left" filter="url(#goldMetallicShadow)">
                   <polygon
                     points="180,90 380,40 340,160 140,210"
@@ -779,7 +784,7 @@ export default function Hero() {
               </g>
 
               {/* FRAGMENT 3: Center-Right Monolithic Angular Plate */}
-              <g transform={getFragTransform('frag3', tier)} style={{ transition: reducedMotion ? 'none' : 'transform 0.4s cubic-bezier(0.16, 1, 0.3, 1)' }}>
+              <g transform={getFragTransform('frag3', tier, vbHeight)} style={{ transition: reducedMotion ? 'none' : 'transform 0.4s cubic-bezier(0.16, 1, 0.3, 1)' }}>
                 <g className="fragment-plate frag-midground frag-converge-b frag-scatter-right" filter="url(#goldMetallicShadow)">
                   <polygon
                     points="1020,380 1260,330 1320,580 1080,630"
@@ -804,7 +809,7 @@ export default function Hero() {
               </g>
 
               {/* FRAGMENT 4: Lower-Right Architectural Wedge Plate */}
-              <g transform={getFragTransform('frag4', tier)} style={{ transition: reducedMotion ? 'none' : 'transform 0.4s cubic-bezier(0.16, 1, 0.3, 1)' }}>
+              <g transform={getFragTransform('frag4', tier, vbHeight)} style={{ transition: reducedMotion ? 'none' : 'transform 0.4s cubic-bezier(0.16, 1, 0.3, 1)' }}>
                 <g className="fragment-plate frag-midground frag-scatter-right" filter="url(#goldMetallicShadow)">
                   <polygon
                     points="1140,680 1440,610 1490,790 1210,870"
@@ -818,7 +823,7 @@ export default function Hero() {
               </g>
 
               {/* FRAGMENT 5: Lower-Left Geometric Plate */}
-              <g transform={getFragTransform('frag5', tier)} style={{ transition: reducedMotion ? 'none' : 'transform 0.4s cubic-bezier(0.16, 1, 0.3, 1)' }}>
+              <g transform={getFragTransform('frag5', tier, vbHeight)} style={{ transition: reducedMotion ? 'none' : 'transform 0.4s cubic-bezier(0.16, 1, 0.3, 1)' }}>
                 <g className="fragment-plate frag-midground frag-scatter-left" filter="url(#goldMetallicShadow)">
                   <polygon
                     points="220,720 460,660 410,840 180,890"
@@ -842,7 +847,7 @@ export default function Hero() {
               }}
             >
               {/* FRAGMENT 6: Precision Golden Ring Arc with Radial Calibration */}
-              <g transform={getFragTransform('frag6', tier)} style={{ transition: reducedMotion ? 'none' : 'transform 0.4s cubic-bezier(0.16, 1, 0.3, 1)' }}>
+              <g transform={getFragTransform('frag6', tier, vbHeight)} style={{ transition: reducedMotion ? 'none' : 'transform 0.4s cubic-bezier(0.16, 1, 0.3, 1)' }}>
                 <g className="fragment-outline frag-foreground frag-converge-a" filter="url(#goldMetallicShadow)">
                   <path
                     d="M 980 210 A 180 180 0 0 1 1220 340"
@@ -884,7 +889,7 @@ export default function Hero() {
               </g>
 
               {/* FRAGMENT 7: Angular Golden Shard pointing inward toward text */}
-              <g transform={getFragTransform('frag7', tier)} style={{ transition: reducedMotion ? 'none' : 'transform 0.4s cubic-bezier(0.16, 1, 0.3, 1)' }}>
+              <g transform={getFragTransform('frag7', tier, vbHeight)} style={{ transition: reducedMotion ? 'none' : 'transform 0.4s cubic-bezier(0.16, 1, 0.3, 1)' }}>
                 <g className="fragment-plate frag-foreground frag-converge-b frag-scatter-right" filter="url(#goldMetallicShadow)">
                   <polygon
                     points="840,320 960,280 920,380 810,410"
@@ -897,7 +902,7 @@ export default function Hero() {
               </g>
 
               {/* FRAGMENT 8: Floating Golden Rectangular Block (Top Center-Right) */}
-              <g transform={getFragTransform('frag8', tier)} style={{ transition: reducedMotion ? 'none' : 'transform 0.4s cubic-bezier(0.16, 1, 0.3, 1)' }}>
+              <g transform={getFragTransform('frag8', tier, vbHeight)} style={{ transition: reducedMotion ? 'none' : 'transform 0.4s cubic-bezier(0.16, 1, 0.3, 1)' }}>
                 <g className="fragment-plate frag-foreground frag-scatter-up" filter="url(#goldMetallicShadow)">
                   <polygon
                     points="760,110 880,85 860,165 740,190"
@@ -913,7 +918,7 @@ export default function Hero() {
               </g>
 
               {/* FRAGMENT 9: Lower Center-Right Sharp Shard */}
-              <g transform={getFragTransform('frag9', tier)} style={{ transition: reducedMotion ? 'none' : 'transform 0.4s cubic-bezier(0.16, 1, 0.3, 1)' }}>
+              <g transform={getFragTransform('frag9', tier, vbHeight)} style={{ transition: reducedMotion ? 'none' : 'transform 0.4s cubic-bezier(0.16, 1, 0.3, 1)' }}>
                 <g className="fragment-plate frag-foreground frag-scatter-right" filter="url(#goldMetallicShadow)">
                   <polygon
                     points="890,640 1020,590 980,720 860,760"
@@ -926,7 +931,7 @@ export default function Hero() {
               </g>
 
               {/* FRAGMENT 10: Lower Angular Ring Arc */}
-              <g transform={getFragTransform('frag10', tier)} style={{ transition: reducedMotion ? 'none' : 'transform 0.4s cubic-bezier(0.16, 1, 0.3, 1)' }}>
+              <g transform={getFragTransform('frag10', tier, vbHeight)} style={{ transition: reducedMotion ? 'none' : 'transform 0.4s cubic-bezier(0.16, 1, 0.3, 1)' }}>
                 <path
                   className="fragment-outline frag-foreground"
                   d="M 1080 720 A 140 140 0 0 1 1260 840"
@@ -996,7 +1001,7 @@ export default function Hero() {
           </header> */}
 
           {/* MAIN EDITORIAL HERO BODY (40-50% width on desktop, centered left) */}
-          <div className="hero-text-block flex-1 flex flex-col justify-center text-left my-auto w-full py-8 sm:py-12 lg:py-6 max-w-2xl xl:max-w-3xl">
+          <div className={`hero-text-block flex-1 flex flex-col justify-center ${tier === 'desktop' ? 'text-left' : 'mx-auto items-center text-center'} my-auto w-full py-8 sm:py-12 lg:py-6 max-w-2xl xl:max-w-3xl`}>
 
             {/* Eyebrow Pill */}
             <div className="hero-eyebrow-pill inline-flex items-center gap-2.5 w-fit px-3 py-1 rounded-full bg-[#D4AF37]/10 border border-[#D4AF37]/30 text-[10px] sm:text-[11px] font-mono tracking-[0.22em] text-[#F0C75E] uppercase mb-4 sm:mb-6">
@@ -1005,8 +1010,8 @@ export default function Hero() {
             </div>
 
             {/* Editorial Main Heading: CORE [gold 2] CODE */}
-            <div className="hero-headline select-none">
-              <h1 className="flex items-baseline gap-2.5 sm:gap-4 lg:gap-5 flex-wrap">
+            <div className="hero-headline w-full select-none">
+              <h1 className={`flex items-baseline gap-2.5 sm:gap-4 lg:gap-5 flex-wrap ${tier === 'desktop' ? '' : 'justify-center'}`}>
                 <span className="hero-headline-word block text-[13vw] sm:text-[10vw] md:text-7xl lg:text-[5.2rem] xl:text-[6.4rem] font-black uppercase tracking-tight leading-[0.9] text-[#FFFFFF]">
                   CORE
                 </span>
@@ -1022,7 +1027,7 @@ export default function Hero() {
             {/* Tagline & Description */}
             <div className="space-y-3 pt-3 sm:pt-4 max-w-lg">
               {/* Tagline */}
-              <div className="hero-tagline-wrap flex items-center gap-2.5">
+              <div className={`hero-tagline-wrap flex items-center gap-2.5 ${tier === 'desktop' ? '' : 'justify-center'}`}>
                 <span className="font-mono text-base text-[#D4AF37] font-semibold">//</span>
                 <p className="text-lg sm:text-xl md:text-2xl font-light text-[#E5E5E5] tracking-wide">
                   From Core to Code.
@@ -1038,7 +1043,7 @@ export default function Hero() {
             </div>
 
             {/* Buttons: Brushed Gold & Premium Dark Glass */}
-            <div className="pt-6 sm:pt-8 flex flex-col sm:flex-row items-stretch sm:items-center gap-3.5 sm:gap-4.5">
+            <div className={`pt-6 sm:pt-8 flex flex-col sm:flex-row items-stretch sm:items-center gap-3.5 sm:gap-4.5 ${tier === 'desktop' ? '' : 'justify-center'}`}>
               {/* Primary: EXPLORE EVENT */}
               <button
                 type="button"
@@ -1072,36 +1077,7 @@ export default function Hero() {
           </div>
 
           {/* BOTTOM SCROLL INDICATOR */}
-          <footer className="w-full flex items-center justify-between text-[11px] font-mono tracking-widest text-[#737373] pt-4 pb-1 border-t border-neutral-900/70">
-            <div className="hidden sm:flex items-center gap-2 text-[#A3A3A3]">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#D4AF37]/80 shadow-[0_0_6px_#D4AF37]" />
-              <span>METALLIC FRAGMENT COMPOSITION</span>
-            </div>
 
-            <div
-              onClick={() => {
-                window.scrollBy({ top: window.innerHeight * 0.9, behavior: 'smooth' })
-              }}
-              className="hero-scroll-indicator mx-auto sm:mx-0 flex flex-col sm:flex-row items-center gap-2 text-[#D4AF37]/80 hover:text-[#FFD978] transition-colors cursor-pointer group"
-            >
-              <span className="text-[10px] sm:text-[11px] font-semibold tracking-[0.25em] uppercase">
-                SCROLL TO EXPLORE
-              </span>
-              <svg
-                className="w-3.5 h-3.5 text-[#D4AF37] animate-bounce"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                strokeWidth="2"
-              >
-                <path strokeLinecap="round" strokeLinejoin="round" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
-              </svg>
-            </div>
-
-            <div className="hidden sm:block text-right text-[#737373]">
-              <span>CORE2CODE // IEEE CS &copy; 2026</span>
-            </div>
-          </footer>
 
         </div>
       </section>
