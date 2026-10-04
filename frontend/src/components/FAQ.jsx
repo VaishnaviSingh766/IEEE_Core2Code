@@ -25,7 +25,7 @@ const FAQS = [
 ];
 
 // Typing speed: milliseconds per character (higher = slower)
-const MS_PER_CHAR = 45;
+const MS_PER_CHAR = 30;
 
 /* ---------- Typed answer ---------- */
 function Answer({ text, open, reduce }) {
@@ -79,18 +79,18 @@ export default function Faqs({ items = FAQS }) {
       aria-labelledby="faq-heading"
     >
       {/* Single keyframe rule — cannot be expressed as a Tailwind utility */}
-      <style>{`@keyframes c2cBlink { 50% { opacity: 0; } }`}</style>
+      <style>{`
+        @import url("https://fonts.googleapis.com/css2?family=Orbitron:wght@500;800&display=swap");
+        @keyframes c2cBlink { 50% { opacity: 0; } }
+      `}</style>
 
       <div className="max-w-3xl mx-auto">
         <h2
           id="faq-heading"
-          className="m-0 mb-3 text-[clamp(32px,5vw,52px)] leading-[1.08] tracking-[-0.03em] font-bold text-[#FFFFFF]"
+          className="m-0 mb-10 text-[clamp(22px,5vw,36px)] leading-none tracking-[0.25em] font-extrabold uppercase text-[#D4AF37] text-center font-['Orbitron',sans-serif] [text-shadow:0_0_18px_rgba(212,175,55,0.45)]"
         >
-          Questions, answered.
+          FAQ
         </h2>
-        <p className="m-0 mb-10 text-[#D4AF37]/70 text-[17px]">
-          Can't find yours? Reach the organizers below.
-        </p>
 
         <div className="grid gap-3">
           {items.map((item, i) => {
