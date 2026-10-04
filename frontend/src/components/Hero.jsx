@@ -4,6 +4,21 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
 gsap.registerPlugin(ScrollTrigger)
 
+// ---------- C2C wheel helpers ----------
+const polar = (r, deg) => [r * Math.cos((deg * Math.PI) / 180), r * Math.sin((deg * Math.PI) / 180)]
+const arc = (r, a0, a1) => {
+  const [x0, y0] = polar(r, a0)
+  const [x1, y1] = polar(r, a1)
+  return `M ${x0.toFixed(1)} ${y0.toFixed(1)} A ${r} ${r} 0 ${Math.abs(a1 - a0) > 180 ? 1 : 0} 1 ${x1.toFixed(1)} ${y1.toFixed(1)}`
+}
+// 60 calibration ticks (a longer one every 30deg) for the outer ring
+const WHEEL_TICKS = Array.from({ length: 60 }, (_, i) => {
+  const major = i % 5 === 0
+  const [x1, y1] = polar(major ? 272 : 279, i * 6)
+  const [x2, y2] = polar(288, i * 6)
+  return { x1, y1, x2, y2, major }
+})
+
 // Responsive fragment positioning configuration (desktop = identity / no-op)
 const FRAG_CONFIG = {
   // Fragment 1: Upper-Right Major Chiseled Golden Plate (original center ~1300, 220)
@@ -427,11 +442,13 @@ export default function Hero() {
         scrollTrigger: {
           trigger: heroRef.current,
           start: 'top top',
-          end: isDesktop ? '+=140%' : '+=90%',
+          // extra scroll distance so the C2C wordmark has its own moment after the hero content leaves
+          end: isDesktop ? '+=225%' : '+=145%',
           pin: heroInnerRef.current,
           pinSpacing: true,
           scrub: 0.9,
-          anticipatePin: 1
+          anticipatePin: 1,
+          invalidateOnRefresh: true
         }
       })
 
@@ -577,6 +594,78 @@ export default function Hero() {
           duration: 0.25
         },
         0.85
+      )
+
+      // ==============================
+      // C2C WORDMARK
+      // (runs after the hero content has left; fills the scroll that used to be empty black)
+      // ==============================
+      gsap.set('.c2c-word', { opacity: 1 })
+
+      const letters = gsap.utils.toArray('.c2c-letter')
+      // each letter comes from a different side; the order is shuffled on every page load
+      const sectors = [205, 335, 90].sort(() => Math.random() - 0.5)
+      const seeds = letters.map((_, i) => ({
+        a: ((sectors[i] + gsap.utils.random(-30, 30)) * Math.PI) / 180,
+        d: gsap.utils.random(0.55, 0.9),
+        r: gsap.utils.random(-35, 35),
+        s: gsap.utils.random(0.7, 1.5)
+      }))
+
+      letters.forEach((el, i) => {
+        const sd = seeds[i]
+        const start = 1.0 + i * 0.06
+
+        // fly in from a random direction and settle into place
+        scrollTl.fromTo(
+          el,
+          {
+            x: () => Math.cos(sd.a) * sd.d * window.innerWidth * 0.75,
+            y: () => Math.sin(sd.a) * sd.d * window.innerHeight * 0.75,
+            rotation: sd.r,
+            scale: sd.s
+          },
+          {
+            x: 0,
+            y: 0,
+            rotation: 0,
+            scale: 1,
+            ease: 'power3.out',
+            duration: 0.38
+          },
+          start
+        )
+
+        // fade in while travelling
+        scrollTl.fromTo(
+          el,
+          { opacity: 0 },
+          { opacity: 1, ease: 'none', duration: 0.18 },
+          start
+        )
+      })
+
+      // wheel scales in with the letters, then keeps turning (each ring: own speed + direction) until the word fades
+      scrollTl
+        .fromTo('.c2c-wheel', { opacity: 0, scale: 0.7 }, { opacity: 1, scale: 1, ease: 'power3.out', duration: 0.5 }, 0.98)
+        .fromTo('.c2c-ring-outer', { rotation: 0 }, { rotation: 140, ease: 'none', duration: 0.78 }, 0.98)
+        .fromTo('.c2c-ring-mid', { rotation: 0 }, { rotation: -200, ease: 'none', duration: 0.78 }, 0.98)
+        .fromTo('.c2c-ring-inner', { rotation: 0 }, { rotation: 260, ease: 'none', duration: 0.78 }, 0.98)
+        // glow rises behind the word
+        .fromTo('.c2c-glow', { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1.05, ease: 'power2.out', duration: 0.5 }, 1.05)
+        // caption draws in right as the letters lock together
+        .fromTo('.c2c-line', { scaleX: 0 }, { scaleX: 1, ease: 'power3.out', duration: 0.15 }, 1.45)
+        .fromTo('.c2c-caption-text', { opacity: 0, y: 8 }, { opacity: 1, y: 0, ease: 'power3.out', duration: 0.12 }, 1.47)
+
+      // hold the finished word, then fade it out smoothly (letters stay together, nothing scatters)
+      scrollTl.to(
+        '.c2c-word',
+        {
+          opacity: 0,
+          ease: 'none',
+          duration: 0.18
+        },
+        1.58
       )
 
       ScrollTrigger.refresh()
@@ -976,7 +1065,8 @@ export default function Hero() {
         <div className="absolute inset-0 pointer-events-none z-[2] bg-gradient-to-b from-black/80 via-black/40 to-black/85 lg:bg-gradient-to-r lg:from-black/95 lg:via-black/75 lg:via-45% lg:to-transparent" />
 
         {/* ================= LAYER 3: EDITORIAL HERO CONTENT ================= */}
-        <div className="hero-content-layer relative z-10 w-full min-h-[100svh] flex flex-col justify-between px-5 sm:px-8 md:px-12 lg:px-16 xl:px-24 py-6 sm:py-8 lg:py-10">
+        {/* Extra top padding keeps the content clear of the fixed navbar (raise pt- values if your navbar is taller) */}
+        <div className="hero-content-layer relative z-10 w-full min-h-[100svh] flex flex-col justify-between px-5 sm:px-8 md:px-12 lg:px-16 xl:px-24 pt-24 pb-6 sm:pt-28 sm:pb-8 lg:pt-32 lg:pb-10">
 
           {/* TOP HUD BAR */}
           {/* <header className="hero-header-bar w-full flex items-center justify-between font-mono text-xs tracking-widest text-[#A3A3A3] pb-4 border-b border-neutral-900/80">
@@ -1079,6 +1169,73 @@ export default function Hero() {
           {/* BOTTOM SCROLL INDICATOR */}
 
 
+        </div>
+
+        {/* ================= LAYER 4: C2C WORDMARK + ROTATING WHEEL (appears after the hero content leaves) ================= */}
+        <div
+          aria-hidden
+          className="c2c-word absolute inset-0 z-[12] flex items-center justify-center pointer-events-none opacity-0"
+        >
+          {/* soft gold glow behind everything (gradient only, no blur filter) */}
+          <div className="c2c-glow absolute aspect-square w-[min(110vw,100svh)] rounded-full opacity-0 bg-[radial-gradient(circle,rgba(240,199,94,0.22)_0%,rgba(212,175,55,0.07)_40%,transparent_70%)]" />
+
+          {/* the wheel: three rings, each rotating at its own speed / direction */}
+          <svg
+            className="c2c-wheel absolute aspect-square w-[min(94vw,88svh)] overflow-visible opacity-0"
+            viewBox="-300 -300 600 600"
+            fill="none"
+          >
+            {/* outer: calibration tick ring */}
+            <g className="c2c-ring-outer">
+              <circle r="288" stroke="#D4AF37" strokeOpacity="0.35" strokeWidth="1" />
+              {WHEEL_TICKS.map((t, i) => (
+                <line
+                  key={i}
+                  x1={t.x1}
+                  y1={t.y1}
+                  x2={t.x2}
+                  y2={t.y2}
+                  stroke="#D4AF37"
+                  strokeWidth={t.major ? 1.4 : 0.8}
+                  strokeOpacity={t.major ? 0.7 : 0.35}
+                />
+              ))}
+              <path d={arc(288, -60, -20)} stroke="#FFD978" strokeWidth="2.6" strokeLinecap="round" />
+            </g>
+
+            {/* middle: dashed ring with three bright arcs */}
+            <g className="c2c-ring-mid">
+              <circle r="250" stroke="#D4AF37" strokeOpacity="0.25" strokeWidth="0.9" strokeDasharray="2 10" />
+              <path d={arc(250, 15, 75)} stroke="#F0C75E" strokeWidth="2.2" strokeLinecap="round" strokeOpacity="0.95" />
+              <path d={arc(250, 140, 165)} stroke="#D4AF37" strokeWidth="1.8" strokeLinecap="round" strokeOpacity="0.8" />
+              <path d={arc(250, 230, 292)} stroke="#F0C75E" strokeWidth="2.2" strokeLinecap="round" strokeOpacity="0.95" />
+            </g>
+
+            {/* inner: thin ring with one bright arc and a glowing node */}
+            <g className="c2c-ring-inner">
+              <circle r="215" stroke="#D4AF37" strokeOpacity="0.3" strokeWidth="0.9" />
+              <path d={arc(215, 200, 300)} stroke="#FFD978" strokeWidth="1.8" strokeLinecap="round" />
+              <circle cx={polar(215, 300)[0]} cy={polar(215, 300)[1]} r="4.5" fill="#FFD978" />
+            </g>
+          </svg>
+
+          {/* the word */}
+          <div className="relative flex items-baseline justify-center gap-[0.04em] font-black uppercase leading-none tracking-tight text-[30vw] sm:text-[24vw] lg:text-[17vw]">
+            <span className="c2c-letter block text-white">C</span>
+            <span className="c2c-letter block bg-gradient-to-br from-[#FFD978] via-[#F0C75E] to-[#B8860B] bg-clip-text text-transparent drop-shadow-[0_0_30px_rgba(212,175,55,0.45)]">
+              2
+            </span>
+            <span className="c2c-letter block text-white">C</span>
+          </div>
+
+          {/* caption: hairlines draw outwards, text rises in */}
+          <div className="absolute inset-x-0 bottom-[11svh] flex items-center justify-center gap-4 px-6">
+            <span className="c2c-line h-px w-12 origin-right bg-gradient-to-r from-transparent to-[#D4AF37] sm:w-24" />
+            <span className="c2c-caption-text font-mono text-[10px] uppercase tracking-[0.3em] text-[#F0C75E] sm:text-xs">
+              From Core to Code
+            </span>
+            <span className="c2c-line h-px w-12 origin-left bg-gradient-to-l from-transparent to-[#D4AF37] sm:w-24" />
+          </div>
         </div>
       </section>
     </div>
