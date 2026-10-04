@@ -128,66 +128,52 @@ const Events = () => {
 
   return (
     <>
-      {/* ============================================================
-          EVENT COMPONENT
-      ============================================================ */}
-
       <section
         id="events"
         className="relative min-h-screen overflow-hidden bg-[#050505] px-5 py-20 font-['Rajdhani',sans-serif] text-white sm:px-8 md:px-12 lg:px-20"
       >
-        {/* Background grid */}
         <div className="pointer-events-none absolute inset-0 opacity-[0.035]">
           <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.5)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.5)_1px,transparent_1px)] bg-[size:55px_55px]" />
         </div>
 
-        {/* Background glow */}
         <div className="pointer-events-none absolute left-1/2 top-1/2 h-[500px] w-[500px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#e4bd3d]/[0.035] blur-[120px]" />
 
-        {/* Decorative dots */}
         <div className="absolute left-[8%] top-[15%] h-1 w-1 rounded-full bg-[#e4bd3d]" />
         <div className="absolute right-[12%] top-[30%] h-1 w-1 rounded-full bg-[#e4bd3d]" />
         <div className="absolute bottom-[20%] left-[10%] h-1 w-1 rounded-full bg-[#e4bd3d]" />
         <div className="absolute bottom-[12%] right-[8%] h-1 w-1 rounded-full bg-[#e4bd3d]" />
 
-        <div className="relative mx-auto flex min-h-screen max-w-[920px] flex-col items-center justify-center">
+        <div className="relative mx-auto flex min-h-[calc(100vh-10rem)] max-w-[920px] flex-col items-center justify-center">
           <h2 className="mb-8 text-center font-['Orbitron',sans-serif] text-3xl font-extrabold uppercase leading-none tracking-[0.16em] text-[#e4bd3d] sm:text-4xl md:text-5xl">
-            THE EVENTS
+            THE EVENT
           </h2>
 
-          {/* Main event card */}
           <div className="relative w-full rounded-[30px] border border-[#80691f] bg-[#080909] p-[1px] shadow-[0_0_60px_rgba(228,189,61,0.05)]">
             <div className="relative overflow-hidden rounded-[29px] border border-[#292a26] px-6 py-10 sm:px-10 md:px-14 md:py-14">
-              {/* Inner glow */}
               <div className="pointer-events-none absolute right-[-100px] top-[-100px] h-[280px] w-[280px] rounded-full bg-[#e4bd3d]/[0.04] blur-[90px]" />
 
-              {/* Small decorative dots */}
               <div className="absolute left-5 top-12 h-1 w-1 rounded-full bg-[#e4bd3d]" />
               <div className="absolute right-7 top-24 h-1 w-1 rounded-full bg-[#e4bd3d]" />
               <div className="absolute bottom-14 right-7 h-1 w-1 rounded-full bg-[#e4bd3d]" />
 
-              {/* Event name */}
               <h1 className="relative font-['Orbitron',sans-serif] text-4xl font-extrabold uppercase leading-none tracking-[-0.04em] sm:text-5xl md:text-6xl">
                 core
                 <span className="text-[#e4bd3d]">2</span>
                 code
               </h1>
 
-              {/* Event type */}
               <div className="mt-7 inline-flex rounded-xl border border-white/15 bg-white/[0.025] px-4 py-2">
                 <span className="font-mono text-xs font-semibold uppercase tracking-[0.18em] text-white/90">
                   Global coding event
                 </span>
               </div>
 
-              {/* Description */}
               <p className="mt-8 max-w-3xl text-lg font-medium leading-8 tracking-wide text-white/65 sm:text-xl md:text-2xl md:leading-10">
                 A one-day technical challenge that takes you from computer
                 science fundamentals to problem solving, and finally to
                 building real-world solutions.
               </p>
 
-              {/* Event information */}
               <div className="mt-8 flex flex-wrap gap-3">
                 <div className="rounded-xl border border-[#65551f] bg-black px-4 py-2.5 font-mono text-xs uppercase tracking-[0.12em] text-white/90">
                   One day
@@ -202,9 +188,7 @@ const Events = () => {
                 </div>
               </div>
 
-              {/* Buttons */}
               <div className="mt-8 flex flex-col items-start gap-3 sm:flex-row sm:items-center">
-                {/* Register */}
                 <button
                   type="button"
                   className="w-[180px] whitespace-nowrap rounded-2xl bg-[#e4bd3d] px-2 py-3.5 font-['Orbitron',sans-serif] text-[10px] font-bold uppercase tracking-[0.1em] text-black shadow-[0_0_35px_rgba(228,189,61,0.12)] transition-all duration-300 hover:bg-[#f0ca4c] hover:shadow-[0_0_40px_rgba(228,189,61,0.2)] sm:w-auto sm:px-7 sm:text-xs sm:tracking-[0.14em]"
@@ -212,7 +196,6 @@ const Events = () => {
                   Register now
                 </button>
 
-                {/* Explore */}
                 <button
                   type="button"
                   onClick={openTracks}
@@ -226,34 +209,24 @@ const Events = () => {
         </div>
       </section>
 
-      {/* ============================================================
-          EXPLORE TRACKS OVERLAY
-          This stays inside Events.jsx.
-      ============================================================ */}
-
       {showTracks && (
         <div className="fixed inset-0 z-[100] overflow-y-auto bg-black/90 backdrop-blur-md">
-          {/* Outer container */}
           <div className="flex min-h-screen items-center justify-center px-4 py-6 sm:px-8">
             <div className="relative w-full max-w-[900px]">
-              {/* Gold outer border */}
               <div className="absolute -inset-[1px] rounded-[28px] border border-[#8e7625]/70" />
 
-              {/* Main detail panel */}
               <div className="relative rounded-[28px] border border-white/10 bg-[#070808] px-5 py-8 shadow-[0_0_70px_rgba(228,189,61,0.07)] sm:px-8 md:px-12 md:py-10">
-                {/* Close button */}
                 <button
                   type="button"
                   onClick={closeTracks}
                   aria-label="Close tracks"
-                  className="absolute right-5 top-5 flex h-10 w-10 items-center justify-center rounded-full border border-white/15 text-xl text-white/70 transition-all duration-300 hover:border-[#e4bd3d] hover:bg-[#e4bd3d] hover:text-black"
+                  className="absolute right-5 top-5 flex h-10 w-10 items-center justify-center rounded-full border border-[#e4bd3d] bg-transparent font-sans text-2xl font-normal leading-none text-[#e4bd3d] transition-colors duration-300 hover:bg-[#e4bd3d] hover:text-black focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#e4bd3d] focus-visible:ring-offset-2 focus-visible:ring-offset-[#070808]"
                 >
                   ×
                 </button>
 
-                {/* Heading */}
                 <div className="pr-12">
-                  <p className="text-sm text-white/40">
+                  <p className="font-['Orbitron',sans-serif] text-xl font-extrabold uppercase tracking-[-0.04em] text-white/75 sm:text-2xl">
                     core
                     <span className="text-[#e4bd3d]">2</span>
                     code
@@ -268,7 +241,6 @@ const Events = () => {
                   </p>
                 </div>
 
-                {/* Track selector */}
                 <div className="mx-auto mt-8 flex max-w-[520px] rounded-xl border border-white/10 bg-[#0b0c0c] p-1">
                   <button
                     type="button"
@@ -295,9 +267,7 @@ const Events = () => {
                   </button>
                 </div>
 
-                {/* Round navigation */}
                 <div className="mx-auto mt-8 flex max-w-[650px] items-start">
-                  {/* Round 1 */}
                   <button
                     type="button"
                     onClick={() => setSelectedRound(1)}
@@ -324,10 +294,8 @@ const Events = () => {
                     </span>
                   </button>
 
-                  {/* Line */}
                   <div className="mt-[18px] h-px flex-1 bg-white/10" />
 
-                  {/* Round 2 */}
                   <button
                     type="button"
                     onClick={() => setSelectedRound(2)}
@@ -354,10 +322,8 @@ const Events = () => {
                     </span>
                   </button>
 
-                  {/* Line */}
                   <div className="mt-[18px] h-px flex-1 bg-white/10" />
 
-                  {/* Round 3 */}
                   <button
                     type="button"
                     onClick={() => setSelectedRound(3)}
@@ -385,25 +351,20 @@ const Events = () => {
                   </button>
                 </div>
 
-                {/* Round content */}
                 <div className="mx-auto mt-8 max-w-[650px]">
                   <div className="rounded-2xl border border-white/10 bg-[#0a0b0b] p-5 shadow-[0_0_30px_rgba(255,255,255,0.02)] sm:p-7">
-                    {/* Round number */}
                     <p className="text-sm text-white/40">
                       Round {currentRound.number} of 3
                     </p>
 
-                    {/* Title */}
                     <h3 className="mt-2 text-2xl font-medium sm:text-3xl">
                       {currentRound.title}
                     </h3>
 
-                    {/* Description */}
                     <p className="mt-4 text-sm leading-7 text-white/55 sm:text-base">
                       {currentRound.description}
                     </p>
 
-                    {/* Points */}
                     <div className="mt-5 space-y-2.5">
                       {currentRound.points.map((point) => (
                         <div
@@ -421,7 +382,6 @@ const Events = () => {
                       ))}
                     </div>
 
-                    {/* Tags */}
                     <div className="mt-5 flex flex-wrap gap-2">
                       {currentRound.tags.map((tag) => (
                         <span
@@ -433,7 +393,6 @@ const Events = () => {
                       ))}
                     </div>
 
-                    {/* Navigation buttons */}
                     <div className="mt-7 flex items-center justify-between">
                       <button
                         type="button"
@@ -468,8 +427,14 @@ const Events = () => {
                   </div>
                 </div>
 
-                {/* Bottom close */}
-                <div className="mt-8 flex justify-center">
+                <div className="mt-8 flex flex-col items-center gap-4">
+                  <button
+                    type="button"
+                    className="rounded-xl bg-[#e4bd3d] px-7 py-3 text-sm font-medium text-black shadow-[0_0_25px_rgba(228,189,61,0.15)] transition-all duration-300 hover:bg-[#f0ca4c]"
+                  >
+                    Register now
+                  </button>
+
                   <button
                     type="button"
                     onClick={closeTracks}
