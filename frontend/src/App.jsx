@@ -12,6 +12,8 @@ import ContactUs from './pages/ContactUs'
 import Timeline from './components/Timeline'
 import Cursor from './utils/Cursor'
 
+import NotFound from './pages/NotFound'
+
 const Structure = () => {
   return (
     <div className='bg-black text-white select-none min-h-screen w-full flex flex-col'>
@@ -28,6 +30,7 @@ const router = createBrowserRouter([
   {
     path: '/',
     element: <Structure />,
+    errorElement: <NotFound />,
     children: [
       {
         path: '/',

@@ -32,6 +32,15 @@ const logosData = [
   { src: computerSociety, alt: 'IEEE Computer Society', height: 'h-6 sm:h-8 lg:h-9' }
 ];
 
+/* ═══ Centralised logo links — paste real URLs here ═══ */
+const LOGO_LINKS = [
+  { name: "Siddaganga Institute of Technology", url: "https://sit.ac.in/" },   // paste college site link here
+  { name: "IEEE", url: "https://www.ieee.org/" },   // paste IEEE link here
+  { name: "IEEE Bangalore Section", url: "https://ieeebangalore.org/" },   // paste Bangalore Section link here
+  { name: "IEEE Women in Engineering", url: "https://wie.ieee.org/" },   // paste WIE link here
+  { name: "IEEE Computer Society", url: "https://www.computer.org/" },   // paste Computer Society link here
+];
+
 /* ═══ NavPill – Expanding circle-to-pill nav link ═══ */
 const NavPill = ({ item, onClick, className = '' }) => (
   <li className={`nb-item ${className}`}>
@@ -722,8 +731,18 @@ export default function Header() {
             }
           }
 
-          /* ─── Mobile Menu Blob Items ─── */
+          /* ─── Mobile Menu Blob Items (fixed: removed goo filter, added clip) ─── */
           @media (max-width: 1279px) {
+
+            /* STEP 1+2: Outer wrapper – unclipped, carries the safe glow */
+            .nb-m-item {
+              position: relative;
+              border-radius: 999px;                          /* (changed) matches pill */
+              background: transparent !important;            /* (changed) no gold bg leak */
+              transition: box-shadow 0.3s ease;
+            }
+
+            /* The link itself – fully clipped pill */
             .nb-m-link {
               position: relative;
               display: flex;
@@ -732,7 +751,7 @@ export default function Header() {
               gap: 12px;
               width: 100%;
               height: 100%;
-              border-radius: 30px;
+              border-radius: 999px;                          /* (changed) large pill radius */
               text-transform: uppercase;
               font-weight: bold;
               letter-spacing: 0.1em;
@@ -741,55 +760,73 @@ export default function Header() {
               -webkit-backdrop-filter: blur(10px);
               border: 1.5px solid rgba(212, 175, 55, 0.5);
               color: #D4AF37 !important;
-              box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2);
-              overflow: hidden;
+              overflow: hidden;                              /* clip children to pill */
               isolation: isolate;
+              clip-path: inset(0 round 999px);               /* (added) hard pixel clip */
+              -webkit-clip-path: inset(0 round 999px);
+              background-clip: padding-box;                  /* (added) prevent border bleed */
               text-decoration: none;
-              transition: box-shadow 0.3s ease;
+              box-shadow: none;                              /* (changed) no shadow here, moved to wrapper */
+              transition: none;
             }
 
+            /* Inner blob container – inherits clip */
             .nb-m-inner {
               position: absolute;
               inset: 0;
               overflow: hidden;
-              border-radius: inherit;
+              border-radius: inherit;                        /* matches pill */
               z-index: 1;
               pointer-events: none;
             }
 
+            /* Blobs layer – NO goo filter (changed: removed filter:url(#nb-goo)) */
             .nb-m-blobs {
               position: relative;
               display: block;
               height: 100%;
-              filter: url(#nb-goo);
+              border-radius: inherit;                        /* (added) inherit pill clip */
+              /* filter: url(#nb-goo);  ── REMOVED: caused gold rectangle leak ── */
             }
 
+            /* Individual blob circles */
             .nb-m-blob {
               position: absolute;
               top: 0;
-              width: 30%;
-              height: 140%;
-              border-radius: 100%;
+              width: 32%;                                    /* (changed) slightly wider */
+              height: 150%;                                  /* (changed) taller for coverage */
+              border-radius: 50%;
               background-color: #F5D76E;
-              transform: translate3d(0, 160%, 0) scale(1.5);
+              transform: translateY(160%) scale(1.3);        /* (changed) idle: hidden below */
               transition: transform 0.5s cubic-bezier(0.65, 0, 0.35, 1);
             }
+            /* Fixed left positions per blob (changed: overrides inline left) */
+            .nb-m-blob:nth-child(1) { left: -6%;  transition-delay: 0s; }
+            .nb-m-blob:nth-child(2) { left: 22%;  transition-delay: 0.06s; }
+            .nb-m-blob:nth-child(3) { left: 50%;  transition-delay: 0.12s; }
+            .nb-m-blob:nth-child(4) { left: 76%;  transition-delay: 0.18s; }
 
+            /* Solid gold fill underneath (::before) – keeps fill complete */
             .nb-m-link::before {
               content: "";
               position: absolute;
               inset: 0;
               z-index: 0;
-              border-radius: inherit;
+              border-radius: inherit;                        /* matches pill */
               background: linear-gradient(135deg, #B8860B, #F5D76E, #D4AF37);
               transform: translateY(101%);
               transition: transform 0.5s 0.15s cubic-bezier(0.65, 0, 0.35, 1);
             }
 
+            /* Title + icon at z-index 3 */
             .nb-m-title {
               position: relative;
               z-index: 3;
               transition: color 0.3s ease;
+            }
+            .nb-m-link .nb-icon {
+              position: relative;                            /* (added) keep in flow */
+              z-index: 3;
             }
 
             /* Register Now Idle (Inverted) */
@@ -805,29 +842,35 @@ export default function Header() {
               background-color: #000;
             }
 
-            /* Hover / Tap / Active States */
-            .nb-m-link:active,
-            .nb-m-link:focus-visible,
-            .nb-m-link.active {
-              box-shadow: 0 0 22px rgba(212, 175, 55, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+            /* ── Hover / Tap / Active States ── */
+
+            /* STEP 3: Safe glow on WRAPPER only (unclipped, has border-radius) */
+            .nb-m-item:active,
+            .nb-m-item:focus-within {
+              box-shadow: 0 0 12px rgba(212, 175, 55, 0.3); /* (changed) safe glow on wrapper */
+            }
+            .nb-m-item:has(.nb-m-link.active) {
+              box-shadow: 0 0 12px rgba(212, 175, 55, 0.3); /* active route glow */
             }
             @media (hover: hover) {
-              .nb-m-link:hover {
-                box-shadow: 0 0 22px rgba(212, 175, 55, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+              .nb-m-item:hover {
+                box-shadow: 0 0 12px rgba(212, 175, 55, 0.3);
               }
             }
 
+            /* Blobs rise into view on active/tap/hover */
             .nb-m-link:active .nb-m-blob,
             .nb-m-link:focus-visible .nb-m-blob,
             .nb-m-link.active .nb-m-blob {
-              transform: translate3d(0, -10%, 0) scale(1.9);
+              transform: translateY(-8%) scale(1.5);         /* (changed) slightly tighter */
             }
             @media (hover: hover) {
               .nb-m-link:hover .nb-m-blob {
-                transform: translate3d(0, -10%, 0) scale(1.9);
+                transform: translateY(-8%) scale(1.5);
               }
             }
 
+            /* Solid fill slides up on active/tap/hover */
             .nb-m-link:active::before,
             .nb-m-link:focus-visible::before,
             .nb-m-link.active::before {
@@ -839,6 +882,7 @@ export default function Header() {
               }
             }
 
+            /* Text goes black on fill */
             .nb-m-link:active .nb-m-title,
             .nb-m-link:focus-visible .nb-m-title,
             .nb-m-link.active .nb-m-title {
@@ -850,6 +894,7 @@ export default function Header() {
               }
             }
 
+            /* Icon goes black on fill */
             .nb-m-link:active .nb-icon,
             .nb-m-link:focus-visible .nb-icon,
             .nb-m-link.active .nb-icon {
@@ -888,9 +933,34 @@ export default function Header() {
               .nb-m-link, .nb-m-blob, .nb-m-link::before, .nb-m-title {
                 transition: none !important;
               }
-              .nb-m-blobs {
-                filter: none;
-              }
+              /* (changed) no filter to remove, just ensure blobs are static */
+            }
+          }
+
+          /* ═══ nb-logo-link — added: clickable logo wrapper ═══ */
+          .nb-logo-link {
+            display: inline-flex;
+            align-items: center;
+            cursor: pointer;
+            text-decoration: none;
+            color: inherit;
+            transition: transform .3s ease, filter .3s ease;
+          }
+          @media (hover: hover) {
+            .nb-logo-link:hover {
+              transform: translateY(-2px) scale(1.05);
+              filter: drop-shadow(0 0 8px rgba(212,175,55,.6));
+            }
+          }
+          .nb-logo-link:focus-visible {
+            outline: 2px solid #D4AF37;
+            outline-offset: 4px;
+            border-radius: 6px;
+          }
+          @media (prefers-reduced-motion: reduce) {
+            .nb-logo-link {
+              transition: none !important;
+              transform: none !important;
             }
           }
         `}</style>
@@ -936,22 +1006,30 @@ export default function Header() {
 
           {/* Institutional Logo Strip */}
           <div ref={brandingRef} className="flex items-center justify-start gap-1.5 sm:gap-3 lg:gap-4 flex-1 min-w-0 py-1" aria-label="Institutional Branding">
-            {logosData.map((logo, index) => (
-              <React.Fragment key={index}>
-                <button
-                  className="branding-logo relative group cursor-pointer flex items-center justify-center flex-shrink min-w-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold rounded"
-                  aria-label={logo.alt}
-                >
-                  {/* Hover Aura */}
-                  <div className="logo-aura absolute inset-[-4px] bg-gold blur-[8px] opacity-0 pointer-events-none rounded-full" />
-                  <img src={logo.src} alt={logo.alt} className={`${logo.height} w-auto max-w-full object-contain relative z-10 drop-shadow-md`} />
-                </button>
-                {/* Separator */}
-                {index < logosData.length - 1 && (
-                  <div className="h-4 sm:h-5 lg:h-6 w-[1px] bg-gold/25 logo-separator flex-shrink-0" />
-                )}
-              </React.Fragment>
-            ))}
+            {logosData.map((logo, index) => {
+              const link = LOGO_LINKS[index]; // added: pull matching link entry
+              return (
+                <React.Fragment key={index}>
+                  {/* Wrapped in <a> for external link — added */}
+                  <a
+                    href={link.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={`Visit ${link.name} website`}
+                    className="nb-logo-link branding-logo relative group cursor-pointer flex items-center justify-center flex-shrink min-w-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold rounded"
+                    onClick={(e) => { if (link.url === "#") e.preventDefault(); }}
+                  >
+                    {/* Hover Aura */}
+                    <div className="logo-aura absolute inset-[-4px] bg-gold blur-[8px] opacity-0 pointer-events-none rounded-full" />
+                    <img src={logo.src} alt={link.name} className={`${logo.height} w-auto max-w-full object-contain relative z-10 drop-shadow-md`} />
+                  </a>
+                  {/* Separator */}
+                  {index < logosData.length - 1 && (
+                    <div className="h-4 sm:h-5 lg:h-6 w-[1px] bg-gold/25 logo-separator flex-shrink-0" />
+                  )}
+                </React.Fragment>
+              );
+            })}
           </div>
 
           {/* Desktop Navigation – expanding pill items */}
@@ -1014,11 +1092,75 @@ export default function Header() {
         </div>
       </header>
 
-      {/* Mobile Menu Overlay */}
+      {/* Mobile Menu Overlay — fixed panel below header, centered items */}
       <div
         ref={mobileMenuOverlayRef}
         className="fixed inset-0 bg-[#030303]/98 backdrop-blur-xl z-40 hidden opacity-0"
       >
+        {/* ── mobile-menu-panel layout (changed) ── */}
+        <style>{`
+          @media (max-width: 1023px) {
+            /* Panel fills viewport below the header */
+            .nb-mobile-panel {
+              position: fixed !important;
+              left: 0; right: 0; bottom: 0;
+              top: 70px;                                     /* header height */
+              height: calc(100dvh - 70px);                   /* dvh for mobile browser toolbars */
+              height: calc(100vh - 70px);                     /* fallback */
+              display: flex !important;
+              flex-direction: column;
+              justify-content: center;                       /* vertical centering */
+              align-items: center;                           /* horizontal centering */
+              gap: 18px;                                     /* tight even spacing */
+              padding: 24px 20px;
+              padding-bottom: 8vh;                           /* optical lift */
+              overflow-y: auto;
+              /* reset old spacing */
+              padding-top: 0 !important;
+            }
+
+            /* Remove large gaps/padding from the inner <nav> */
+            .nb-mobile-panel nav.nb-mobile-nav {
+              gap: 0 !important;
+              width: 100%;
+              max-width: 420px;
+              padding: 0;
+              margin: 0;
+            }
+            .nb-mobile-panel nav.nb-mobile-nav .nb-list {
+              gap: 18px !important;
+            }
+
+            /* Each item: constrained width, fixed height, no extra margin */
+            .nb-mobile-panel .mobile-nav-wrapper {
+              width: min(320px, 100%) !important;
+              height: 56px !important;
+              padding: 0 !important;
+              margin: 0 !important;
+            }
+
+            /* Register Now gets a tiny top margin for separation */
+            .nb-mobile-panel .mobile-nav-wrapper.nb-register-wrapper {
+              margin-top: 8px !important;
+            }
+
+            /* Landscape / very short screens: don't clip items */
+            @media (max-height: 520px) {
+              .nb-mobile-panel {
+                justify-content: flex-start !important;
+                gap: 12px !important;
+                padding-top: 16px !important;
+                padding-bottom: 16px !important;
+              }
+              .nb-mobile-panel .mobile-nav-wrapper {
+                height: 52px !important;
+              }
+              .nb-mobile-panel nav.nb-mobile-nav .nb-list {
+                gap: 12px !important;
+              }
+            }
+          }
+        `}</style>
         {/* Cinematic Dark Background & Balanced Ambient Light */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none flex items-center justify-center">
           {/* Subtle balanced radial gradients instead of one intense bar */}
@@ -1040,7 +1182,7 @@ export default function Header() {
 
         <div
           ref={mobileMenuInnerRef}
-          className="flex flex-col items-center justify-start h-full w-full relative hidden opacity-0 z-20 pt-20 sm:pt-24 pb-8 overflow-y-auto no-scrollbar"
+          className="nb-mobile-panel flex flex-col items-center w-full relative hidden opacity-0 z-20 no-scrollbar"
         >
           {/* Compact Logo Branding at the top of the mobile menu */}
           {/* <div className="flex items-center justify-center gap-1.5 sm:gap-3 w-[min(90vw,420px)] mx-auto mb-10 flex-nowrap flex-shrink-0 min-w-0">
@@ -1056,12 +1198,12 @@ export default function Header() {
             ))}
           </div> */}
 
-          {/* Mobile nav – full-width pills with icon + label always visible */}
-          <nav className="flex flex-col items-center gap-4 sm:gap-6 w-[min(88vw,420px)] mx-auto flex-shrink-0" aria-label="Mobile Navigation">
-            <ul className="nb-list" style={{ flexDirection: 'column', width: '100%' }}>
+          {/* Mobile nav – centered pills with icon + label always visible (changed) */}
+          <nav className="nb-mobile-nav flex flex-col items-center w-full mx-auto flex-shrink-0" aria-label="Mobile Navigation">
+            <ul className="nb-list" style={{ flexDirection: 'column', width: '100%', alignItems: 'center' }}>
               {navItems.map((item, index) => {
                 return (
-                  <div key={index} className="mobile-nav-wrapper overflow-hidden p-3 w-full flex justify-center h-[84px]">
+                  <div key={index} className="mobile-nav-wrapper overflow-hidden flex justify-center">
                     <MobileBlobItem
                       item={item}
                       onClick={handleNavClick}
@@ -1072,7 +1214,7 @@ export default function Header() {
               })}
 
               {/* Register Now Button (Mobile Blob) */}
-              <div className="mobile-nav-wrapper overflow-hidden p-3 w-full flex justify-center mt-2 h-[84px]">
+              <div className="mobile-nav-wrapper nb-register-wrapper overflow-hidden flex justify-center">
                 <MobileBlobItem
                   item={{ label: 'Register Now', href: REGISTER_URL }}
                   onClick={handleNavClick}
