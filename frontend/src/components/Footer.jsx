@@ -40,12 +40,20 @@ export default function Footer() {
           --gold: var(--accent, #f5a623);
           --white: #ffffff;
           position: relative;
+          width: 100%;
+          box-sizing: border-box;
           background: var(--black);
           color: var(--white);
           font-family: "Rajdhani", system-ui, sans-serif;
           text-align: center;
-          padding-top: 64px;
+          padding: 36px 0 0;
           overflow: hidden;
+        }
+
+        .ft *,
+        .ft *::before,
+        .ft *::after {
+          box-sizing: border-box;
         }
 
         .ft a {
@@ -86,7 +94,9 @@ export default function Footer() {
         }
 
         @keyframes ft-scan {
-          to { left: 82%; }
+          to {
+            left: 82%;
+          }
         }
 
         .ft__inner {
@@ -95,17 +105,30 @@ export default function Footer() {
           padding: 0 24px;
         }
 
+        .ft__main {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          gap: 30px;
+          text-align: left;
+        }
+
+        .ft__brand {
+          flex: 1;
+          min-width: 0;
+        }
+
         .ft__name {
           margin: 0;
           font-family: "Orbitron", sans-serif;
           font-weight: 800;
-          font-size: clamp(2rem, 6vw, 3.4rem);
+          font-size: clamp(2rem, 5vw, 3.2rem);
           letter-spacing: 0.14em;
           line-height: 1.2;
         }
 
         .ft__sub {
-          margin: 10px 0 0;
+          margin: 8px 0 0;
           font-family: "Orbitron", sans-serif;
           font-weight: 600;
           font-size: 0.95rem;
@@ -113,12 +136,22 @@ export default function Footer() {
           color: var(--gold);
         }
 
+        .ft__social {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          gap: 16px;
+          flex-shrink: 0;
+        }
+
         .ft__title {
-          margin: 36px 0 20px;
+          margin: 0;
           font-family: "Orbitron", sans-serif;
           font-weight: 600;
           font-size: 0.8rem;
           letter-spacing: 0.2em;
+          text-align: center;
         }
 
         .ft__list {
@@ -128,15 +161,15 @@ export default function Footer() {
           display: flex;
           justify-content: center;
           flex-wrap: wrap;
-          gap: 18px;
+          gap: 14px;
         }
 
         .ft__pulse {
           position: relative;
           display: grid;
           place-items: center;
-          width: 48px;
-          height: 48px;
+          width: 46px;
+          height: 46px;
           border-radius: 50%;
           border: 1px solid var(--gold);
           color: var(--white);
@@ -184,20 +217,32 @@ export default function Footer() {
         }
 
         .ft__copy {
-          margin: 40px 0 0;
-          padding: 14px 24px 24px;
+          margin: 28px 0 0;
+          padding: 12px 24px 16px;
           border-top: 1px solid var(--gold);
           font-size: 0.95rem;
           letter-spacing: 0.04em;
+          text-align: center;
         }
 
         @media (max-width: 700px) {
           .ft {
-            padding-top: 48px;
+            padding-top: 32px;
           }
 
           .ft__inner {
             padding: 0 16px;
+          }
+
+          .ft__main {
+            flex-direction: column;
+            align-items: center;
+            gap: 26px;
+            text-align: center;
+          }
+
+          .ft__brand {
+            width: 100%;
           }
 
           .ft__name {
@@ -209,11 +254,18 @@ export default function Footer() {
             letter-spacing: 0.2em;
           }
 
+          .ft__social {
+            align-items: center;
+            width: 100%;
+            gap: 14px;
+          }
+
           .ft__title {
-            margin-top: 30px;
+            margin: 0;
           }
 
           .ft__list {
+            justify-content: center;
             gap: 14px;
           }
 
@@ -223,8 +275,20 @@ export default function Footer() {
           }
 
           .ft__copy {
-            margin-top: 32px;
+            margin-top: 24px;
+            padding: 12px 16px 16px;
             font-size: 0.85rem;
+          }
+        }
+
+        @media (max-width: 360px) {
+          .ft__list {
+            gap: 10px;
+          }
+
+          .ft__pulse {
+            width: 40px;
+            height: 40px;
           }
         }
 
@@ -242,33 +306,39 @@ export default function Footer() {
 
       <footer className="ft">
         <div className="ft__inner">
-          <h2 className="ft__name">IEEE SIT</h2>
-          <p className="ft__sub">Student Branch</p>
+          <div className="ft__main">
+            <div className="ft__brand">
+              <h2 className="ft__name">IEEE SIT</h2>
+              <p className="ft__sub">Student Branch</p>
+            </div>
 
-          <h3 className="ft__title">Follow us</h3>
+            <div className="ft__social">
+              <h3 className="ft__title">Follow us</h3>
 
-          <ul className="ft__list">
-            {SOCIALS.map(({ name, href, path }, i) => (
-              <li key={name}>
-                <a
-                  className="ft__pulse"
-                  style={{ "--n": i }}
-                  href={href}
-                  target={
-                    href.startsWith("mailto:")
-                      ? undefined
-                      : "_blank"
-                  }
-                  rel="noopener noreferrer"
-                  aria-label={name}
-                >
-                  <svg viewBox="0 0 24 24" aria-hidden="true">
-                    <path d={path} />
-                  </svg>
-                </a>
-              </li>
-            ))}
-          </ul>
+              <ul className="ft__list">
+                {SOCIALS.map(({ name, href, path }, i) => (
+                  <li key={name}>
+                    <a
+                      className="ft__pulse"
+                      style={{ "--n": i }}
+                      href={href}
+                      target={
+                        href.startsWith("mailto:")
+                          ? undefined
+                          : "_blank"
+                      }
+                      rel="noopener noreferrer"
+                      aria-label={name}
+                    >
+                      <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <path d={path} />
+                      </svg>
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
         </div>
 
         <p className="ft__copy">
