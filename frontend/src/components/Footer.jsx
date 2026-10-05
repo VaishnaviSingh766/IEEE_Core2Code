@@ -1,4 +1,3 @@
-
 import React from "react";
 
 const SOCIALS = [
@@ -10,7 +9,7 @@ const SOCIALS = [
   {
     name: "Instagram",
     href: "https://www.instagram.com/ieeesitsb?igsh=dGtpNWo0ZGFlZW1z",
-    path: "M7.5 2h9A5.5 5.5 0 0 1 22 7.5v9a5.5 5.5 0 0 1-5.5 5.5h-9A5.5 5.5 0 0 1 2 16.5v-9A5.5 5.5 0 0 1 7.5 2Zm0 2A3.5 3.5 0 0 0 4 7.5v9A3.5 3.5 0 0 0 7.5 20h9a3.5 3.5 0 0 0 3.5-3.5v-9A3.5 3.5 0 0 0 16.5 4h-9ZM12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10Zm0 2a3 3 0 1 0 0 6 3 3 0 0 0 0-6Zm5.25-3.25a1.25 1.25 0 1 1 0 2.5 1.25 1.25 0 0 1 0-2.5Z",
+    path: "M7.5 2h9A5.5 5.5 0 0 1 22 7.5v9a5.5 5.5 0 0 1-5.5 5.5h-9A5.5 5.5 0 0 1 2 16.5v-9A5.5 5.5 0 0 1 7.5 2Zm0 2A3.5 3.5 0 0 0 4 7.5v9A3.5 3.5 0 0 0 7.5 20h9a3.5 3.5 0 0 0 3.5-3.5v-9A3.5 3.5 0 0 0 16.5 4h-9ZM12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10Zm0 2a3 3 0 1 0 0 6 3 3 0 0 0-3 0Zm5.25-3.25a1.25 1.25 0 1 1 0 2.5 1.25 1.25 0 0 1 0-2.5Z",
   },
   {
     name: "YouTube",
@@ -182,28 +181,6 @@ export default function Footer() {
           fill: currentColor;
         }
 
-        .ft__pulse::after {
-          content: "";
-          position: absolute;
-          inset: -1px;
-          border-radius: 50%;
-          border: 1px solid var(--gold);
-          animation: ft-ping 2.8s ease-out infinite;
-          animation-delay: calc(var(--n) * 0.5s);
-          pointer-events: none;
-        }
-
-        @keyframes ft-ping {
-          0% {
-            transform: scale(1);
-            opacity: 0.9;
-          }
-          100% {
-            transform: scale(1.7);
-            opacity: 0;
-          }
-        }
-
         .ft__pulse:hover,
         .ft__pulse:focus-visible {
           background: var(--gold);
@@ -212,8 +189,9 @@ export default function Footer() {
         }
 
         .ft__pulse:focus-visible {
-          box-shadow: 0 0 0 3px var(--black),
-                      0 0 0 5px var(--gold);
+          box-shadow:
+            0 0 0 3px var(--black),
+            0 0 0 5px var(--gold);
         }
 
         .ft__copy {
@@ -291,17 +269,6 @@ export default function Footer() {
             height: 40px;
           }
         }
-
-        @media (prefers-reduced-motion: reduce) {
-          .ft::after,
-          .ft__pulse::after {
-            animation: none;
-          }
-
-          .ft__pulse {
-            transition: none;
-          }
-        }
       `}</style>
 
       <footer className="ft">
@@ -316,11 +283,10 @@ export default function Footer() {
               <h3 className="ft__title">Follow us</h3>
 
               <ul className="ft__list">
-                {SOCIALS.map(({ name, href, path }, i) => (
+                {SOCIALS.map(({ name, href, path }) => (
                   <li key={name}>
                     <a
                       className="ft__pulse"
-                      style={{ "--n": i }}
                       href={href}
                       target={
                         href.startsWith("mailto:")
