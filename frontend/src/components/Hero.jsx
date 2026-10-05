@@ -1,6 +1,7 @@
 import React, { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import Button from '../utils/Button'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -2141,62 +2142,26 @@ export default function Hero() {
             {/* Buttons */}
 
             <div
-              className={`pt-6 sm:pt-8 flex flex-col sm:flex-row items-stretch sm:items-center gap-3.5 sm:gap-4.5 ${tier === 'desktop'
+              className={`hero-btn pt-6 sm:pt-8 flex flex-col sm:flex-row items-center gap-4 ${tier === 'desktop'
                   ? ''
                   : 'justify-center'
                 }`}
             >
 
-              <button
-                type="button"
+              <Button
                 onClick={() => {
                   const target =
-                    document.getElementById(
-                      'events'
-                    ) ||
-                    document.querySelector(
-                      'section:nth-of-type(2)'
-                    )
-
-                  target?.scrollIntoView({
-                    behavior: 'smooth'
-                  })
+                    document.getElementById('events') ||
+                    document.querySelector('section:nth-of-type(2)')
+                  target?.scrollIntoView({ behavior: 'smooth' })
                 }}
-                className="hero-btn group relative px-7 sm:px-8 py-3.5 rounded-sm font-bold text-xs sm:text-sm tracking-[0.18em] uppercase overflow-hidden cursor-pointer transition-all duration-300 transform active:scale-95 bg-gradient-to-r from-[#D4AF37] via-[#F0C75E] to-[#C9A227] text-[#000000] shadow-[0_0_22px_rgba(212,175,55,0.28)] hover:shadow-[0_0_34px_rgba(240,199,94,0.55)] hover:-translate-y-0.5"
               >
+                EXPLORE EVENT
+              </Button>
 
-                <span className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/40 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-in-out" />
-
-                <span className="relative flex items-center justify-center gap-2.5">
-
-                  <span>
-                    EXPLORE EVENT
-                  </span>
-
-                  <span className="transform group-hover:translate-x-1.5 transition-transform duration-300 font-bold">
-                    →
-                  </span>
-
-                </span>
-
-              </button>
-
-              <button
-                type="button"
-                className="hero-btn group relative px-7 sm:px-8 py-3.5 rounded-sm font-bold text-xs sm:text-sm tracking-[0.18em] uppercase overflow-hidden cursor-pointer transition-all duration-300 border border-[#D4AF37]/50 hover:border-[#F0C75E] bg-black/60 hover:bg-[#D4AF37]/10 text-[#F5F5F5] hover:text-[#FFD978] backdrop-blur-md shadow-[0_0_15px_rgba(0,0,0,0.8)] hover:shadow-[0_0_24px_rgba(212,175,55,0.22)] hover:-translate-y-0.5 active:scale-95"
-              >
-
-                <span className="relative flex items-center justify-center gap-2.5">
-
-                  <span className="w-1.5 h-1.5 rounded-full bg-[#D4AF37] group-hover:bg-[#FFD978] transition-colors shadow-[0_0_6px_#D4AF37]" />
-
-                  <span>
-                    REGISTER NOW
-                  </span>
-
-                </span>
-
-              </button>
+              <Button>
+                REGISTER NOW
+              </Button>
 
             </div>
 
