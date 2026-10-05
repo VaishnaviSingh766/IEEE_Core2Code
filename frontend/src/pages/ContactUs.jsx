@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import {
   MapContainer,
   TileLayer,
@@ -11,28 +11,14 @@ import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 
 /* =========================================================
-   FIX LEAFLET MARKER ICON
+   SIT MARKER ICON
 ========================================================= */
 
 const sitIcon = new L.DivIcon({
   className: "sit-custom-marker",
   html: `
-    <div style="
-      width:42px;
-      height:42px;
-      border-radius:50%;
-      background:#F5C542;
-      border:4px solid #050505;
-      box-shadow:0 0 0 5px rgba(245,197,66,0.25),
-                 0 0 30px rgba(245,197,66,0.8);
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      color:#050505;
-      font-size:20px;
-      font-weight:900;
-    ">
-      ★
+    <div class="sit-marker-circle">
+      <span>★</span>
     </div>
   `,
   iconSize: [42, 42],
@@ -41,7 +27,7 @@ const sitIcon = new L.DivIcon({
 });
 
 /* =========================================================
-   MAP LOCATION
+   SIT LOCATION
 ========================================================= */
 
 const SIT_POSITION = [13.3379, 77.1013];
@@ -64,19 +50,28 @@ function MapController() {
       type="button"
       onClick={goToSIT}
       className="
-        absolute bottom-5 left-1/2 z-[1000]
-        flex -translate-x-1/2
-        items-center gap-3
+        absolute
+        bottom-5
+        left-1/2
+        z-[1000]
+        flex
+        -translate-x-1/2
+        items-center
+        gap-3
         whitespace-nowrap
         rounded-xl
         bg-[#F5C542]
-        px-7 py-3.5
-        text-sm font-extrabold
+        px-7
+        py-3.5
+        text-sm
+        font-extrabold
         text-black
         shadow-[0_8px_30px_rgba(245,197,66,0.35)]
-        transition-all duration-300
+        transition-all
+        duration-300
         hover:scale-105
         hover:bg-white
+        active:scale-95
       "
     >
       <span className="text-xl">⌖</span>
@@ -90,10 +85,9 @@ function MapController() {
 ========================================================= */
 
 export default function ContactUs() {
-  const [submitted, setSubmitted] = useState(false);
 
   /* =======================================================
-     SEND EMAIL USING MAILTO
+     SEND MESSAGE
   ======================================================= */
 
   const handleSubmit = (e) => {
@@ -106,20 +100,10 @@ export default function ContactUs() {
     const phone = form.elements.phone.value.trim();
     const message = form.elements.message.value.trim();
 
-    /*
-      FIXED EMAIL ADDRESS
-      This is the address where the message will be sent.
-    */
     const fixedToEmail = "event@sittumkur.ac.in";
 
-    /*
-      NAME + PHONE GO INTO SUBJECT
-    */
     const subject = `${name} - ${phone}`;
 
-    /*
-      EMAIL + MESSAGE GO INTO COMPOSE BODY
-    */
     const body = `Name: ${name}
 Email: ${email}
 Phone: ${phone}
@@ -127,31 +111,43 @@ Phone: ${phone}
 Message:
 ${message}`;
 
-    /*
-      OPEN USER'S DEFAULT EMAIL CLIENT
-    */
     const mailtoLink =
       `mailto:${fixedToEmail}` +
       `?subject=${encodeURIComponent(subject)}` +
       `&body=${encodeURIComponent(body)}`;
 
+    /*
+      Directly open the user's email client.
+      No success message is displayed on the page.
+    */
     window.location.href = mailtoLink;
-
-    setSubmitted(true);
-
-    setTimeout(() => {
-      setSubmitted(false);
-    }, 3000);
   };
 
   return (
-    <div className="min-h-screen overflow-x-hidden bg-[#000000] text-white">
+    <div
+      className="
+        min-h-screen
+        overflow-x-hidden
+        bg-[#050505]
+        text-white
+      "
+    >
 
       {/* =====================================================
           HERO
       ===================================================== */}
 
-      <section className="mx-auto max-w-[1320px] px-6 pb-16 pt-24 sm:px-8 lg:px-10">
+      <section
+        className="
+          mx-auto
+          max-w-[1320px]
+          px-6
+          pb-16
+          pt-24
+          sm:px-8
+          lg:px-10
+        "
+      >
 
         <div className="flex flex-col items-center text-center">
 
@@ -169,7 +165,15 @@ ${message}`;
             Contact Us
           </h1>
 
-          <div className="mt-5 h-[4px] w-[68px] rounded-full bg-[#F5C542]" />
+          <div
+            className="
+              mt-5
+              h-[4px]
+              w-[68px]
+              rounded-full
+              bg-[#F5C542]
+            "
+          />
 
         </div>
 
@@ -246,11 +250,11 @@ ${message}`;
             rounded-[17px]
             border
             border-[#F5C542]
-            bg-[#111111]
+            bg-[#181818]
             px-7
             pb-9
             pt-10
-            shadow-[inset_0_0_0_1px_rgba(255,255,255,0.08)]
+            shadow-[0_15px_45px_rgba(0,0,0,0.35)]
             sm:px-10
             sm:pb-11
             sm:pt-12
@@ -264,7 +268,7 @@ ${message}`;
               inset-0
               rounded-[17px]
               border
-              border-white/20
+              border-white/10
             "
           />
 
@@ -475,13 +479,6 @@ ${message}`;
 
               </button>
 
-
-              {submitted && (
-                <div className="mt-4 text-center text-sm text-[#F5C542]">
-                  Opening your email client...
-                </div>
-              )}
-
             </form>
 
           </div>
@@ -502,9 +499,9 @@ ${message}`;
             rounded-[17px]
             border
             border-[#F5C542]
-            bg-[#111111]
+            bg-[#181818]
             p-7
-            shadow-[inset_0_0_0_1px_rgba(255,255,255,0.08)]
+            shadow-[0_15px_45px_rgba(0,0,0,0.35)]
             sm:p-9
           "
         >
@@ -516,15 +513,24 @@ ${message}`;
               inset-0
               rounded-[17px]
               border
-              border-white/20
+              border-white/10
             "
           />
 
           <div className="relative flex w-full flex-col">
 
-            {/* TITLE */}
+            {/* =================================================
+                TITLE
+            ================================================= */}
 
-            <div className="mb-2 text-[13px] font-bold text-[#F5C542]">
+            <div
+              className="
+                mb-2
+                text-[13px]
+                font-bold
+                text-[#F5C542]
+              "
+            >
               Our Location
             </div>
 
@@ -550,6 +556,7 @@ ${message}`;
               {/* VENUE */}
 
               <div>
+
                 <div
                   className="
                     text-[14px]
@@ -573,16 +580,15 @@ ${message}`;
                 >
                   Karnataka - 572103
                 </div>
+
               </div>
 
 
               {/* =================================================
-                  EVENT CONTACTS
+                  CONTACT US
               ================================================= */}
 
               <div>
-
-                {/* HEADING */}
 
                 <div
                   className="
@@ -593,62 +599,101 @@ ${message}`;
                     sm:text-[16px]
                   "
                 >
-                  For Event Queries
-                </div>
-
-                <div
-                  className="
-                    mt-4
-                    text-[14px]
-                    font-bold
-                    leading-[1.45]
-                    text-white
-                    sm:text-[15px]
-                  "
-                >
-                  Rahul Kumar
-                </div>
-
-                <div
-                  className="
-                    mt-[3px]
-                    text-[12px]
-                    font-normal
-                    leading-[1.45]
-                    text-[#999]
-                    sm:text-[13px]
-                  "
-                >
-                  +91 98765 43210
+                  Contact Us
                 </div>
 
 
-                {/* SECOND PERSON */}
+                {/* =================================================
+                    CHAIRMAN
+                ================================================= */}
 
-                <div
-                  className="
-                    mt-5
-                    text-[14px]
-                    font-bold
-                    leading-[1.45]
-                    text-white
-                    sm:text-[15px]
-                  "
-                >
-                  Ananya Sharma
+                <div className="mt-4">
+
+                  <div
+                    className="
+                      text-[14px]
+                      font-bold
+                      leading-[1.35]
+                      text-white
+                      sm:text-[15px]
+                    "
+                  >
+                    D Jaya Srikar
+                  </div>
+
+                  <div
+                    className="
+                      mt-[2px]
+                      text-[12px]
+                      font-medium
+                      leading-[1.35]
+                      text-[#F5C542]
+                      sm:text-[13px]
+                    "
+                  >
+                    Chairman
+                  </div>
+
+                  <div
+                    className="
+                      mt-[2px]
+                      text-[12px]
+                      font-normal
+                      leading-[1.35]
+                      text-[#999]
+                      sm:text-[13px]
+                    "
+                  >
+                    +91 8217651756
+                  </div>
+
                 </div>
 
-                <div
-                  className="
-                    mt-[3px]
-                    text-[12px]
-                    font-normal
-                    leading-[1.45]
-                    text-[#999]
-                    sm:text-[13px]
-                  "
-                >
-                  +91 87654 32109
+
+                {/* =================================================
+                    VICE CHAIRMAN
+                ================================================= */}
+
+                <div className="mt-5">
+
+                  <div
+                    className="
+                      text-[14px]
+                      font-bold
+                      leading-[1.35]
+                      text-white
+                      sm:text-[15px]
+                    "
+                  >
+                    Chetan Kumar R S
+                  </div>
+
+                  <div
+                    className="
+                      mt-[2px]
+                      text-[12px]
+                      font-medium
+                      leading-[1.35]
+                      text-[#F5C542]
+                      sm:text-[13px]
+                    "
+                  >
+                    Vice Chairman
+                  </div>
+
+                  <div
+                    className="
+                      mt-[2px]
+                      text-[12px]
+                      font-normal
+                      leading-[1.35]
+                      text-[#999]
+                      sm:text-[13px]
+                    "
+                  >
+                    +91 7676967922
+                  </div>
+
                 </div>
 
               </div>
@@ -657,15 +702,17 @@ ${message}`;
 
 
             {/* =================================================
-                REAL LEAFLET MAP
+                LEAFLET MAP
             ================================================= */}
 
             <div
               className="
                 relative
+                isolate
                 mt-auto
                 h-[390px]
                 w-full
+                transform-gpu
                 overflow-hidden
                 rounded-[16px]
                 border-2
@@ -680,8 +727,14 @@ ${message}`;
                 center={[20.5937, 78.9629]}
                 zoom={5}
                 scrollWheelZoom={true}
+                dragging={true}
                 zoomControl={false}
-                className="h-full w-full"
+                className="
+                  relative
+                  z-0
+                  h-full
+                  w-full
+                "
               >
 
                 {/* MAP */}
@@ -701,31 +754,15 @@ ${message}`;
 
                   <Popup>
 
-                    <div
-                      style={{
-                        minWidth: "190px",
-                        textAlign: "center",
-                        fontFamily: "Arial, sans-serif",
-                      }}
-                    >
+                    <div className="min-w-[190px] text-center font-sans">
 
-                      <strong
-                        style={{
-                          color: "#111",
-                          fontSize: "14px",
-                        }}
-                      >
+                      <strong className="text-[14px] text-[#111]">
                         Siddaganga Institute of Technology
                       </strong>
 
                       <br />
 
-                      <span
-                        style={{
-                          color: "#555",
-                          fontSize: "12px",
-                        }}
-                      >
+                      <span className="text-[12px] text-[#555]">
                         Tumakuru, Karnataka
                       </span>
 
@@ -741,7 +778,7 @@ ${message}`;
                 <ZoomControl position="topright" />
 
 
-                {/* FLY TO SIT */}
+                {/* EXPLORE BUTTON */}
 
                 <MapController />
 
@@ -779,82 +816,25 @@ ${message}`;
                     text-[#F5C542]
                   "
                 >
-                  Location
-                </div>
-
-                <div className="mt-1 text-sm font-bold text-white">
-                  India
-                </div>
-
+                  Location</div>
+                <div className="mt-1 text-sm font-bold text-white">India</div>
               </div>
 
-
-              {/* =================================================
-                  MAP STYLING
-              ================================================= */}
-
-              <style>
-                {`
-                  .leaflet-container {
-                    background: #02070c !important;
-                    font-family: Arial, Helvetica, sans-serif;
-                  }
-
-                  .leaflet-control-zoom {
-  border: 1px solid rgba(245,197,66,0.7) !important;
-  border-radius: 12px !important;
-  overflow: hidden;
-  box-shadow: 0 8px 25px rgba(0,0,0,0.5) !important;
-}
-
-.leaflet-control-zoom a {
-  width: 46px !important;
-  height: 46px !important;
-  line-height: 46px !important;
-  background: rgba(5,9,13,0.94) !important;
-  color: #F5C542 !important;
-  border-bottom: 1px solid rgba(245,197,66,0.35) !important;
-  font-size: 24px !important;
-  transition: all 0.2s ease;
-}
-
-.leaflet-control-zoom a:last-child {
-  border-bottom: none !important;
-}
-
-.leaflet-control-zoom a:hover {
-  background: #F5C542 !important;
-  color: #000 !important;
-}
-
-.leaflet-popup-content-wrapper,
-.leaflet-popup-tip {
-  background: #F5C542 !important;
-  color: #111 !important;
-}
-
-.leaflet-popup-content {
-  margin: 12px 14px !important;
-}
-
-.leaflet-popup-close-button {
-  color: #111 !important;
-}
-
-.leaflet-popup-close-button:hover {
-  color: #000 !important;
-}
-  `}
-            </style>
-
+              <style>{`
+                .leaflet-container { background:#02070c !important; font-family:Arial,Helvetica,sans-serif; }
+                .leaflet-control-zoom { border:1px solid rgba(245,197,66,0.7) !important; border-radius:12px !important; overflow:hidden; box-shadow:0 8px 25px rgba(0,0,0,0.5) !important; }
+                .leaflet-control-zoom a { width:46px !important; height:46px !important; line-height:46px !important; background:rgba(5,9,13,0.94) !important; color:#F5C542 !important; border-bottom:1px solid rgba(245,197,66,0.35) !important; font-size:24px !important; transition:all 0.2s ease; }
+                .leaflet-control-zoom a:last-child { border-bottom:none !important; }
+                .leaflet-control-zoom a:hover { background:#F5C542 !important; color:#000 !important; }
+                .leaflet-popup-content-wrapper,.leaflet-popup-tip { background:#F5C542 !important; color:#111 !important; }
+                .leaflet-popup-content { margin:12px 14px !important; }
+                .leaflet-popup-close-button { color:#111 !important; }
+                .leaflet-popup-close-button:hover { color:#000 !important; }
+              `}</style>
+            </div>
           </div>
-
-        </div>
-
-      </section>
-
-    </main>
-
-  </div>
-);
+        </section>
+      </main>
+    </div>
+  );
 }
