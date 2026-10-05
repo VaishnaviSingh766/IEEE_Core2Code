@@ -2,6 +2,7 @@ import React, { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import Button from '../utils/Button'
+import { typography } from '../utils/typography'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -2071,7 +2072,7 @@ export default function Hero() {
 
             {/* Eyebrow */}
 
-            <div className="hero-eyebrow-pill inline-flex items-center gap-2.5 w-fit px-3 py-1 rounded-full bg-[#D4AF37]/10 border border-[#D4AF37]/30 text-[10px] sm:text-[11px] font-mono tracking-[0.22em] text-[#F0C75E] uppercase mb-4 sm:mb-6">
+            <div className={`hero-eyebrow-pill inline-flex items-center gap-2.5 w-fit px-3 py-1 rounded-full bg-[#D4AF37]/10 border border-[#D4AF37]/30 text-[10px] sm:text-[11px] tracking-[0.22em] text-[#F0C75E] uppercase mb-4 sm:mb-6 ${typography.heading}`}>
 
               <span className="w-1.5 h-1.5 rounded-full bg-[#D4AF37] shadow-[0_0_6px_#D4AF37]" />
 
@@ -2092,15 +2093,15 @@ export default function Hero() {
                   }`}
               >
 
-                <span className="hero-headline-word block text-[13vw] sm:text-[10vw] md:text-7xl lg:text-[5.2rem] xl:text-[6.4rem] font-black uppercase tracking-tight leading-[0.9] text-[#FFFFFF]">
+                <span className={`hero-headline-word block text-[13vw] sm:text-[10vw] md:text-7xl lg:text-[5.2rem] xl:text-[6.4rem] font-black uppercase tracking-tight leading-[0.9] text-[#FFFFFF] ${typography.main}`}>
                   CORE
                 </span>
 
-                <span className="hero-headline-word block text-[13vw] sm:text-[10vw] md:text-7xl lg:text-[5.2rem] xl:text-[6.4rem] font-black uppercase tracking-tight leading-[0.9] bg-gradient-to-br from-[#FFD978] via-[#F0C75E] to-[#B8860B] bg-clip-text text-transparent filter drop-shadow-[0_0_30px_rgba(212,175,55,0.45)]">
+                <span className={`hero-headline-word block text-[13vw] sm:text-[10vw] md:text-7xl lg:text-[5.2rem] xl:text-[6.4rem] font-black uppercase tracking-tight leading-[0.9] bg-gradient-to-br from-[#FFD978] via-[#F0C75E] to-[#B8860B] bg-clip-text text-transparent filter drop-shadow-[0_0_30px_rgba(212,175,55,0.45)] ${typography.main}`}>
                   2
                 </span>
 
-                <span className="hero-headline-word block text-[13vw] sm:text-[10vw] md:text-7xl lg:text-[5.2rem] xl:text-[6.4rem] font-black uppercase tracking-tight leading-[0.9] text-[#FFFFFF]">
+                <span className={`hero-headline-word block text-[13vw] sm:text-[10vw] md:text-7xl lg:text-[5.2rem] xl:text-[6.4rem] font-black uppercase tracking-tight leading-[0.9] text-[#FFFFFF] ${typography.main}`}>
                   CODE
                 </span>
 
@@ -2119,11 +2120,11 @@ export default function Hero() {
                   }`}
               >
 
-                <span className="font-mono text-base text-[#D4AF37] font-semibold">
+                <span className={`text-base text-[#D4AF37] font-semibold ${typography.heading}`}>
                   //
                 </span>
 
-                <p className="text-lg sm:text-xl md:text-2xl font-light text-[#E5E5E5] tracking-wide">
+                <p className={`text-lg sm:text-xl md:text-2xl font-light text-[#E5E5E5] tracking-wide ${typography.heading}`}>
                   From Core to Code.
                 </p>
 
@@ -2131,7 +2132,7 @@ export default function Hero() {
 
               <div className="hero-description-wrap">
 
-                <p className="text-[#A3A3A3] text-sm sm:text-base leading-relaxed font-normal">
+                <p className={`text-[#A3A3A3] text-sm sm:text-base leading-relaxed font-normal ${typography.body}`}>
                   Where ideas, logic and technology come together to build what comes next.
                 </p>
 
@@ -2226,7 +2227,7 @@ export default function Hero() {
 
           {/* C2C WORD */}
 
-          <div className="relative flex items-baseline justify-center gap-[0.04em] font-black uppercase leading-none tracking-tight text-[30vw] sm:text-[24vw] lg:text-[17vw]">
+          <div className={`relative flex items-baseline justify-center gap-[0.04em] font-black uppercase leading-none tracking-tight text-[30vw] sm:text-[24vw] lg:text-[17vw] ${typography.main}`}>
 
             <span className="c2c-letter block text-white">
               C
@@ -2248,7 +2249,7 @@ export default function Hero() {
 
             <span className="c2c-line h-px w-12 origin-right bg-gradient-to-r from-transparent to-[#D4AF37] sm:w-24" />
 
-            <span className="c2c-caption-text font-mono text-[10px] uppercase tracking-[0.3em] text-[#F0C75E] sm:text-xs">
+            <span className={`c2c-caption-text text-[10px] uppercase tracking-[0.3em] text-[#F0C75E] sm:text-xs ${typography.body}`}>
               From Core to Code
             </span>
 
