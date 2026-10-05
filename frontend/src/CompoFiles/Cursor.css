@@ -1,0 +1,81 @@
+body.neon-cursor-enabled,
+body.neon-cursor-enabled * {
+  cursor: none !important;
+}
+
+.neon-cursor-container {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 999999;
+}
+
+.cursor-main,
+.cursor-trail,
+.cursor-glow {
+  position: fixed;
+  top: 0;
+  left: 0;
+  border-radius: 50%;
+  pointer-events: none;
+  will-change: transform;
+}
+
+/* GOLD DOT */
+
+.cursor-main {
+  width: 8px;
+  height: 8px;
+  background: #ffd700;
+
+  box-shadow:
+    0 0 6px #ffd700,
+    0 0 14px #ffd700,
+    0 0 28px rgba(255, 215, 0, 0.9);
+}
+
+/* GOLD RING */
+
+.cursor-trail {
+  width: 40px;
+  height: 40px;
+
+  border: 2px solid #daa520;
+
+  box-shadow:
+    0 0 10px rgba(255, 215, 0, 0.7),
+    inset 0 0 10px rgba(255, 215, 0, 0.15);
+}
+
+/* GOLD GLOW */
+
+.cursor-glow {
+  width: 80px;
+  height: 80px;
+
+  background: radial-gradient(
+    circle,
+    rgba(255, 215, 0, 0.45) 0%,
+    rgba(255, 215, 0, 0.28) 30%,
+    rgba(218, 165, 32, 0.15) 55%,
+    rgba(218, 165, 32, 0) 75%
+  );
+
+  filter: blur(12px);
+  opacity: 1;
+
+  box-shadow:
+    0 0 20px rgba(255, 215, 0, 0.35),
+    0 0 40px rgba(255, 215, 0, 0.25),
+    0 0 70px rgba(255, 215, 0, 0.15);
+}
+
+/* MOBILE */
+
+@media (pointer: coarse) {
+  .neon-cursor-container {
+    display: none;
+  }
+}
