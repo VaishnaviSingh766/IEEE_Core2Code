@@ -100,7 +100,7 @@ export default function ContactUs() {
     const phone = form.elements.phone.value.trim();
     const message = form.elements.message.value.trim();
 
-    const fixedToEmail = "event@sittumkur.ac.in";
+    const fixedToEmail = "ieee@sit.ac.in";
 
     const subject = `${name} - ${phone}`;
 
