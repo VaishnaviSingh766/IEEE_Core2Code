@@ -18,3 +18,29 @@ body,
   margin: 0;
   padding: 0;
 }
+
+/* Custom Golden Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #000000;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #D4AF37;
+  border-radius: 9999px;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #F0C75E;
+}
+
+/* Firefox & Standard */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #D4AF37 #000000;
+}
