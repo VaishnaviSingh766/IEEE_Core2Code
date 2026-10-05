@@ -1,4 +1,4 @@
-import React, { useEffect, useLayoutEffect, useRef, useState } from 'react'
+﻿import React, { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import Button from '../utils/Button'
@@ -1214,10 +1214,10 @@ export default function Hero() {
   }, [reducedMotion, isSmall])
 
   return (
-    <div
-      ref={heroRef}
-      className="relative w-full min-h-[100svh]"
-    >
+   <div
+  ref={heroRef}
+  className="relative w-full min-h-[100svh] overflow-x-hidden"
+>
       <section
         ref={heroInnerRef}
         onMouseMove={handleMouseMove}
