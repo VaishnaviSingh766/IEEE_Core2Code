@@ -1,10 +1,9 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { createBrowserRouter, Outlet, RouterProvider } from 'react-router-dom'
 import Navbar from './components/Navbar'
 import Footer from './components/Footer'
 
 import Loader from './components/Loader'
-import IntroLoader from "./components/IntroLoader";
 
 import Home from './pages/Home'
 import AboutUs from './pages/AboutUs'
@@ -54,7 +53,7 @@ const App = () => {
   if (loading) {
     return (
       <>
-        <IntroLoader onComplete={() => setLoading(false)} />
+        <Loader onComplete={() => setLoading(false)} />
         <Cursor />
       </>
     );

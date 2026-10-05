@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react';
-import './AboutUs.css';
+import '../CompoFiles/AboutUs.css';
 
 import img4 from '../assets/about/img4.jpeg';
 import club from '../assets/about/club.jpg';
@@ -43,17 +43,10 @@ export default function AboutUs() {
       <div className="about-wrap">
         <header className="about-hero">
           <h1>About Us</h1>
-          <p className="about-sub">Learn more about our mission, vision, and team</p>
+          <p className="about-sub">Learn more about our mission, vision and team</p>
           <span className="bar" />
         </header>
 
-        <div className="strip">
-          {stripImages.map((img) => (
-            <figure className="photo glass" key={img.alt}>
-              <img src={img.src} alt={img.alt} />
-            </figure>
-          ))}
-        </div>
 
         <section className="split">
           <figure className="photo glass reveal">
@@ -102,6 +95,20 @@ export default function AboutUs() {
             </p>
           </div>
         </section>
+
+        <div className="strip">
+          <div className="strip-track">
+            {[0, 1].map((copy) => (
+              <div className="strip-set" key={copy} aria-hidden={copy === 1}>
+                {stripImages.map((img) => (
+                  <figure className="photo glass" key={img.alt}>
+                    <img src={img.src} alt={copy === 1 ? '' : img.alt} />
+                  </figure>
+                ))}
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
     </main>
   );
