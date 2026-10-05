@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react';
-import './AboutUs.css';
+import '../CompoFiles/AboutUs.css';
 
 import img4 from '../assets/about/img4.jpeg';
 import club from '../assets/about/club.jpg';
