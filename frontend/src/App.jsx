@@ -12,6 +12,7 @@ import Timeline from './components/Timeline'
 import Cursor from './utils/Cursor'
 
 import NotFound from './pages/NotFound'
+import Registration from './pages/Registration'
 
 const Structure = () => {
   return (
@@ -42,6 +43,10 @@ const router = createBrowserRouter([
       {
         path: '/contactUs',
         element: <ContactUs />
+      },
+      {
+        path:'/registrations',
+        element: <Registration />
       }
     ]
   }
