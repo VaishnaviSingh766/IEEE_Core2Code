@@ -1214,10 +1214,10 @@ export default function Hero() {
   }, [reducedMotion, isSmall])
 
   return (
-   <div
-  ref={heroRef}
-  className="relative w-full min-h-[100svh] overflow-x-hidden"
->
+    <div
+      ref={heroRef}
+      className="relative w-full min-h-[100svh] overflow-x-hidden"
+    >
       <section
         ref={heroInnerRef}
         onMouseMove={handleMouseMove}
@@ -1317,8 +1317,8 @@ export default function Hero() {
             }
 
             className={`fragment-svg select-none overflow-visible ${tier === 'desktop'
-                ? 'h-full w-auto min-w-full max-w-none shrink-0 lg:w-full lg:h-full'
-                : 'w-full h-full'
+              ? 'h-full w-auto min-w-full max-w-none shrink-0 lg:w-full lg:h-full'
+              : 'w-full h-full'
               }`}
           >
 
@@ -2064,8 +2064,8 @@ export default function Hero() {
 
           <div
             className={`hero-text-block flex-1 flex flex-col justify-center ${tier === 'desktop'
-                ? 'text-left'
-                : 'mx-auto items-center text-center'
+              ? 'text-left'
+              : 'mx-auto items-center text-center'
               } my-auto w-full py-8 sm:py-12 lg:py-6 max-w-2xl xl:max-w-3xl`}
           >
 
@@ -2084,28 +2084,28 @@ export default function Hero() {
             {/* Heading */}
 
             <div className="hero-headline w-full select-none">
-
               <h1
-                className={`flex items-baseline gap-2.5 sm:gap-4 lg:gap-5 flex-wrap ${tier === 'desktop'
-                    ? ''
-                    : 'justify-center'
+                className={`flex items-baseline gap-2 sm:gap-3 lg:gap-4 flex-nowrap whitespace-nowrap ${tier === "desktop" ? "" : "justify-center"
                   }`}
               >
-
-                <span className="hero-headline-word block text-[13vw] sm:text-[10vw] md:text-7xl lg:text-[5.2rem] xl:text-[6.4rem] font-black uppercase tracking-tight leading-[0.9] text-[#FFFFFF] font-main">
+                <span
+                  className="hero-headline-word block font-core text-[10vw] sm:text-[8vw] md:text-7xl lg:text-[5rem] xl:text-[6rem] uppercase leading-none text-white"
+                >
                   CORE
                 </span>
 
-                <span className="hero-headline-word block text-[13vw] sm:text-[10vw] md:text-7xl lg:text-[5.2rem] xl:text-[6.4rem] font-black uppercase tracking-tight leading-[0.9] bg-gradient-to-br from-[#FFD978] via-[#F0C75E] to-[#B8860B] bg-clip-text text-transparent filter drop-shadow-[0_0_30px_rgba(212,175,55,0.45)] font-main">
+                <span
+                  className="hero-headline-word block font-core text-[10vw] sm:text-[8vw] md:text-7xl lg:text-[5rem] xl:text-[6rem] uppercase leading-none bg-gradient-to-br from-[#FFD978] via-[#F0C75E] to-[#B8860B] bg-clip-text text-transparent drop-shadow-[0_0_30px_rgba(212,175,55,0.45)]"
+                >
                   2
                 </span>
 
-                <span className="hero-headline-word block text-[13vw] sm:text-[10vw] md:text-7xl lg:text-[5.2rem] xl:text-[6.4rem] font-black uppercase tracking-tight leading-[0.9] text-[#FFFFFF] font-main">
+                <span
+                  className="hero-headline-word block font-core text-[10vw] sm:text-[8vw] md:text-7xl lg:text-[5rem] xl:text-[6rem] uppercase leading-none text-white"
+                >
                   CODE
                 </span>
-
               </h1>
-
             </div>
 
             {/* Tagline */}
@@ -2114,8 +2114,8 @@ export default function Hero() {
 
               <div
                 className={`hero-tagline-wrap flex items-center gap-2.5 ${tier === 'desktop'
-                    ? ''
-                    : 'justify-center'
+                  ? ''
+                  : 'justify-center'
                   }`}
               >
 
@@ -2143,8 +2143,8 @@ export default function Hero() {
 
             <div
               className={`hero-btn pt-6 sm:pt-8 flex flex-col sm:flex-row items-center gap-4 ${tier === 'desktop'
-                  ? ''
-                  : 'justify-center'
+                ? ''
+                : 'justify-center'
                 }`}
             >
 

@@ -2,24 +2,82 @@
 
 @import "tailwindcss";
 
+/* =========================================================
+   CUSTOM FONTS
+   ========================================================= */
+
+/* Core2Code Heading Font */
+@font-face {
+  font-family: "AGrazingMace";
+  src: url("./assets/fonts/AGrazingMace.otf") format("opentype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Paragraph Font */
+@font-face {
+  font-family: "MithellaBold";
+  src: url("./assets/fonts/MithellaBold.otf") format("opentype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* =========================================================
+   TAILWIND FONT CONFIGURATION
+   ========================================================= */
+
 @theme {
   --font-main: "Montserrat", sans-serif;
   --font-heading: "Space Grotesk", sans-serif;
   --font-body: "Inter", sans-serif;
+
+  /* Core2Code custom fonts */
+  --font-core: "AGrazingMace", sans-serif;
+  --font-paragraph: "MithellaBold", sans-serif;
 }
+
+/* =========================================================
+   GLOBAL STYLES
+   ========================================================= */
 
 html,
 body,
 #root {
   width: 100%;
   min-height: 100vh;
-  background-color: #000000;
-  color: #ffffff;
   margin: 0;
   padding: 0;
+
+  background-color: #000000;
+  color: #ffffff;
 }
 
-/* Custom Golden Scrollbar */
+/* =========================================================
+   CORE2CODE HEADING FONT
+   ========================================================= */
+
+.font-core {
+  font-family: "AGrazingMace", sans-serif !important;
+  font-weight: 400 !important;
+  font-style: normal !important;
+}
+
+/* =========================================================
+   CORE2CODE PARAGRAPH FONT
+   ========================================================= */
+
+.font-paragraph {
+  font-family: "MithellaBold", sans-serif !important;
+  font-weight: 400 !important;
+  font-style: normal !important;
+}
+
+/* =========================================================
+   CUSTOM GOLDEN SCROLLBAR
+   ========================================================= */
+
 ::-webkit-scrollbar {
   width: 8px;
   height: 8px;
@@ -39,7 +97,7 @@ body,
   background: #F0C75E;
 }
 
-/* Firefox & Standard */
+/* Firefox */
 * {
   scrollbar-width: thin;
   scrollbar-color: #D4AF37 #000000;
