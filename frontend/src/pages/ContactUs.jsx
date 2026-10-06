@@ -239,7 +239,7 @@ ${message}`;
             rounded-[17px]
             border
             border-[rgba(212,175,55,0.39)]
-            bg-[rgba(255,255,255,0.08)]
+            bg-[rgba(255,255,255,0.06)]
             px-7
             pb-9
             pt-10
@@ -436,7 +436,7 @@ ${message}`;
             rounded-[17px]
             border
             border-[rgba(212,175,55,0.39)]
-            bg-[rgba(255,255,255,0.08)]
+            bg-[rgba(255,255,255,0.06)]
             p-7
             shadow-[0_15px_45px_rgba(0,0,0,0.35)]
             sm:p-9
