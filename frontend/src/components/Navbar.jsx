@@ -1,5 +1,5 @@
 import React, { useRef, useLayoutEffect, useState, useEffect } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, Link, useLocation } from 'react-router-dom'; // added
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
@@ -47,8 +47,7 @@ const NavPill = ({ item, onClick, className = '' }) => (
     <NavLink
       to={item.href}
       end={item.href === '/'}
-      aria-current="page"
-      className={({ isActive }) => `nb-link hover-nav-link ${isActive ? 'active' : ''}`}
+      className={({ isActive }) => `nb-link hover-nav-link ${isActive ? 'active' : ''}`} // changed
       onClick={(e) => {
         onClick();
       }}
@@ -91,22 +90,19 @@ const MobileBlobItem = ({ item, onClick, isRegister = false, className = '' }) =
   return (
     <div className={`nb-m-item ${className}`}>
       {isRegister ? (
-        <a
-          href="PASTE_YOUR_FORM_LINK_HERE"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="nb-m-link nb-m-register"
-          onClick={handleClick}
-          aria-label={item.label}
+        <Link // changed
+          to={item.href} // changed
+          className="nb-m-link nb-m-register" // changed
+          onClick={handleClick} // changed
+          aria-label={item.label} // changed
         >
           {innerContent}
-        </a>
+        </Link> // changed
       ) : (
         <NavLink
           to={item.href}
           end={item.href === '/'}
-          aria-current="page"
-          className={({ isActive }) => `nb-m-link ${isActive ? 'active' : ''}`}
+          className={({ isActive }) => `nb-m-link ${isActive ? 'active' : ''}`} // changed
           onClick={handleClick}
           aria-label={item.label}
         >
@@ -117,7 +113,11 @@ const MobileBlobItem = ({ item, onClick, isRegister = false, className = '' }) =
   );
 };
 
-const REGISTER_URL = "PASTE_YOUR_FORM_LINK_HERE";
+const REGISTER_PATH = "/registrations"; // must match the Registration route in App.jsx // changed
+
+// Pages whose content starts at the very top and needs space below the fixed header. // added
+// The Home hero is designed to sit under the header, so it is NOT listed. // added
+const SPACER_ROUTES = [REGISTER_PATH]; // added
 
 export default function Header() {
   const containerRef = useRef(null);
@@ -135,6 +135,28 @@ export default function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [reducedMotion, setReducedMotion] = useState(false);
   const isInitialMount = useRef(true);
+
+  const { pathname } = useLocation(); // added
+  const [headerHeight, setHeaderHeight] = useState(0); // added
+  const needsSpacer = SPACER_ROUTES.includes(pathname); // added
+
+  useEffect(() => { // added
+    const el = headerRef.current; // added
+    if (!el) return; // added
+    const measure = () => { // added
+      // The header shrinks slightly after scrolling. Only measure at the top // added
+      // so the spacer height never jumps while the user scrolls. // added
+      if (window.scrollY < 30) setHeaderHeight(el.offsetHeight); // added
+    }; // added
+    measure(); // added
+    const ro = new ResizeObserver(measure); // added
+    ro.observe(el); // added
+    window.addEventListener('resize', measure); // added
+    return () => { // added
+      ro.disconnect(); // added
+      window.removeEventListener('resize', measure); // added
+    }; // added
+  }, []); // added
 
   // Check for reduced motion
   useEffect(() => {
@@ -1046,16 +1068,9 @@ export default function Header() {
               })}
               {/* Register Now Button (Desktop) */}
               <li className="nb-item ml-2">
-                <a
-                  href="/register"
-                  className="nb-register"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    handleNavClick('/register');
-                  }}
-                >
-                  Register Now
-                </a>
+                <Link to={REGISTER_PATH} className="nb-register" onClick={handleNavClick}> {/* changed */}
+                  Register Now {/* changed */}
+                </Link> {/* changed */}
               </li>
             </ul>
           </nav>
@@ -1091,6 +1106,8 @@ export default function Header() {
           />
         </div>
       </header>
+
+      {needsSpacer && <div aria-hidden="true" style={{ height: headerHeight }} />} {/* added */}
 
       {/* Mobile Menu Overlay — fixed panel below header, centered items */}
       <div
@@ -1216,7 +1233,7 @@ export default function Header() {
               {/* Register Now Button (Mobile Blob) */}
               <div className="mobile-nav-wrapper nb-register-wrapper overflow-hidden flex justify-center">
                 <MobileBlobItem
-                  item={{ label: 'Register Now', href: REGISTER_URL }}
+                  item={{ label: 'Register Now', href: REGISTER_PATH }} // changed
                   onClick={handleNavClick}
                   isRegister={true}
                   className="w-full h-full"
