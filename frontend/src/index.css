@@ -8,8 +8,8 @@
 
 /* Core2Code Heading Font */
 @font-face {
-  font-family: "AGrazingMace";
-  src: url("./assets/fonts/AGrazingMace.otf") format("opentype");
+  font-family: "BatmanForeverAlternate";
+  src: url("./assets/fonts/BatmanForeverAlternate.ttf") format("truetype");
   font-weight: 400;
   font-style: normal;
   font-display: swap;
@@ -43,7 +43,7 @@
   --font-body: "Inter", sans-serif;
 
   /* Core2Code custom fonts */
-  --font-core: "AGrazingMace", sans-serif;
+  --font-core: "BatmanForeverAlternate", sans-serif;
   --font-paragraph: "Mithellapara", sans-serif;
   --font-number: "Dekatron", sans-serif;
 }
@@ -69,7 +69,7 @@ body,
    ========================================================= */
 
 .font-core {
-  font-family: "AGrazingMace", sans-serif !important;
+  font-family: "BatmanForeverAlternate", sans-serif !important;
   font-weight: 400 !important;
   font-style: normal !important;
 }
