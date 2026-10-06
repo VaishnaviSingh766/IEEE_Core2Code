@@ -9,6 +9,7 @@ import {
 } from "react-leaflet";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
+import Button from "../utils/Button";
 
 /* =========================================================
    SIT MARKER ICON
@@ -127,7 +128,6 @@ ${message}`;
         text-white
       "
     >
-
       {/* =====================================================
           HERO
       ===================================================== */}
@@ -144,7 +144,6 @@ ${message}`;
         "
       >
         <div className="flex flex-col items-center text-center">
-
           <h1
             className="
               text-[48px]
@@ -168,7 +167,6 @@ ${message}`;
               bg-[#F5C542]
             "
           />
-
         </div>
 
         <h2
@@ -228,7 +226,6 @@ ${message}`;
           lg:px-10
         "
       >
-
         {/* =================================================
             SEND MESSAGE CARD
         ================================================= */}
@@ -241,7 +238,7 @@ ${message}`;
             overflow-hidden
             rounded-[17px]
             border
-            border-[rgba(212,175,55,0.35)]
+            border-[rgba(212,175,55,0.39)]
             bg-[rgba(255,255,255,0.08)]
             px-7
             pb-9
@@ -252,7 +249,6 @@ ${message}`;
             sm:pt-12
           "
         >
-
           <div
             className="
               pointer-events-none
@@ -265,7 +261,6 @@ ${message}`;
           />
 
           <div className="relative flex w-full flex-col">
-
             <div
               className="
                 mb-4
@@ -304,7 +299,6 @@ ${message}`;
               onSubmit={handleSubmit}
               className="flex flex-1 flex-col"
             >
-
               <input
                 name="name"
                 type="text"
@@ -414,71 +408,23 @@ ${message}`;
 
               {/* =================================================
                   SEND MESSAGE BUTTON
-                  ONLY THIS BUTTON WAS CHANGED
-                  TO MATCH THE EXPLORE EVENT STYLE
+                  USING CORE2CODE BUTTON COMPONENT
               ================================================= */}
 
-              <button
-                type="submit"
-                className="
-                  group
-                  relative
-                  h-[58px]
-                  w-full
-                  shrink-0
-                  overflow-visible
-                  rounded-[9px]
-                  border-2
-                  border-[#F5C542]
-                  bg-[#050505]
-                  px-6
-                  text-[15px]
-                  font-extrabold
-                  uppercase
-                  tracking-[1.5px]
-                  text-[#F5C542]
-                  shadow-[0_5px_0_#F5C542,0_10px_25px_rgba(245,197,66,0.18)]
-                  transition-all
-                  duration-300
-                  hover:-translate-y-0.5
-                  hover:bg-[#F5C542]
-                  hover:text-black
-                  hover:shadow-[0_5px_0_#D4A900,0_12px_30px_rgba(245,197,66,0.35)]
-                  active:translate-y-1
-                  active:shadow-[0_2px_0_#D4A900,0_5px_15px_rgba(245,197,66,0.2)]
-                "
+              <Button
+                className="w-full"
+                onClick={(e) => {
+                  e.currentTarget.closest("form")?.requestSubmit();
+                }}
               >
-                <span className="relative z-10">
-                  Send Message
-                </span>
-
-                <span
-                  className="
-                    pointer-events-none
-                    absolute
-                    inset-0
-                    -translate-x-full
-                    overflow-hidden
-                    rounded-[7px]
-                    bg-gradient-to-r
-                    from-transparent
-                    via-white/25
-                    to-transparent
-                    transition-transform
-                    duration-700
-                    group-hover:translate-x-full
-                  "
-                />
-              </button>
-
+                Send Message
+              </Button>
             </form>
           </div>
         </section>
 
-
         {/* =================================================
             LOCATION CARD
-            EVERYTHING BELOW IS UNCHANGED
         ================================================= */}
 
         <section
@@ -489,14 +435,13 @@ ${message}`;
             overflow-hidden
             rounded-[17px]
             border
-            border-[rgba(212,175,55,0.35)]
+            border-[rgba(212,175,55,0.39)]
             bg-[rgba(255,255,255,0.08)]
             p-7
             shadow-[0_15px_45px_rgba(0,0,0,0.35)]
             sm:p-9
           "
         >
-
           <div
             className="
               pointer-events-none
@@ -509,7 +454,6 @@ ${message}`;
           />
 
           <div className="relative flex w-full flex-col">
-
             <div
               className="
                 mb-2
@@ -534,7 +478,6 @@ ${message}`;
             </h2>
 
             <div className="mb-7 space-y-6">
-
               <div>
                 <div
                   className="
@@ -562,7 +505,6 @@ ${message}`;
               </div>
 
               <div>
-
                 <div
                   className="
                     text-[15px]
@@ -576,7 +518,6 @@ ${message}`;
                 </div>
 
                 <div className="mt-4">
-
                   <div
                     className="
                       text-[14px]
@@ -614,11 +555,9 @@ ${message}`;
                   >
                     +91 8217651756
                   </div>
-
                 </div>
 
                 <div className="mt-5">
-
                   <div
                     className="
                       text-[14px]
@@ -656,11 +595,13 @@ ${message}`;
                   >
                     +91 7676967922
                   </div>
-
                 </div>
-
               </div>
             </div>
+
+            {/* =================================================
+                MAP
+            ================================================= */}
 
             <div
               className="
@@ -679,7 +620,6 @@ ${message}`;
                 sm:h-[430px]
               "
             >
-
               <MapContainer
                 center={[20.5937, 78.9629]}
                 zoom={5}
@@ -693,7 +633,6 @@ ${message}`;
                   w-full
                 "
               >
-
                 <TileLayer
                   url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                   attribution="&copy; OpenStreetMap contributors"
@@ -721,7 +660,6 @@ ${message}`;
                 <ZoomControl position="topright" />
 
                 <MapController />
-
               </MapContainer>
 
               <div
@@ -741,7 +679,6 @@ ${message}`;
                   backdrop-blur-md
                 "
               >
-
                 <div
                   className="
                     text-[10px]
@@ -757,7 +694,6 @@ ${message}`;
                 <div className="mt-1 text-sm font-bold text-white">
                   India
                 </div>
-
               </div>
 
               <style>{`
@@ -811,11 +747,9 @@ ${message}`;
                   color:#000 !important;
                 }
               `}</style>
-
             </div>
           </div>
         </section>
-
       </main>
     </div>
   );
