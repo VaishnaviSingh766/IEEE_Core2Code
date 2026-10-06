@@ -241,8 +241,8 @@ ${message}`;
             overflow-hidden
             rounded-[17px]
             border
-            border-[#F5C542]
-            bg-[rgba(255,255,255,0.073)]
+            border-[rgba(212,175,55,0.35)]
+            bg-[rgba(255,255,255,0.08)]
             px-7
             pb-9
             pt-10
@@ -489,8 +489,8 @@ ${message}`;
             overflow-hidden
             rounded-[17px]
             border
-            border-[#F5C542]
-            bg-[rgba(255,255,255,0.073)]
+            border-[rgba(212,175,55,0.35)]
+            bg-[rgba(255,255,255,0.08)]
             p-7
             shadow-[0_15px_45px_rgba(0,0,0,0.35)]
             sm:p-9
