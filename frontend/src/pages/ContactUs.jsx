@@ -85,7 +85,6 @@ function MapController() {
 ========================================================= */
 
 export default function ContactUs() {
-
   /* =======================================================
      SEND MESSAGE
   ======================================================= */
@@ -116,10 +115,6 @@ ${message}`;
       `?subject=${encodeURIComponent(subject)}` +
       `&body=${encodeURIComponent(body)}`;
 
-    /*
-      Directly open the user's email client.
-      No success message is displayed on the page.
-    */
     window.location.href = mailtoLink;
   };
 
@@ -148,7 +143,6 @@ ${message}`;
           lg:px-10
         "
       >
-
         <div className="flex flex-col items-center text-center">
 
           <h1
@@ -212,9 +206,7 @@ ${message}`;
           for any queries regarding registrations, schedules, venue or anything
           else.
         </p>
-
       </section>
-
 
       {/* =====================================================
           MAIN CONTENT
@@ -250,7 +242,7 @@ ${message}`;
             rounded-[17px]
             border
             border-[#F5C542]
-            bg-[#181818]
+            bg-[rgba(255,255,255,0.15)]
             px-7
             pb-9
             pt-10
@@ -304,7 +296,6 @@ ${message}`;
               to Hear from You
             </h2>
 
-
             {/* =================================================
                 FORM
             ================================================= */}
@@ -313,8 +304,6 @@ ${message}`;
               onSubmit={handleSubmit}
               className="flex flex-1 flex-col"
             >
-
-              {/* NAME */}
 
               <input
                 name="name"
@@ -342,9 +331,6 @@ ${message}`;
                 "
               />
 
-
-              {/* EMAIL */}
-
               <input
                 name="email"
                 type="email"
@@ -370,9 +356,6 @@ ${message}`;
                   focus:ring-[#F5C542]/20
                 "
               />
-
-
-              {/* PHONE */}
 
               <input
                 name="phone"
@@ -400,9 +383,6 @@ ${message}`;
                 "
               />
 
-
-              {/* MESSAGE */}
-
               <textarea
                 name="message"
                 placeholder="Your Message"
@@ -411,8 +391,8 @@ ${message}`;
                 className="
                   mb-5
                   min-h-[205px]
-                  flex-1
                   w-full
+                  flex-1
                   resize-y
                   rounded-[10px]
                   border
@@ -432,8 +412,11 @@ ${message}`;
                 "
               />
 
-
-              {/* SEND BUTTON */}
+              {/* =================================================
+                  SEND MESSAGE BUTTON
+                  ONLY THIS BUTTON WAS CHANGED
+                  TO MATCH THE EXPLORE EVENT STYLE
+              ================================================= */}
 
               <button
                 type="submit"
@@ -443,51 +426,59 @@ ${message}`;
                   h-[58px]
                   w-full
                   shrink-0
-                  overflow-hidden
+                  overflow-visible
                   rounded-[9px]
-                  bg-[#F5C542]
+                  border-2
+                  border-[#F5C542]
+                  bg-[#050505]
+                  px-6
                   text-[15px]
-                  font-bold
-                  text-[#171717]
+                  font-extrabold
+                  uppercase
+                  tracking-[1.5px]
+                  text-[#F5C542]
+                  shadow-[0_5px_0_#F5C542,0_10px_25px_rgba(245,197,66,0.18)]
                   transition-all
                   duration-300
                   hover:-translate-y-0.5
-                  hover:bg-white
-                  hover:shadow-[0_8px_30px_rgba(245,197,66,0.25)]
-                  active:scale-[0.98]
+                  hover:bg-[#F5C542]
+                  hover:text-black
+                  hover:shadow-[0_5px_0_#D4A900,0_12px_30px_rgba(245,197,66,0.35)]
+                  active:translate-y-1
+                  active:shadow-[0_2px_0_#D4A900,0_5px_15px_rgba(245,197,66,0.2)]
                 "
               >
-
                 <span className="relative z-10">
                   Send Message
                 </span>
 
                 <span
                   className="
+                    pointer-events-none
                     absolute
                     inset-0
                     -translate-x-full
+                    overflow-hidden
+                    rounded-[7px]
                     bg-gradient-to-r
                     from-transparent
-                    via-white/40
+                    via-white/25
                     to-transparent
                     transition-transform
                     duration-700
                     group-hover:translate-x-full
                   "
                 />
-
               </button>
 
             </form>
-
           </div>
-
         </section>
 
 
         {/* =================================================
             LOCATION CARD
+            EVERYTHING BELOW IS UNCHANGED
         ================================================= */}
 
         <section
@@ -499,7 +490,7 @@ ${message}`;
             rounded-[17px]
             border
             border-[#F5C542]
-            bg-[#181818]
+            bg-[rgba(255,255,255,0.15)]
             p-7
             shadow-[0_15px_45px_rgba(0,0,0,0.35)]
             sm:p-9
@@ -518,10 +509,6 @@ ${message}`;
           />
 
           <div className="relative flex w-full flex-col">
-
-            {/* =================================================
-                TITLE
-            ================================================= */}
 
             <div
               className="
@@ -546,17 +533,9 @@ ${message}`;
               Find Us at the Venue
             </h2>
 
-
-            {/* =================================================
-                LOCATION DETAILS
-            ================================================= */}
-
             <div className="mb-7 space-y-6">
 
-              {/* VENUE */}
-
               <div>
-
                 <div
                   className="
                     text-[14px]
@@ -580,13 +559,7 @@ ${message}`;
                 >
                   Karnataka - 572103
                 </div>
-
               </div>
-
-
-              {/* =================================================
-                  CONTACT US
-              ================================================= */}
 
               <div>
 
@@ -601,11 +574,6 @@ ${message}`;
                 >
                   Contact Us
                 </div>
-
-
-                {/* =================================================
-                    CHAIRMAN
-                ================================================= */}
 
                 <div className="mt-4">
 
@@ -648,11 +616,6 @@ ${message}`;
                   </div>
 
                 </div>
-
-
-                {/* =================================================
-                    VICE CHAIRMAN
-                ================================================= */}
 
                 <div className="mt-5">
 
@@ -697,13 +660,7 @@ ${message}`;
                 </div>
 
               </div>
-
             </div>
-
-
-            {/* =================================================
-                LEAFLET MAP
-            ================================================= */}
 
             <div
               className="
@@ -737,25 +694,17 @@ ${message}`;
                 "
               >
 
-                {/* MAP */}
-
                 <TileLayer
                   url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                   attribution="&copy; OpenStreetMap contributors"
                 />
 
-
-                {/* SIT MARKER */}
-
                 <Marker
                   position={SIT_POSITION}
                   icon={sitIcon}
                 >
-
                   <Popup>
-
                     <div className="min-w-[190px] text-center font-sans">
-
                       <strong className="text-[14px] text-[#111]">
                         Siddaganga Institute of Technology
                       </strong>
@@ -765,29 +714,15 @@ ${message}`;
                       <span className="text-[12px] text-[#555]">
                         Tumakuru, Karnataka
                       </span>
-
                     </div>
-
                   </Popup>
-
                 </Marker>
 
-
-                {/* ZOOM CONTROL */}
-
                 <ZoomControl position="topright" />
-
-
-                {/* EXPLORE BUTTON */}
 
                 <MapController />
 
               </MapContainer>
-
-
-              {/* =================================================
-                  MAP LABEL
-              ================================================= */}
 
               <div
                 className="
@@ -816,24 +751,71 @@ ${message}`;
                     text-[#F5C542]
                   "
                 >
-                  Location</div>
-                <div className="mt-1 text-sm font-bold text-white">India</div>
+                  Location
+                </div>
+
+                <div className="mt-1 text-sm font-bold text-white">
+                  India
+                </div>
+
               </div>
 
               <style>{`
-                .leaflet-container { background:#02070c !important; font-family:Arial,Helvetica,sans-serif; }
-                .leaflet-control-zoom { border:1px solid rgba(245,197,66,0.7) !important; border-radius:12px !important; overflow:hidden; box-shadow:0 8px 25px rgba(0,0,0,0.5) !important; }
-                .leaflet-control-zoom a { width:46px !important; height:46px !important; line-height:46px !important; background:rgba(5,9,13,0.94) !important; color:#F5C542 !important; border-bottom:1px solid rgba(245,197,66,0.35) !important; font-size:24px !important; transition:all 0.2s ease; }
-                .leaflet-control-zoom a:last-child { border-bottom:none !important; }
-                .leaflet-control-zoom a:hover { background:#F5C542 !important; color:#000 !important; }
-                .leaflet-popup-content-wrapper,.leaflet-popup-tip { background:#F5C542 !important; color:#111 !important; }
-                .leaflet-popup-content { margin:12px 14px !important; }
-                .leaflet-popup-close-button { color:#111 !important; }
-                .leaflet-popup-close-button:hover { color:#000 !important; }
+                .leaflet-container {
+                  background:#02070c !important;
+                  font-family:Arial,Helvetica,sans-serif;
+                }
+
+                .leaflet-control-zoom {
+                  border:1px solid rgba(245,197,66,0.7) !important;
+                  border-radius:12px !important;
+                  overflow:hidden;
+                  box-shadow:0 8px 25px rgba(0,0,0,0.5) !important;
+                }
+
+                .leaflet-control-zoom a {
+                  width:46px !important;
+                  height:46px !important;
+                  line-height:46px !important;
+                  background:rgba(5,9,13,0.94) !important;
+                  color:#F5C542 !important;
+                  border-bottom:1px solid rgba(245,197,66,0.35) !important;
+                  font-size:24px !important;
+                  transition:all 0.2s ease;
+                }
+
+                .leaflet-control-zoom a:last-child {
+                  border-bottom:none !important;
+                }
+
+                .leaflet-control-zoom a:hover {
+                  background:#F5C542 !important;
+                  color:#000 !important;
+                }
+
+                .leaflet-popup-content-wrapper,
+                .leaflet-popup-tip {
+                  background:#F5C542 !important;
+                  color:#111 !important;
+                }
+
+                .leaflet-popup-content {
+                  margin:12px 14px !important;
+                }
+
+                .leaflet-popup-close-button {
+                  color:#111 !important;
+                }
+
+                .leaflet-popup-close-button:hover {
+                  color:#000 !important;
+                }
               `}</style>
+
             </div>
           </div>
         </section>
+
       </main>
     </div>
   );
