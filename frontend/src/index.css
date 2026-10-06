@@ -17,19 +17,20 @@
 
 /* Paragraph Font */
 @font-face {
-  font-family: "MithellaBold";
-  src: url("./assets/fonts/MithellaBold.otf") format("opentype");
+  font-family: "Mithellapara";
+  src: url("./assets/fonts/Mithellapara.otf") format("opentype");
   font-weight: 400;
   font-style: normal;
   font-display: swap;
 }
+
 /* for numbers */
 @font-face {
-  font-family: 'Dekatron';
-  src: url('./assets/fonts/Dekatron-SemiBold.otf') format('opentype');
+  font-family: "Dekatron";
+  src: url("./assets/fonts/Dekatron-SemiBold.otf") format("opentype");
   font-weight: 600;
   font-style: normal;
-  font-display: swap;
+  font-display: block;
 }
 
 /* =========================================================
@@ -43,7 +44,8 @@
 
   /* Core2Code custom fonts */
   --font-core: "AGrazingMace", sans-serif;
-  --font-paragraph: "MithellaBold", sans-serif;
+  --font-paragraph: "Mithellapara", sans-serif;
+  --font-number: "Dekatron", sans-serif;
 }
 
 /* =========================================================
@@ -77,8 +79,18 @@ body,
    ========================================================= */
 
 .font-paragraph {
-  font-family: "MithellaBold", sans-serif !important;
+  font-family: "Mithellapara", sans-serif !important;
   font-weight: 400 !important;
+  font-style: normal !important;
+}
+
+/* =========================================================
+   CORE2CODE NUMBER FONT
+   ========================================================= */
+
+.font-number {
+  font-family: "Dekatron", sans-serif !important;
+  font-weight: 600 !important;
   font-style: normal !important;
 }
 

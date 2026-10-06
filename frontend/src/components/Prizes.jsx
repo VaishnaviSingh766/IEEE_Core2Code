@@ -55,11 +55,10 @@ function PodiumPrizes() {
           {podium.map((p) => (
             <article
               key={p.id}
-              className={`relative flex flex-col justify-between gap-10 overflow-hidden border p-6 md:gap-0 md:p-7 ${p.order} ${p.height} ${
-                p.champion
-                  ? "border-[#D4AF37] bg-[#D4AF37] text-[#000000]"
-                  : "border-[#FFFFFF]/15 bg-[#FFFFFF]/[0.02]"
-              }`}
+              className={`relative flex flex-col justify-between gap-10 overflow-hidden border p-6 md:gap-0 md:p-7 ${p.order} ${p.height} ${p.champion
+                ? "border-[#D4AF37] bg-[#D4AF37] text-[#000000]"
+                : "border-[#FFFFFF]/15 bg-[#FFFFFF]/[0.02]"
+                }`}
             >
               {p.champion && (
                 <span
@@ -81,7 +80,10 @@ function PodiumPrizes() {
 
               <div>
                 <p className={`text-sm font-medium ${p.champion ? "text-[#000000]/70" : "text-[#FFFFFF]/60"}`}>{p.title}</p>
-                <p className={`c2c-display mt-1 text-4xl font-bold md:text-5xl ${p.champion ? "text-[#000000]" : "text-[#FFFFFF]"}`}>
+                <p
+                  className={`font-number mt-1 text-4xl md:text-5xl ${p.champion ? "text-[#000000]" : "text-[#FFFFFF]"
+                    }`}
+                >
                   {p.amount}
                 </p>
               </div>
@@ -114,14 +116,24 @@ function TicketPrizes() {
   return (
     <section className="relative -mt-8 overflow-hidden bg-[#000000] px-4 pb-20 pt-0 text-[#FFFFFF] sm:px-8">
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,600;1,700&family=Space+Mono:wght@400;700&display=swap');
-        .c2c-serif { font-family: 'Playfair Display', Georgia, serif; }
-        .c2c-mono { font-family: 'Space Mono', ui-monospace, monospace; }
-        .c2c-gold { color: #D4AF37; }
-        @keyframes c2c-twinkle { 0%,100% { opacity: .15; transform: scale(.7); } 50% { opacity: 1; transform: scale(1); } }
-        .c2c-twinkle { animation: c2c-twinkle 3.4s ease-in-out infinite; }
-        @media (prefers-reduced-motion: reduce) { .c2c-twinkle { animation: none; opacity: .6; } }
-      `}</style>
+  @import url('https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,500;6..96,700;6..96,900&family=Manrope:wght@400;500;700&display=swap');
+
+  .c2c-display {
+    font-family: 'Bodoni Moda', 'Didot', Georgia, serif;
+  }
+
+  .c2c-body {
+    font-family: 'Manrope', system-ui, sans-serif;
+  }
+
+  .prize-number {
+    font-family: "Dekatron", sans-serif !important;
+    font-weight: 600 !important;
+    font-style: normal !important;
+  }
+
+  ...
+`}</style>
 
       <div
         aria-hidden="true"
@@ -150,15 +162,13 @@ function TicketPrizes() {
           {tickets.map((p) => (
             <article key={p.id}>
               <div
-                className={`relative flex overflow-hidden border-2 ${
-                  p.hero ? "border-[#D4AF37] shadow-[0_0_70px_-12px_rgba(212,175,55,0.6)]" : "border-[#D4AF37]/70"
-                }`}
+                className={`relative flex overflow-hidden border-2 ${p.hero ? "border-[#D4AF37] shadow-[0_0_70px_-12px_rgba(212,175,55,0.6)]" : "border-[#D4AF37]/70"
+                  }`}
               >
                 {/* stub */}
                 <div
-                  className={`relative flex w-28 shrink-0 flex-col items-center justify-center gap-3 px-3 py-6 sm:w-44 ${
-                    p.hero ? "bg-[#000000] text-[#D4AF37]" : "bg-[#D4AF37] text-[#000000]"
-                  }`}
+                  className={`relative flex w-28 shrink-0 flex-col items-center justify-center gap-3 px-3 py-6 sm:w-44 ${p.hero ? "bg-[#000000] text-[#D4AF37]" : "bg-[#D4AF37] text-[#000000]"
+                    }`}
                 >
                   <svg viewBox="0 0 24 24" className={p.hero ? "h-14 w-14 sm:h-20 sm:w-20" : "h-12 w-12 sm:h-16 sm:w-16"} fill="none" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                     <path d={ICONS[p.icon]} />
@@ -174,15 +184,15 @@ function TicketPrizes() {
 
                 {/* body */}
                 <div
-                  className={`relative flex flex-1 flex-col justify-center px-5 sm:px-10 ${
-                    p.hero ? "bg-[#D4AF37] py-9 text-[#000000] sm:py-12" : "bg-[#000000] py-7 text-[#FFFFFF]"
-                  }`}
+                  className={`relative flex flex-1 flex-col justify-center px-5 sm:px-10 ${p.hero ? "bg-[#D4AF37] py-9 text-[#000000] sm:py-12" : "bg-[#000000] py-7 text-[#FFFFFF]"
+                    }`}
                 >
                   <h3 className={`c2c-serif font-bold ${p.hero ? "text-2xl sm:text-4xl" : "text-xl sm:text-3xl"}`}>{p.name}</h3>
                   <p
-                    className={`c2c-serif mt-1 font-bold italic leading-tight ${
-                      p.hero ? "text-5xl text-[#000000] sm:text-7xl" : "c2c-gold text-4xl sm:text-6xl"
-                    }`}
+                    className={`font-number mt-1 leading-tight ${p.hero
+                        ? "text-5xl text-[#000000] sm:text-7xl"
+                        : "text-[#D4AF37] text-4xl sm:text-6xl"
+                      }`}
                   >
                     {p.amount}
                   </p>
