@@ -23,6 +23,14 @@
   font-style: normal;
   font-display: swap;
 }
+/* for numbers */
+@font-face {
+  font-family: 'Dekatron';
+  src: url('./assets/fonts/Dekatron-SemiBold.otf') format('opentype');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
 
 /* =========================================================
    TAILWIND FONT CONFIGURATION
