@@ -2,9 +2,11 @@
     children,
     className = "",
     as: Tag = "h2",
+    id,
 }) => {
     return (
         <Tag
+            id={id}
             className={`core-heading ${className}`}
         >
             {children}
