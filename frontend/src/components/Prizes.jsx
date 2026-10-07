@@ -116,7 +116,7 @@ const sparkles = [[6, 10, 14], [12, 88, 18], [40, 3, 10], [55, 96, 12], [80, 8, 
 
 function TicketPrizes() {
   return (
-    <section className="relative -mt-8 overflow-hidden bg-[#000000] px-4 pb-20 pt-0 text-[#FFFFFF] sm:px-8">
+    <section className="relative mt-8 overflow-hidden bg-[#000000] px-4 pb-20 pt-0 text-[#FFFFFF] sm:px-8">
       <style>{`
   @import url('https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,500;6..96,700;6..96,900&family=Manrope:wght@400;500;700&display=swap');
 
@@ -152,11 +152,6 @@ function TicketPrizes() {
 
       <div className="relative mx-auto max-w-3xl">
         <header className="text-center">
-          <div aria-hidden="true" className="mx-auto mb-3 flex items-center justify-center gap-3">
-            <span className="h-px w-16 bg-gradient-to-r from-transparent to-[#D4AF37]" />
-            <span className="h-2.5 w-2.5 rotate-45 bg-[#D4AF37]" />
-            <span className="h-px w-16 bg-gradient-to-l from-transparent to-[#D4AF37]" />
-          </div>
           <Header>Prizes</Header>
         </header>
 

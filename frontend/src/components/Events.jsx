@@ -134,7 +134,7 @@ const Events = () => {
     <>
       <section
         id="events"
-        className="relative mb-4 min-h-fit overflow-hidden bg-[#000000] px-4 py-16 font-['Rajdhani',sans-serif] text-[#FFFFFF] sm:px-8 md:px-12 lg:px-20 sm:py-20"
+        className="relative mb-0 min-h-fit overflow-hidden bg-[#000000] px-4 py-16 font-['Rajdhani',sans-serif] text-[#FFFFFF] sm:px-8 md:px-12 lg:px-20 sm:py-20"
       >
         <div className="pointer-events-none absolute inset-0 opacity-[0.035]">
           <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.5)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.5)_1px,transparent_1px)] bg-[size:55px_55px]" />
