@@ -1,4 +1,5 @@
 import React from "react";
+import Header from "../utils/Header";
 
 const SOCIALS = [
   {
@@ -32,8 +33,6 @@ export default function Footer() {
   return (
     <>
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800&family=Rajdhani:wght@400;500&display=swap');
-
         .ft {
           --black: #000000;
           --gold: var(--accent, #f5a623);
@@ -43,7 +42,6 @@ export default function Footer() {
           box-sizing: border-box;
           background: var(--black);
           color: var(--white);
-          font-family: "Rajdhani", system-ui, sans-serif;
           text-align: center;
           padding: 36px 0 0;
           overflow: hidden;
@@ -118,17 +116,18 @@ export default function Footer() {
         }
 
         .ft__name {
-          margin: 0;
-          font-family: "Orbitron", sans-serif;
-          font-weight: 800;
-          font-size: clamp(2rem, 5vw, 3.2rem);
-          letter-spacing: 0.14em;
-          line-height: 1.2;
+          width: auto !important;
+          text-align: left !important;
+          color: var(--white) !important;
+          margin: 0 !important;
+          font-weight: 400 !important;
+          font-size: clamp(2rem, 5vw, 3.2rem) !important;
+          letter-spacing: 0.14em !important;
+          line-height: 1.2 !important;
         }
 
         .ft__sub {
           margin: 8px 0 0;
-          font-family: "Orbitron", sans-serif;
           font-weight: 600;
           font-size: 0.95rem;
           letter-spacing: 0.3em;
@@ -145,12 +144,14 @@ export default function Footer() {
         }
 
         .ft__title {
-          margin: 0;
-          font-family: "Orbitron", sans-serif;
-          font-weight: 600;
-          font-size: 0.8rem;
-          letter-spacing: 0.2em;
-          text-align: center;
+          width: auto !important;
+          color: var(--white) !important;
+          margin: 0 !important;
+          font-weight: 400 !important;
+          font-size: 0.8rem !important;
+          letter-spacing: 0.2em !important;
+          line-height: 1 !important;
+          text-align: center !important;
         }
 
         .ft__list {
@@ -275,12 +276,12 @@ export default function Footer() {
         <div className="ft__inner">
           <div className="ft__main">
             <div className="ft__brand">
-              <h2 className="ft__name">IEEE SIT</h2>
-              <p className="ft__sub">Student Branch</p>
+              <Header as="h2" className="ft__name">IEEE SIT</Header>
+              <p className="ft__sub font-mistical">Student Branch</p>
             </div>
 
             <div className="ft__social">
-              <h3 className="ft__title">Follow us</h3>
+              <Header as="h3" className="ft__title">Follow us</Header>
 
               <ul className="ft__list">
                 {SOCIALS.map(({ name, href, path }) => (
@@ -307,8 +308,8 @@ export default function Footer() {
           </div>
         </div>
 
-        <p className="ft__copy">
-          © {new Date().getFullYear()} IEEE SIT SB. All rights reserved.
+        <p className="ft__copy font-paragraph">
+          © <span className="font-number">{new Date().getFullYear()}</span> IEEE SIT SB. All rights reserved.
         </p>
       </footer>
     </>

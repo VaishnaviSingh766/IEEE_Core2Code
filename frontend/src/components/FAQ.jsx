@@ -49,7 +49,7 @@ function Answer({ text, open, reduce }) {
   }, [open, text, reduce]);
 
   return (
-    <p className="m-0 px-[22px] pb-[22px] pl-14 min-h-[1.7em] font-mono text-sm leading-[1.7] text-[#F5E6A8] max-[520px]:pl-[22px]">
+    <p className="font-paragraph m-0 px-[22px] pb-[22px] pl-14 min-h-[1.7em] text-sm leading-[1.7] text-[#F5E6A8] max-[520px]:pl-[22px]">
       <span className="absolute w-px h-px overflow-hidden [clip:rect(0_0_0_0)] whitespace-nowrap">
         {text}
       </span>
@@ -81,7 +81,6 @@ export default function Faqs({ items = FAQS }) {
     >
       {/* Single keyframe rule — cannot be expressed as a Tailwind utility */}
       <style>{`
-        @import url("https://fonts.googleapis.com/css2?family=Orbitron:wght@500;800&display=swap");
         @keyframes c2cBlink { 50% { opacity: 0; } }
       `}</style>
 
@@ -124,7 +123,7 @@ export default function Faqs({ items = FAQS }) {
                     <span
                       aria-hidden="true"
                       className={[
-                        "font-mono text-[15px] text-[#D4AF37] transition-[transform,text-shadow] duration-[350ms]",
+                        "font-mistical text-[15px] text-[#D4AF37] transition-[transform,text-shadow] duration-[350ms]",
                         open ? "translate-x-1 [text-shadow:0_0_12px_#D4AF37]" : "",
                       ].join(" ")}
                     >

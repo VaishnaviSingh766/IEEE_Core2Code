@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import Header from "../utils/Header";
 
 /* ===== EDIT YOUR EVENT DATA HERE ===== */
 // th = scroll point (0 to 1) where the row boards
@@ -23,10 +24,7 @@ const sh = (c) => (c === " " ? "" : c);
 
 /* Tailwind can't define @keyframes or @import fonts without a config change,
    so this tiny stylesheet is the only plain CSS in the file. */
-const BASE_CSS = `
-@import url("https://fonts.googleapis.com/css2?family=Orbitron:wght@500;800&family=Rajdhani:wght@500;600&display=swap");
-@keyframes c2c-fl{50%{transform:scaleY(.04)}}
-`;
+const BASE_CSS = `@keyframes c2c-fl{50%{transform:scaleY(.04)}}`;
 
 /* One flap tile.
    mode "big": large tile, only the letter squashes (swap at 35ms).
@@ -46,11 +44,12 @@ function Tile({ value = " ", mode = "ch", locked = false, variant = "" }) {
   }, [value, mode]);
 
   if (mode === "big") {
+    const tileFont = /^\d$/.test(shown) ? "font-number" : "font-core";
     return (
       <div
         className={
           "relative grid aspect-[3/4] max-h-[15vh] min-w-0 [@media(max-height:600px)]:max-h-[11vh] place-items-center overflow-hidden rounded-md border sm:max-h-[20vh] sm:rounded-lg " +
-          "font-['Orbitron',sans-serif] text-[length:clamp(30px,min(11vw,9vh),84px)] font-extrabold leading-none " +
+          `${tileFont} text-[length:clamp(30px,min(11vw,9vh),84px)] leading-none ` +
           "transition-[background-color,color] duration-[400ms] " +
           "after:absolute after:inset-x-0 after:top-1/2 after:-mt-px after:h-[3px] after:bg-black " +
           "after:shadow-[0_1px_0_rgba(255,255,255,.07)] after:content-[''] " +
@@ -65,12 +64,13 @@ function Tile({ value = " ", mode = "ch", locked = false, variant = "" }) {
   }
 
   const isSpace = variant === "space";
+  const tileFont = variant === "status" ? "font-mistical" : "font-heading";
   return (
     <span
       key={n}
       className={
         "relative mr-px inline-grid h-[1.5em] w-[.95em] place-items-center overflow-hidden rounded-[3px] sm:mr-0.5 " +
-        "font-['Orbitron',sans-serif] text-[length:clamp(10px,3.3vw,15px)] font-medium leading-normal " +
+        `${tileFont} text-[length:clamp(10px,3.3vw,15px)] leading-normal ` +
         (isSpace
           ? ""
           : "bg-[#0d0d0d] after:absolute after:inset-x-0 after:top-1/2 after:h-px after:bg-black after:content-[''] ") +
@@ -134,7 +134,7 @@ function Row({ phase, on, open, statusWords }) {
           <FlapText text={statusWords[phase.tag] || phase.tag} active={on} variant="status" />
         </div>
       </div>
-      <div className="mt-0.5 min-h-[15px] text-[length:clamp(12px,3.4vw,15px)] font-semibold leading-tight text-[#D4AF37] sm:mt-1 sm:min-h-[18px]">{on ? phase.d : ""}</div>
+      <div className="font-paragraph mt-0.5 min-h-[15px] text-[length:clamp(12px,3.4vw,15px)] leading-tight text-[#D4AF37] sm:mt-1 sm:min-h-[18px]">{on ? phase.d : ""}</div>
       <ul
         className={
           "m-0 grid list-none gap-0.5 overflow-hidden p-0 transition-[max-height,opacity,margin] duration-300 sm:gap-1 " +
@@ -142,7 +142,7 @@ function Row({ phase, on, open, statusWords }) {
         }
       >
         {phase.items.map(([name, ok]) => (
-          <li key={name} className="flex items-center gap-2 text-[length:clamp(13px,3.7vw,16px)] leading-tight sm:gap-2.5">
+          <li key={name} className="font-paragraph flex items-center gap-2 text-[length:clamp(13px,3.7vw,16px)] leading-tight sm:gap-2.5">
             <i
               className={
                 "grid h-3 w-3 flex-none place-items-center border-[1.5px] font-sans text-[9px] not-italic leading-none text-black sm:h-3.5 sm:w-3.5 sm:text-[10px] " +
@@ -227,27 +227,27 @@ export default function Core2CodeTimeline({
     <div
       ref={root}
       style={{ height: totalLen, overflowAnchor: "none" }}
-      className="relative bg-black font-['Rajdhani',system-ui,-apple-system,'Segoe_UI',sans-serif] text-[15px] text-white"
+      className="relative bg-black font-paragraph text-[15px] text-white"
     >
       <style>{BASE_CSS}</style>
       <div
         ref={stk}
         className="will-change-transform sticky top-2 mx-auto flex max-w-[560px] flex-col gap-2 px-2 py-1 sm:gap-3 sm:px-4 sm:py-2 md:max-w-[600px]"
       >
-        <h2 className="m-0 pl-[.3em] text-center font-['Orbitron',sans-serif] text-[length:clamp(16px,5vw,28px)] font-extrabold uppercase leading-none tracking-[.3em] text-[#D4AF37] [text-shadow:0_0_18px_rgba(212,175,55,.45)]">
+        <Header as="h2" className="m-0 pl-[.3em] text-[length:clamp(16px,5vw,28px)] uppercase tracking-[.3em] [text-shadow:0_0_18px_rgba(212,175,55,.45)]">
           {heading}
-        </h2>
+        </Header>
 
         <div className="grid grid-cols-4 gap-1.5 sm:gap-2" role="img" aria-label="Core to Code">
           {word.map((c, i) => <Tile key={i} value={c} mode="big" locked={i === 2} />)}
         </div>
 
-        <div className="flex items-center gap-2 font-['Orbitron',sans-serif] text-[10px] font-medium text-[#D4AF37] sm:gap-3 sm:text-xs">
+        <div className="font-mistical flex items-center gap-2 text-[10px] text-[#D4AF37] sm:gap-3 sm:text-xs">
           <span className="whitespace-nowrap">CORE &rarr; CODE</span>
           <span className="h-[3px] flex-1 bg-[rgba(212,175,55,.2)]">
             <b className="block h-full bg-[#D4AF37] shadow-[0_0_8px_#D4AF37]" style={{ width: `${p * 100}%`, transition: "width .12s linear" }} />
           </span>
-          <span>{Math.round(p * 100)}%</span>
+          <span className="font-number">{Math.round(p * 100)}%</span>
         </div>
 
         <div className="grid gap-1.5 sm:gap-2">
@@ -257,7 +257,7 @@ export default function Core2CodeTimeline({
         </div>
 
         <div
-          className="text-center font-['Orbitron',sans-serif] text-[11px] font-medium text-[#D4AF37] transition-opacity duration-[400ms]"
+          className="font-mistical text-center text-[11px] text-[#D4AF37] transition-opacity duration-[400ms]"
           style={{ opacity: p < 0.03 ? 1 : 0 }}
         >
           
