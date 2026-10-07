@@ -86,10 +86,10 @@ export default function Faqs({ items = FAQS }) {
 
       <div className="max-w-3xl mx-auto">
        
-          <Header>FAQ</Header>
+          <Header>Frequently Asked Questions</Header>
         
 
-        <div className="grid gap-3">
+        <div className="mt-10 grid gap-3 sm:mt-12 md:mt-16">
           {items.map((item, i) => {
             const open = openIndex === i;
             return (
