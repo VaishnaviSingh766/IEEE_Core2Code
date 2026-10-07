@@ -4,9 +4,9 @@ import Header from "../utils/Header";
 /* ===== EDIT YOUR EVENT DATA HERE ===== */
 // th = scroll point (0 to 1) where the row boards
 const DEFAULT_PHASES = [
-  { t: "REGISTRATION", d: "Feb – Mar 2025", tag: "", th: 0.12, items: [["Registrations open", 1], ["Problem statements out", 1], ["Sponsor outreach", 1]] },
-  { t: "ONLINE ROUND", d: "Apr 2025", tag: "", th: 0.45, items: [["Coding test", 1], ["Shortlist teams", 0], ["Mentor sessions", 0]] },
-  { t: "FINALE", d: "May 2025", tag: "", th: 0.78, items: [["Live build", 0], ["Demo & judging", 0], ["Awards & closing", 0]] },
+  { t: "REGISTRATION", d: "Feb – Mar 2025", tag: "", th: 0.12, items: [["Registrations open", 1]] },
+  { t: "ONLINE ROUND", d: "Apr 2025", tag: "", th: 0.45, items: [["MCQ Round", 1], ["Elimination Phase-1", 0], ["Coding Test", 0],["Elimination Phase-2", 0]] },
+  { t: "FINALE", d: "May 2025", tag: "", th: 0.78, items: [["Domain Reveal", 0],["Build Time",0], ["Submission", 0], ["Result Announcement", 0]] },
 ];
 /* ===================================== */
 
