@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Check, Loader2 } from "lucide-react";
+import Header from "../utils/Header";
 
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
@@ -80,7 +81,7 @@ const GroupTitle = ({ children }) => (
   <div className="mb-1 flex items-center gap-2.5">
     <span className="h-1.5 w-1.5 rounded-full bg-[#D4AF37] shadow-[0_0_8px_rgba(212,175,55,0.8)]" />
 
-    <h2 className="text-sm font-medium text-neutral-200">
+    <h2 className="font-mistical text-sm text-neutral-200">
       {children}
     </h2>
   </div>
@@ -498,21 +499,13 @@ const Registration = () => {
 
         <header className="mb-10 text-center">
 
-          <h1
-            className="bg-clip-text text-4xl font-bold tracking-[0.12em] text-transparent sm:text-5xl"
-            style={{
-              backgroundImage:
-                GOLD_GRADIENT,
-            }}
-          >
-            CORE 2 CODE
-          </h1>
+          <Header as="h1">Registrations</Header>
 
-          <p className="mt-3 text-sm font-medium text-neutral-300">
+          <p className="font-mistical mt-3 text-sm text-neutral-300">
             Team Registration
           </p>
 
-          <p className="mt-1 text-sm text-neutral-500">
+          <p className="font-paragraph mt-1 text-sm text-neutral-500">
             From Core to Code.
           </p>
 
@@ -546,7 +539,7 @@ const Registration = () => {
               </legend>
 
               <GroupTitle>
-                Participant 1
+                Participant <span className="font-number">1</span>
               </GroupTitle>
 
               <div className="grid grid-cols-1 gap-x-8 sm:grid-cols-2">
@@ -582,7 +575,7 @@ const Registration = () => {
               </legend>
 
               <GroupTitle>
-                Participant 2
+                Participant <span className="font-number">2</span>
               </GroupTitle>
 
               <div className="grid grid-cols-1 gap-x-8 sm:grid-cols-2">
@@ -619,7 +612,7 @@ const Registration = () => {
 
               <span className="h-1.5 w-1.5 rounded-full bg-[#D4AF37] shadow-[0_0_8px_rgba(212,175,55,0.8)]" />
 
-              <h2 className="text-sm font-medium text-neutral-200">
+              <h2 className="font-mistical text-sm text-neutral-200">
                 Select track
               </h2>
 
@@ -679,7 +672,12 @@ const Registration = () => {
                       />
                     )}
 
-                    {track}
+                    <span>
+                      {track.slice(0, -1)}
+                      <span className="font-number">
+                        {track.slice(-1)}
+                      </span>
+                    </span>
                   </button>
                 );
               })}
@@ -713,7 +711,7 @@ const Registration = () => {
 
             <span className="flex items-baseline gap-1.5">
 
-              <span className="text-3xl font-semibold leading-none text-[#D4AF37]">
+              <span className="font-number text-3xl leading-none text-[#D4AF37]">
                 ₹{FEE}
               </span>
 
@@ -766,23 +764,23 @@ const Registration = () => {
 
               </div>
 
-              <p className="text-sm font-medium text-white">
+              <p className="font-mistical text-sm text-white">
                 Registration Successful
               </p>
 
-              <p className="mt-1 text-xs text-neutral-400">
+              <p className="font-paragraph mt-1 text-xs text-neutral-400">
                 Your payment has been verified.
               </p>
 
-              <p className="mt-3 text-xs text-neutral-500">
+              <p className="font-paragraph mt-3 text-xs text-neutral-500">
                 Registration ID
               </p>
 
-              <p className="mt-1 text-lg font-semibold text-[#D4AF37]">
+              <p className="font-number mt-1 text-lg text-[#D4AF37]">
                 {registrationId}
               </p>
 
-              <p className="mt-3 text-xs text-neutral-500">
+              <p className="font-paragraph mt-3 text-xs text-neutral-500">
                 Please save this Registration ID
                 for event check-in.
               </p>

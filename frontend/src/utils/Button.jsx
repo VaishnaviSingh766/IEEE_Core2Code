@@ -64,10 +64,6 @@ const Button = ({
 
           cursor: pointer;
 
-          font-family:
-            Inter,
-            system-ui,
-            sans-serif;
         }
 
         .gold-push-shadow {
@@ -157,17 +153,13 @@ const Button = ({
       >
         <span className="gold-push-shadow" />
 
-        <span className="gold-push-face">
+        <span className="gold-push-face font-paragraph">
           {children}
         </span>
       </button>
     </>
   );
 };
-
-
-
-
 
 
 export default Button;
