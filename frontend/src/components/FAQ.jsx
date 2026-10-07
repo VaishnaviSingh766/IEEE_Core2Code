@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import Header from "../utils/Header.jsx";
 
 /* ---------- Content: edit these ---------- */
 const FAQS = [
@@ -85,12 +86,9 @@ export default function Faqs({ items = FAQS }) {
       `}</style>
 
       <div className="max-w-3xl mx-auto">
-        <h2
-          id="faq-heading"
-          className="m-0 mb-10 text-[clamp(22px,5vw,36px)] leading-none tracking-[0.25em] font-extrabold uppercase text-[#D4AF37] text-center font-['Orbitron',sans-serif] [text-shadow:0_0_18px_rgba(212,175,55,0.45)]"
-        >
-          FAQ
-        </h2>
+       
+          <Header>FAQ</Header>
+        
 
         <div className="grid gap-3">
           {items.map((item, i) => {
@@ -136,8 +134,8 @@ export default function Faqs({ items = FAQS }) {
                     {/* Question text */}
                     <span
                       className={[
-                        "flex-1 transition-colors duration-300",
-                        open ? "text-[#D4AF37]" : "text-[#FFFFFF]",
+                        "flex-1 font-paragraph text-lg leading-relaxed text-center transition-colors duration-300",
+                        open ? "text-[#D4AF37]" : "text-white",
                       ].join(" ")}
                     >
                       {item.q}
