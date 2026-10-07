@@ -18,7 +18,7 @@ const Rules = () => {
   return (
     <section
       aria-labelledby="rules-heading"
-      className="min-h-screen bg-black px-5 py-16 text-white sm:px-8 sm:py-20 lg:px-10"
+      className="min-h-screen bg-black px-5 py-16 text-white sm:px-8 sm:py-6 lg:px-10"
     >
       <div className="mx-auto max-w-5xl">
         <Header as="h1" className="mb-12 sm:mb-16" id="rules-heading">
