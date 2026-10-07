@@ -7,7 +7,7 @@
     return (
         <Tag
             id={id}
-            className={`core-heading ${className}`}
+            className={`core-heading uppercase ${className}`}
         >
             {children}
         </Tag>
