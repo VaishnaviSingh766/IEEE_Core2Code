@@ -12,9 +12,9 @@ import Header from "../utils/Header";
 /* ───────────────────────── Large screens: podium ───────────────────────── */
 
 const podium = [
-  { id: "second", place: "2", title: "Second Prize", amount: "₹15,000", height: "md:h-[20rem]", order: "md:order-1" },
-  { id: "first", place: "1", title: "First Prize", amount: "₹30,000", height: "md:h-[26rem]", order: "md:order-2", champion: true },
-  { id: "young", icon: true, title: "Young Minds", amount: "₹7,500", height: "md:h-[16rem]", order: "md:order-3" },
+  { id: "second", place: "2", title: "Second Prize", amount: "₹2,500", height: "md:h-[20rem]", order: "md:order-1" },
+  { id: "first", place: "1", title: "First Prize", amount: "₹3,500", height: "md:h-[26rem]", order: "md:order-2", champion: true },
+  { id: "young", icon: true, title: "Young Minds", amount: "₹2,000", height: "md:h-[16rem]", order: "md:order-3" },
 ];
 
 const Crown = () => (
@@ -48,7 +48,7 @@ function PodiumPrizes() {
         style={{ background: "radial-gradient(circle, #D4AF37 0%, transparent 65%)" }}
       />
 
-      <div className="c2c-body relative mx-auto max-w-5xl">
+      <div className="c2c-body relative mx-auto mt-10 max-w-5xl sm:mt-12 md:mt-16">
         <header className="mx-auto max-w-2xl text-center">
           <Header>PRIZES</Header>
         </header>
