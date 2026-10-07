@@ -226,6 +226,7 @@ export default function Footer() {
 
           .ft__name {
             font-size: clamp(1.7rem, 8vw, 2.5rem);
+            text-align: center !important;
           }
 
           .ft__sub {
