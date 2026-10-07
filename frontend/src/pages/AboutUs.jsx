@@ -1,5 +1,6 @@
 import { useEffect, useRef } from 'react';
 import '../CompoFiles/AboutUs.css';
+import Header from '../utils/Header';
 
 import img4 from '../assets/about/img4.jpeg';
 import club from '../assets/about/club.jpg';
@@ -42,8 +43,10 @@ export default function AboutUs() {
     <main className="about-page" ref={root}>
       <div className="about-wrap">
         <header className="about-hero">
-          <h1>About Us</h1>
-          <p className="about-sub">Learn more about our mission, vision and team</p>
+          <Header as="h1">About Us</Header>
+          <p className="about-sub font-paragraph">
+            Learn more about our mission, vision and team
+          </p>
           <span className="bar" />
         </header>
 
@@ -55,7 +58,7 @@ export default function AboutUs() {
           <div className="panel glass reveal">
             <h2 className="font-mistical text-4xl">IEEE SIT SB</h2>
             <span className="bar" />
-            <p>
+            <p className="font-paragraph">
               IEEE SIT SB was established in 2002 under the inspiring leadership of Professor
               Basavarajaiah. The legacy continued under the vision of Dr. K V Suresh (HOD, ECE) and
               Dr. N R Sunitha (HOD, CSE). Our current branch counsellors, Dr. K Vishwanath (HOD,
@@ -63,7 +66,7 @@ export default function AboutUs() {
               laurels. This is the only student branch from Bangalore Section to be featured in the
               IEEE India Council Newsletter, 2019
             </p>
-            <p className="note">
+            <p className="note font-paragraph">
               IEEE SIT SB fosters a diverse team, offering opportunities for individuals to explore
               and enhance their skills. The WIE IEEE SIT SB wing supports innovation and technology
               by and for women through various events.
@@ -76,9 +79,9 @@ export default function AboutUs() {
             <img src={sitImg} alt="SIT" />
           </figure>
           <div className="panel glass reveal">
-            <h2>SIT</h2>
+            <h2 className="font-mistical">SIT</h2>
             <span className="bar" />
-            <p>
+            <p className="font-paragraph">
               Siddaganga Institute of Technology has a rich heritage of bestowing knowledge and
               passion to young minds. Its motto &apos;work is worship&apos; is ingrained into the
               minds of every student, thus creating an inclusive and empowering community for
@@ -86,7 +89,7 @@ export default function AboutUs() {
               professors and administrators played a significant role in building the confidence
               and perspective of every individual.
             </p>
-            <p>
+            <p className="font-paragraph">
               The institution stands as a beacon of academic excellence and innovation, providing
               state-of-the-art facilities and world-class education to its students. With a
               commitment to holistic development, SIT nurtures technical expertise alongside

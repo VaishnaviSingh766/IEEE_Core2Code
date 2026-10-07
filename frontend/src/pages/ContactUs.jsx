@@ -10,6 +10,7 @@ import {
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 import Button from "../utils/Button";
+import Header from "../utils/Header";
 
 /* =========================================================
    SIT MARKER ICON
@@ -144,10 +145,10 @@ ${message}`;
         "
       >
         <div className="flex flex-col items-center text-center">
-          <h1
+          <Header
+            as="h1"
             className="
               text-[48px]
-              font-extrabold
               leading-none
               tracking-[-2px]
               text-[#F5C542]
@@ -156,7 +157,7 @@ ${message}`;
             "
           >
             Contact Us
-          </h1>
+          </Header>
 
           <div
             className="
@@ -171,12 +172,11 @@ ${message}`;
 
         <h2
           className="
+            font-mistical
             mt-8
             text-center
             text-[36px]
-            font-extrabold
             leading-[1.08]
-            tracking-[-1.5px]
             sm:text-[46px]
             lg:text-[56px]
           "
@@ -189,12 +189,12 @@ ${message}`;
 
         <p
           className="
+            font-paragraph
             mx-auto
             mt-6
             max-w-[760px]
             text-center
             text-sm
-            font-medium
             leading-[1.7]
             text-[#BDBDBD]
             sm:text-base
@@ -263,6 +263,7 @@ ${message}`;
           <div className="relative flex w-full flex-col">
             <div
               className="
+                font-mistical
                 mb-4
                 text-left
                 text-[14px]
@@ -276,10 +277,10 @@ ${message}`;
 
             <h2
               className="
+                font-mistical
                 mb-8
                 text-left
                 text-[30px]
-                font-bold
                 leading-[1.25]
                 sm:text-[34px]
               "
@@ -456,6 +457,7 @@ ${message}`;
           <div className="relative flex w-full flex-col">
             <div
               className="
+                font-mistical
                 mb-2
                 text-[13px]
                 font-bold
@@ -467,9 +469,9 @@ ${message}`;
 
             <h2
               className="
+                font-mistical
                 mb-7
                 text-[28px]
-                font-bold
                 leading-[1.3]
                 sm:text-[30px]
               "
@@ -481,8 +483,8 @@ ${message}`;
               <div>
                 <div
                   className="
+                    font-paragraph
                     text-[14px]
-                    font-bold
                     leading-[1.45]
                     text-white
                     sm:text-[15px]
@@ -493,6 +495,7 @@ ${message}`;
 
                 <div
                   className="
+                    font-paragraph
                     mt-[4px]
                     text-[12px]
                     leading-[1.45]
@@ -507,8 +510,8 @@ ${message}`;
               <div>
                 <div
                   className="
+                    font-mistical
                     text-[15px]
-                    font-extrabold
                     leading-[1.45]
                     text-white
                     sm:text-[16px]
@@ -520,8 +523,8 @@ ${message}`;
                 <div className="mt-4">
                   <div
                     className="
+                      font-paragraph
                       text-[14px]
-                      font-bold
                       leading-[1.35]
                       text-white
                       sm:text-[15px]
@@ -532,9 +535,9 @@ ${message}`;
 
                   <div
                     className="
+                      font-mistical
                       mt-[2px]
                       text-[12px]
-                      font-medium
                       leading-[1.35]
                       text-[#F5C542]
                       sm:text-[13px]
@@ -545,9 +548,9 @@ ${message}`;
 
                   <div
                     className="
+                      font-number
                       mt-[2px]
                       text-[12px]
-                      font-normal
                       leading-[1.35]
                       text-[#999]
                       sm:text-[13px]
@@ -560,8 +563,8 @@ ${message}`;
                 <div className="mt-5">
                   <div
                     className="
+                      font-paragraph
                       text-[14px]
-                      font-bold
                       leading-[1.35]
                       text-white
                       sm:text-[15px]
@@ -572,9 +575,9 @@ ${message}`;
 
                   <div
                     className="
+                      font-mistical
                       mt-[2px]
                       text-[12px]
-                      font-medium
                       leading-[1.35]
                       text-[#F5C542]
                       sm:text-[13px]
@@ -585,9 +588,9 @@ ${message}`;
 
                   <div
                     className="
+                      font-number
                       mt-[2px]
                       text-[12px]
-                      font-normal
                       leading-[1.35]
                       text-[#999]
                       sm:text-[13px]
