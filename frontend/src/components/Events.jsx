@@ -147,7 +147,7 @@ const Events = () => {
         <div className="absolute bottom-[20%] left-[10%] h-1 w-1 rounded-full bg-[#D4AF37]" />
         <div className="absolute bottom-[12%] right-[8%] h-1 w-1 rounded-full bg-[#D4AF37]" />
 
-        <div className="relative mx-auto flex min-h-[calc(100vh-10rem)] max-w-[920px] flex-col items-center justify-center">
+        <div className="relative mx-auto flex max-w-[920px] flex-col items-center justify-center">
           <div className="mb-8 sm:mb-10">
             <Header>THE EVENT</Header>
           </div>
