@@ -105,7 +105,7 @@ const Events = () => {
 
   const openTracks = () => {
     setSelectedTrack("second");
-    setSelectedRound(2);
+    setSelectedRound(1);
     setShowTracks(true);
   };
 

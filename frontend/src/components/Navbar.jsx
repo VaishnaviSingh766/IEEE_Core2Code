@@ -124,7 +124,6 @@ export default function Header() {
   const headerRef = useRef(null);
   const brandingRef = useRef(null);
   const navRef = useRef(null);
-  const borderLineRef = useRef(null);
   const particlesRef = useRef(null);
   const goldDotsLayerRef = useRef(null);
   const glowRef = useRef(null);
@@ -189,15 +188,9 @@ export default function Header() {
             { opacity: 0, y: -15 },
             { opacity: 1, y: 0, duration: 0.8, stagger: 0.05 },
             "-=0.6"
-          )
-          .fromTo(borderLineRef.current,
-            { scaleX: 0 },
-            { scaleX: 1, duration: 1, transformOrigin: 'center' },
-            "-=0.6"
           );
       } else {
         gsap.set(['.branding-logo', '.logo-separator', ...navRef.current.children], { opacity: 1 });
-        gsap.set(borderLineRef.current, { scaleX: 1 });
       }
 
       // 2. Gold Ambient Glow
@@ -243,23 +236,11 @@ export default function Header() {
     return () => ctx.revert();
   }, [reducedMotion]);
 
-  // ═══════════ GOLD FLOWING LINE & FLOATING DOTS ANIMATION ═══════════
+  // ═══════════ FLOATING GOLD DOTS ANIMATION ═══════════
   useLayoutEffect(() => {
     if (reducedMotion) return;
 
     const ctx = gsap.context(() => {
-      // ── Flowing Gold Light at bottom border ──
-      const borderGlowEl = document.querySelector('.border-energy-glow-enhanced');
-      if (borderGlowEl) {
-        gsap.to(borderGlowEl, {
-          left: '110%',
-          duration: 7,
-          ease: 'none',
-          repeat: -1,
-          delay: 0.2,
-        });
-      }
-
       // ── Floating Gold Dots ──
       const dotsContainer = goldDotsLayerRef.current;
       if (dotsContainer) {
@@ -487,19 +468,23 @@ export default function Header() {
     <div ref={containerRef}>
       <header
         ref={headerRef}
-        className="fixed top-0 left-0 w-full z-50 transition-all duration-500 bg-[#030303] py-2 sm:py-3"
-        style={{ isolation: 'isolate' }}
+        className="fixed top-0 left-0 w-full z-50 border-0 transition-[padding,background-color] duration-500 bg-[#030303] py-2 sm:py-3"
+        style={{
+          isolation: 'isolate',
+          border: 'none',
+          boxShadow: 'none',
+          outline: 'none',
+        }}
       >
         {/* ═══ All nb- styles: expanding circle-to-pill effect ═══ */}
         <style>{`
           .header-scrolled {
             background-color: rgba(3, 3, 3, 1);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
             padding-top: 0.5rem !important;
             padding-bottom: 0.5rem !important;
-            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
-            border-bottom: 1px solid rgba(212, 175, 55, 0.15);
+            box-shadow: none !important;
+            border: none !important;
+            outline: none !important;
           }
           .no-scrollbar::-webkit-scrollbar { display: none; }
           .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
@@ -1091,17 +1076,13 @@ export default function Header() {
 
         </div>
 
-        {/* Bottom Energy Border with Flowing Gold Light */}
-        <div ref={borderLineRef} className="absolute bottom-0 left-0 w-full h-[3px] pointer-events-none" style={{ zIndex: 2 }}>
-          {/* Static subtle gold baseline */}
-          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-[rgba(212,175,55,0.12)] to-transparent" />
-          {/* Flowing gold light orb */}
+        {/* Subtle gold accent line */}
+        <div className="absolute bottom-0 left-0 w-full h-[3px] pointer-events-none" style={{ zIndex: 2 }}>
           <div
-            className="border-energy-glow-enhanced absolute top-1/2 -translate-y-1/2 -left-[60px] w-[60px] h-[3px] pointer-events-none"
+            className="absolute inset-x-0 top-1/2 h-px -translate-y-1/2 pointer-events-none"
             style={{
-              background: 'linear-gradient(90deg, transparent 0%, rgba(212,175,55,0.15) 15%, rgba(245,215,110,0.9) 40%, #FFD700 50%, rgba(245,215,110,0.9) 60%, rgba(212,175,55,0.15) 85%, transparent 100%)',
-              boxShadow: '0 0 12px 3px rgba(245,215,110,0.4), 0 0 30px 6px rgba(212,175,55,0.15)',
-              borderRadius: '50%',
+              background: 'rgba(240, 199, 94, 0.55)',
+              boxShadow: '0 0 4px 1px rgba(240, 199, 94, 0.14)',
             }}
           />
         </div>
