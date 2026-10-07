@@ -42,6 +42,7 @@
   font-display: block;
 }
 
+/* Subheading fornt */
 @font-face {
   font-family: "Mistical";
   src: url("./assets/fonts/Mistical Spring DEMO VERSION.otf") format("opentype");
