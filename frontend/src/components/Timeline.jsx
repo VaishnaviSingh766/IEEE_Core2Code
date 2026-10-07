@@ -223,7 +223,7 @@ export default function Core2CodeTimeline({
     <div
       ref={root}
       style={{ height: totalLen, overflowAnchor: "none" }}
-      className="relative bg-black font-paragraph text-[15px] text-white"
+      className="relative bg-black font-paragraph text-[15px] text-white mt-8 mb-8"
     >
       <style>{BASE_CSS}</style>
       <div

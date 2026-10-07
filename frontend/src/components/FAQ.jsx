@@ -76,7 +76,7 @@ export default function Faqs({ items = FAQS }) {
   return (
     <section
       id="faq"
-      className="bg-[#000000] text-[#FFFFFF] py-24 px-5"
+      className="bg-[#000000] text-[#FFFFFF] py-10 px-5"
       aria-labelledby="faq-heading"
     >
       {/* Single keyframe rule — cannot be expressed as a Tailwind utility */}
