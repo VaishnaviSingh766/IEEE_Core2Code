@@ -1,4 +1,3 @@
-import { useEffect, useRef } from 'react';
 import '../CompoFiles/AboutUs.css';
 import Header from '../utils/Header';
 
@@ -17,30 +16,8 @@ const stripImages = [
 ];
 
 export default function AboutUs() {
-  const root = useRef(null);
-
-  useEffect(() => {
-    const items = root.current.querySelectorAll('.reveal');
-    if (!('IntersectionObserver' in window)) {
-      items.forEach((el) => el.classList.add('in'));
-      return;
-    }
-    const io = new IntersectionObserver(
-      (entries) =>
-        entries.forEach((e) => {
-          if (e.isIntersecting) {
-            e.target.classList.add('in');
-            io.unobserve(e.target);
-          }
-        }),
-      { threshold: 0.15 }
-    );
-    items.forEach((el) => io.observe(el));
-    return () => io.disconnect();
-  }, []);
-
   return (
-    <main className="about-page" ref={root}>
+    <main className="about-page">
       <div className="about-wrap">
         <header className="about-hero">
           <Header as="h1">About Us</Header>
@@ -52,10 +29,10 @@ export default function AboutUs() {
 
 
         <section className="split">
-          <figure className="photo glass reveal">
+          <figure className="photo glass">
             <img src={ieeeImg} alt="IEEE SIT SB" />
           </figure>
-          <div className="panel glass reveal">
+          <div className="panel glass">
             <h2 className="font-mistical text-4xl">IEEE SIT SB</h2>
             <span className="bar" />
             <p className="font-paragraph">
@@ -75,10 +52,10 @@ export default function AboutUs() {
         </section>
 
         <section className="split reverse">
-          <figure className="photo glass reveal">
+          <figure className="photo glass">
             <img src={sitImg} alt="SIT" />
           </figure>
-          <div className="panel glass reveal">
+          <div className="panel glass">
             <h2 className="font-mistical">SIT</h2>
             <span className="bar" />
             <p className="font-paragraph">
