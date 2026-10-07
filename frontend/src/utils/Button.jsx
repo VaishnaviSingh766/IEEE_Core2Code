@@ -49,115 +49,18 @@ const Button = ({
   disabled = false,
 }) => {
   return (
-    <>
-      <style>{`
-        .core-gold-push {
-          position: relative;
+    <button
+      type="button"
+      disabled={disabled}
+      className={`group relative h-[60px] min-w-[190px] cursor-pointer border-0 bg-transparent p-0 disabled:cursor-not-allowed disabled:opacity-50 ${className}`}
+      onClick={onClick}
+    >
+      <span className="absolute inset-x-0 bottom-0 h-full rounded-[7px] bg-[#D4AF37] transition-transform duration-[250ms] ease-[cubic-bezier(.2,.8,.2,1)] group-hover:translate-y-px group-active:translate-y-[3px]" />
 
-          min-width: 190px;
-          height: 60px;
-
-          padding: 0;
-
-          border: none;
-          background: transparent;
-
-          cursor: pointer;
-
-        }
-
-        .gold-push-shadow {
-          position: absolute;
-
-          left: 0;
-          right: 0;
-          bottom: 0;
-
-          height: 100%;
-
-          border-radius: 7px;
-
-          background: #D4AF37;
-
-          transition:
-            transform 250ms cubic-bezier(.2,.8,.2,1);
-        }
-
-        .gold-push-face {
-          position: absolute;
-
-          left: 0;
-          right: 0;
-          top: 0;
-
-          height: calc(100% - 5px);
-
-          display: flex;
-          align-items: center;
-          justify-content: center;
-
-          border-radius: 7px;
-
-          background: #050505;
-
-          border: 1px solid #D4AF37;
-
-          color: #D4AF37;
-
-          font-size: 13px;
-          font-weight: 700;
-          letter-spacing: .16em;
-
-          text-transform: uppercase;
-
-          transition:
-            transform 250ms cubic-bezier(.2,.8,.2,1),
-            color 300ms ease,
-            background 300ms ease;
-        }
-
-        .core-gold-push:hover .gold-push-face {
-          transform:
-            translateY(-5px);
-
-          background: #0a0a0a;
-          color: #fff;
-        }
-
-        .core-gold-push:hover .gold-push-shadow {
-          transform:
-            translateY(1px);
-        }
-
-        .core-gold-push:active .gold-push-face {
-          transform:
-            translateY(3px);
-        }
-
-        .core-gold-push:active .gold-push-shadow {
-          transform:
-            translateY(3px);
-        }
-
-        .core-gold-push:disabled {
-          opacity: .5;
-          cursor: not-allowed;
-        }
-      `}</style>
-
-      <button
-        type="button"
-        disabled={disabled}
-        className={`core-gold-push ${className}`}
-        onClick={onClick}
-      >
-        <span className="gold-push-shadow" />
-
-        <span className="gold-push-face font-paragraph">
-          {children}
-        </span>
-      </button>
-    </>
+      <span className="absolute inset-x-0 top-0 flex h-[calc(100%-5px)] items-center justify-center rounded-[7px] border border-[#D4AF37] bg-[#050505] font-paragraph text-[13px] font-bold uppercase tracking-[.16em] text-[#D4AF37] [transition:transform_250ms_cubic-bezier(.2,.8,.2,1),color_300ms_ease,background_300ms_ease] group-hover:-translate-y-[5px] group-hover:bg-[#0a0a0a] group-hover:text-white group-active:translate-y-[3px]">
+        {children}
+      </span>
+    </button>
   );
 };
 

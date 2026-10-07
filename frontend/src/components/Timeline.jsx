@@ -73,7 +73,7 @@ function Tile({ value = " ", mode = "ch", locked = false, variant = "" }) {
         `${tileFont} text-[length:clamp(10px,3.3vw,15px)] leading-normal ` +
         (isSpace
           ? ""
-          : "bg-[#0d0d0d] after:absolute after:inset-x-0 after:top-1/2 after:h-px after:bg-black after:content-[''] ") +
+          : "bg-[#0d0d0d] ") +
         (variant === "status" ? "text-[#D4AF37] !text-[length:clamp(8px,2.4vw,11px)] " : "text-white ") +
         (n ? "animate-[c2c-fl_.12s_ease-in-out]" : "")
       }
@@ -143,14 +143,10 @@ function Row({ phase, on, open, statusWords }) {
       >
         {phase.items.map(([name, ok]) => (
           <li key={name} className="font-paragraph flex items-center gap-2 text-[length:clamp(13px,3.7vw,16px)] leading-tight sm:gap-2.5">
-            <i
-              className={
-                "grid h-3 w-3 flex-none place-items-center border-[1.5px] font-sans text-[9px] not-italic leading-none text-black sm:h-3.5 sm:w-3.5 sm:text-[10px] " +
-                (ok ? "border-[#D4AF37] bg-[#D4AF37]" : "border-[rgba(212,175,55,.3)]")
-              }
-            >
-              {ok ? "\u2713" : ""}
-            </i>
+            <span
+              aria-hidden="true"
+              className="h-2.5 w-4 flex-none bg-[#D4AF37] [clip-path:polygon(0_25%,65%_25%,65%_0,100%_50%,65%_100%,65%_75%,0_75%)]"
+            />
             {name}
           </li>
         ))}
