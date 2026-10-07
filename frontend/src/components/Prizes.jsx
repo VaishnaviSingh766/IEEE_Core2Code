@@ -31,7 +31,7 @@ const Bulb = () => (
 
 function PodiumPrizes() {
   return (
-    <section className="relative -mt-10 overflow-hidden bg-[#000000] px-5 pb-20 pt-0 text-[#FFFFFF] sm:px-8 md:-mt-16 md:pb-28 md:pt-0">
+    <section className="relative overflow-hidden bg-[#000000] px-5 pb-20 pt-0 text-[#FFFFFF] sm:px-8 md:-mt-2 md:pb-28 md:pt-0">
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,500;6..96,700;6..96,900&family=Manrope:wght@400;500;700&display=swap');
         .c2c-display { font-family: 'Bodoni Moda', 'Didot', Georgia, serif; }
