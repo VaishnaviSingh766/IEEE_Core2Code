@@ -7,6 +7,8 @@
   Edit the `podium` and `tickets` arrays to change names and amounts.
 */
 
+import Header from "../utils/Header";
+
 /* ───────────────────────── Large screens: podium ───────────────────────── */
 
 const podium = [
@@ -48,7 +50,7 @@ function PodiumPrizes() {
 
       <div className="c2c-body relative mx-auto max-w-5xl">
         <header className="mx-auto max-w-2xl text-center">
-          <h2 className="c2c-display text-4xl font-bold leading-tight sm:text-6xl">What the best code earns</h2>
+          <Header>PRIZES</Header>
         </header>
 
         <div className="mt-8 grid grid-cols-1 items-end gap-4 md:mt-10 md:grid-cols-3 md:gap-5">
@@ -71,7 +73,7 @@ function PodiumPrizes() {
                 {p.icon ? (
                   <span className="text-[#D4AF37]"><Bulb /></span>
                 ) : (
-                  <span className={`c2c-display text-7xl font-black leading-none md:text-8xl ${p.champion ? "text-[#000000]" : "text-[#D4AF37]"}`}>
+                  <span className={`font-number text-7xl font-black leading-none md:text-8xl ${p.champion ? "text-[#000000]" : "text-[#D4AF37]"}`}>
                     {p.place}
                   </span>
                 )}
@@ -79,7 +81,7 @@ function PodiumPrizes() {
               </div>
 
               <div>
-                <p className={`text-sm font-medium ${p.champion ? "text-[#000000]/70" : "text-[#FFFFFF]/60"}`}>{p.title}</p>
+                <p className={`font-mistical text-sm font-medium ${p.champion ? "text-[#000000]/70" : "text-[#FFFFFF]/60"}`}>{p.title}</p>
                 <p
                   className={`font-number mt-1 text-4xl md:text-5xl ${p.champion ? "text-[#000000]" : "text-[#FFFFFF]"
                     }`}
@@ -155,7 +157,7 @@ function TicketPrizes() {
             <span className="h-2.5 w-2.5 rotate-45 bg-[#D4AF37]" />
             <span className="h-px w-16 bg-gradient-to-l from-transparent to-[#D4AF37]" />
           </div>
-          <h2 className="c2c-serif c2c-gold text-6xl font-bold italic leading-none sm:text-8xl">Prizes</h2>
+          <Header>Prizes</Header>
         </header>
 
         <div className="mt-8 space-y-6">
@@ -173,7 +175,7 @@ function TicketPrizes() {
                   <svg viewBox="0 0 24 24" className={p.hero ? "h-14 w-14 sm:h-20 sm:w-20" : "h-12 w-12 sm:h-16 sm:w-16"} fill="none" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                     <path d={ICONS[p.icon]} />
                   </svg>
-                  <span className="c2c-mono text-sm font-bold sm:text-base">{p.tag}</span>
+                  <span className="font-paragraph text-sm font-bold sm:text-base">{p.tag}</span>
 
                   {/* perforation */}
                   <span aria-hidden="true" className={`absolute inset-y-4 right-0 border-r-2 border-dashed ${p.hero ? "border-[#D4AF37]/60" : "border-[#000000]/40"}`} />
@@ -187,7 +189,7 @@ function TicketPrizes() {
                   className={`relative flex flex-1 flex-col justify-center px-5 sm:px-10 ${p.hero ? "bg-[#D4AF37] py-9 text-[#000000] sm:py-12" : "bg-[#000000] py-7 text-[#FFFFFF]"
                     }`}
                 >
-                  <h3 className={`c2c-serif font-bold ${p.hero ? "text-2xl sm:text-4xl" : "text-xl sm:text-3xl"}`}>{p.name}</h3>
+                  <h3 className={`font-mistical font-bold ${p.hero ? "text-2xl sm:text-4xl" : "text-xl sm:text-3xl"}`}>{p.name}</h3>
                   <p
                     className={`font-number mt-1 leading-tight ${p.hero
                         ? "text-5xl text-[#000000] sm:text-7xl"
@@ -196,7 +198,7 @@ function TicketPrizes() {
                   >
                     {p.amount}
                   </p>
-                  <span className={`c2c-mono mt-4 text-xs ${p.hero ? "text-[#000000]/70" : "text-[#D4AF37]/80"}`}>C2C · {p.no}</span>
+                  <span className={`font-paragraph mt-4 text-xs ${p.hero ? "text-[#000000]/70" : "text-[#D4AF37]/80"}`}>C2C · <span className="font-number">{p.no}</span></span>
                 </div>
               </div>
             </article>

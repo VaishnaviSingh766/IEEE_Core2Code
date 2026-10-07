@@ -56,7 +56,7 @@ const NavPill = ({ item, onClick, className = '' }) => (
       {({ isActive }) => (
         <>
           <span className="nb-icon" style={{ '--icon': `url(${item.icon})` }} />
-          <span className="nb-title">{item.label}</span>
+          <span className="nb-title font-paragraph">{item.label}</span>
           {isActive && <span className="nb-active-indicator" />}
         </>
       )}
@@ -83,7 +83,7 @@ const MobileBlobItem = ({ item, onClick, isRegister = false, className = '' }) =
         </span>
       </span>
       {item.icon && <span className="nb-icon" style={{ '--icon': `url(${item.icon})` }} />}
-      <span className="nb-m-title">{item.label}</span>
+      <span className="nb-m-title font-paragraph">{item.label}</span>
     </>
   );
 
@@ -1068,7 +1068,7 @@ export default function Header() {
               })}
               {/* Register Now Button (Desktop) */}
               <li className="nb-item ml-2">
-                <Link to={REGISTER_PATH} className="nb-register" onClick={handleNavClick}> {/* changed */}
+                <Link to={REGISTER_PATH} className="nb-register font-paragraph" onClick={handleNavClick}> {/* changed */}
                   Register Now {/* changed */}
                 </Link> {/* changed */}
               </li>

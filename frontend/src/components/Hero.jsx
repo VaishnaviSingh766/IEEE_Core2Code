@@ -2075,7 +2075,7 @@ export default function Hero() {
 
               <span className="w-1.5 h-1.5 rounded-full bg-[#D4AF37] shadow-[0_0_6px_#D4AF37]" />
 
-              <span>
+              <span className="font-paragraph">
                 IEEE COMPUTER SOCIETY
               </span>
 
@@ -2123,7 +2123,7 @@ export default function Hero() {
                   //
                 </span>
 
-                <p className="text-lg sm:text-xl md:text-2xl font-light text-[#E5E5E5] tracking-wide font-heading">
+                <p className="text-lg sm:text-xl md:text-2xl font-light text-[#E5E5E5] tracking-wide font-mistical">
                   From Core to Code.
                 </p>
 
@@ -2131,7 +2131,7 @@ export default function Hero() {
 
               <div className="hero-description-wrap">
 
-                <p className="text-[#A3A3A3] text-sm sm:text-base leading-relaxed font-normal font-body">
+                <p className="text-[#A3A3A3] text-sm sm:text-base leading-relaxed font-normal font-paragraph">
                   Where ideas, logic and technology come together to build what comes next.
                 </p>
 
@@ -2155,11 +2155,12 @@ export default function Hero() {
                     document.querySelector('section:nth-of-type(2)')
                   target?.scrollIntoView({ behavior: 'smooth' })
                 }}
+                className="font-paragraph"
               >
                 EXPLORE EVENT
               </Button>
 
-              <Button>
+              <Button className="font-paragraph">
                 REGISTER NOW
               </Button>
 
