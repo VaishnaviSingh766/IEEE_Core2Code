@@ -53,7 +53,7 @@ export default function AboutUs() {
             <img src={ieeeImg} alt="IEEE SIT SB" />
           </figure>
           <div className="panel glass reveal">
-            <h2>IEEE SIT SB</h2>
+            <h2 className="font-mistical text-4xl">IEEE SIT SB</h2>
             <span className="bar" />
             <p>
               IEEE SIT SB was established in 2002 under the inspiring leadership of Professor
