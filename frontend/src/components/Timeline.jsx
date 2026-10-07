@@ -233,6 +233,7 @@ export default function Core2CodeTimeline({
         <Header as="h2" className="m-0 pl-[.3em] text-[length:clamp(16px,5vw,28px)] uppercase tracking-[.3em] [text-shadow:0_0_18px_rgba(212,175,55,.45)]">
           {heading}
         </Header>
+        <div className="mt-6"></div>
 
         <div className="grid grid-cols-4 gap-1.5 sm:gap-2" role="img" aria-label="Core to Code">
           {word.map((c, i) => <Tile key={i} value={c} mode="big" locked={i === 2} />)}
