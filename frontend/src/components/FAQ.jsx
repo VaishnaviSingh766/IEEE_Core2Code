@@ -134,7 +134,7 @@ export default function Faqs({ items = FAQS }) {
                     {/* Question text */}
                     <span
                       className={[
-                        "flex-1 font-paragraph text-lg leading-relaxed text-center transition-colors duration-300",
+                        "flex-1 font-paragraph text-lg leading-relaxed text-left transition-colors duration-300",
                         open ? "text-[#D4AF37]" : "text-white",
                       ].join(" ")}
                     >
