@@ -42,7 +42,7 @@ const Events = () => {
           "Turn your ideas into a practical solution for a real-world problem.",
         points: [
           "Understand the given theme",
-          "Find a meaningful problem",
+          "Find a problem",
           "Build your solution",
         ],
         tags: ["Ideas", "Problem", "Build", "Solution"],
@@ -67,8 +67,8 @@ const Events = () => {
         title: "DSA Arena",
         description: "Hard problems, tight time limits.",
         points: [
-          "Graph and tree problems",
-          "Dynamic programming",
+          "Binary Search",
+          "Recursion",
           "Optimisation under constraints",
         ],
         tags: ["Graphs", "Trees", "DP", "Greedy"],
@@ -373,9 +373,10 @@ const Events = () => {
                           key={point}
                           className="flex items-start gap-2.5 sm:gap-3"
                         >
-                          <span className="mt-0.5 sm:mt-1 flex h-4 w-4 shrink-0 items-center justify-center rounded-[4px] bg-[#D4AF37] text-[10px] font-black text-[#000000]">
-                            ✓
-                          </span>
+                          <span
+                            aria-hidden="true"
+                            className="mt-1 md:mt-2 h-2.5 w-4 shrink-0 bg-[#D4AF37] [clip-path:polygon(0_25%,65%_25%,65%_0,100%_50%,65%_100%,65%_75%,0_75%)]"
+                          />
 
                           <span className="font-paragraph text-xs sm:text-sm leading-5 sm:leading-6 text-[#FFFFFF]/85">
                             {point}
