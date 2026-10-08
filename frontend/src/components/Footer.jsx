@@ -79,21 +79,15 @@ export default function Footer() {
           position: absolute;
           top: -1px;
           left: 0;
-          width: 18%;
+          width: 100%;
           height: 3px;
           background: linear-gradient(
             90deg,
-            transparent,
-            var(--gold),
-            transparent
+            transparent 0%,
+            var(--gold) 18%,
+            var(--gold) 82%,
+            transparent 100%
           );
-          animation: ft-scan 4.5s ease-in-out infinite alternate;
-        }
-
-        @keyframes ft-scan {
-          to {
-            left: 82%;
-          }
         }
 
         .ft__inner {
