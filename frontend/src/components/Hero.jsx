@@ -713,8 +713,8 @@ export default function Hero() {
             trigger: heroRef.current,
             start: 'top top',
             end: isDesktop
-              ? '+=225%'
-              : '+=145%',
+              ? '+=150%'
+              : '+=120%',
             pin: heroInnerRef.current,
             pinSpacing: true,
             scrub: 0.9,
