@@ -96,11 +96,11 @@
   .split .photo, .split.reverse .photo { order: -1; }
 
   .strip { overflow: hidden; padding: 14px 0; }
-  .strip-track { display: flex; }
-  .strip-set { justify-content: flex-start; gap: 2.5vw; padding-right: 2.5vw; }
-  .strip-set + .strip-set { display: none; }
+  .strip-track { display: flex; width: max-content; gap: 16px; animation: aboutMarquee 24s linear infinite; }
+  .strip-set + .strip-set { display: flex; }
   .strip .photo { flex: none; height: 42vw; padding: 4px; border-radius: 14px; }
   .strip .photo:nth-child(odd) { aspect-ratio: 3 / 4; }
   .strip .photo:nth-child(even) { aspect-ratio: 4 / 3; }
   .strip .photo img { border-radius: 10px; }
 }
+@keyframes aboutMarquee { to { transform: translateX(-50%); } }
