@@ -117,7 +117,7 @@ const REGISTER_PATH = "/registrations"; // must match the Registration route in 
 
 // Pages whose content starts at the very top and needs space below the fixed header. // added
 // The Home hero is designed to sit under the header, so it is NOT listed. // added
-const SPACER_ROUTES = [REGISTER_PATH]; // added
+const SPACER_ROUTES = [REGISTER_PATH, '/about']; // added
 
 export default function Header() {
   const containerRef = useRef(null);
