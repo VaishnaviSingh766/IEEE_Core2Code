@@ -18,7 +18,7 @@
 .about-wrap {
   max-width: 1180px;
   margin: 0 auto;
-  padding: clamp(20px, 5vw, 72px) ;
+  padding: 0 clamp(20px, 5vw, 72px) clamp(20px, 5vw, 72px);
 }
 
 /* Glass cards */
@@ -33,7 +33,6 @@
 
 /* Heading */
 .about-hero {
-  margin-top: 0;
   text-align: center;
 }
 .about-hero h1 {
@@ -44,7 +43,7 @@
   letter-spacing: -0.02em;
   margin: 0;
   padding-block: 0.08em;
-  background: #D4AF37;
+  background: linear-gradient(180deg, #FFB300 0%, #f5a700 55%, #FFE9A8 100%);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -74,7 +73,7 @@
   grid-template-columns: 1fr 1fr;
   align-items: center;
   gap: clamp(24px, 4vw, 48px);
-  margin-top: clamp(64px, 10vw, 120px);
+  margin-top: 50px;
 }
 .split .photo { aspect-ratio: 4 / 3; }
 .split.reverse .photo { order: 2; }

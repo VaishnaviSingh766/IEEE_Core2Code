@@ -20,7 +20,8 @@ export default function AboutUs() {
     <main className="about-page">
       <div className="about-wrap">
         <header className="about-hero">
-          <Header as="h1">About Us</Header>
+          <div className='mt-2'></div>
+          <Header>About Us</Header>
           <p className="about-sub font-paragraph">
             Learn more about our mission, vision and team
           </p>
