@@ -2,6 +2,7 @@
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import Button from '../utils/Button'
+import { useNavigate } from 'react-router-dom'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -250,6 +251,7 @@ function getFragTransform(key, tier, vbHeight) {
 }
 
 export default function Hero() {
+  const navigate = useNavigate()
   const heroRef = useRef(null)
   const heroInnerRef = useRef(null)
 
@@ -2160,7 +2162,10 @@ export default function Hero() {
                 EXPLORE EVENT
               </Button>
 
-              <Button className="font-paragraph">
+              <Button
+                className="font-paragraph"
+                onClick={() => navigate("/registrations")}
+              >
                 REGISTER NOW
               </Button>
 

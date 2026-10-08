@@ -106,9 +106,9 @@ const ICONS = {
 };
 
 const tickets = [
-  { id: "first", icon: "trophy", name: "First Prize", amount: "₹30,000", tag: "1st", no: "0001", hero: true },
-  { id: "second", icon: "medal", name: "Second Prize", amount: "₹15,000", tag: "2nd", no: "0002" },
-  { id: "young", icon: "bulb", name: "Young Minds", amount: "₹7,500", tag: "Special", no: "0003" },
+  { id: "first", icon: "trophy", name: "First Prize", amount: "₹3,500", tag: "1st", no: "0001", hero: true },
+  { id: "second", icon: "medal", name: "Second Prize", amount: "₹2,500", tag: "2nd", no: "0002" },
+  { id: "young", icon: "bulb", name: "Young Minds", amount: "₹2,000", tag: "Special", no: "0003" },
 ];
 
 // [top %, left %, size px]
