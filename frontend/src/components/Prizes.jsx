@@ -12,14 +12,20 @@ import Header from "../utils/Header";
 /* ───────────────────────── Large screens: podium ───────────────────────── */
 
 const podium = [
-  { id: "second", place: "2", title: "Second Prize", amount: "₹2,500", height: "md:h-[20rem]", order: "md:order-1" },
-  { id: "first", place: "1", title: "First Prize", amount: "₹3,500", height: "md:h-[26rem]", order: "md:order-2", champion: true },
+  { id: "second", place: "2", title: "Second Prize", amount: "₹2,500", height: "md:h-[20rem]", order: "md:order-1", badge: "medal" },
+  { id: "first", place: "1", title: "First Prize", amount: "₹3,500", height: "md:h-[26rem]", order: "md:order-2", champion: true, badge: "crown" },
   { id: "young", icon: true, title: "Young Minds", amount: "₹2,000", height: "md:h-[16rem]", order: "md:order-3" },
 ];
 
 const Crown = () => (
   <svg viewBox="0 0 48 32" className="h-8 w-12" fill="currentColor" aria-hidden="true">
     <path d="M4 28 0 6l12 10L24 0l12 16L48 6l-4 22z" />
+  </svg>
+);
+
+const Medal = () => (
+  <svg viewBox="0 0 24 24" className="h-12 w-12 md:h-14 md:w-14" fill="none" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+    <path d="M8 2l4 7 4-7M12 9a6 6 0 1 0 0 12 6 6 0 0 0 0-12zM12 13l1 2 2 .3-1.5 1.4.4 2.1-1.9-1-1.9 1 .4-2.1L9 15.3l2-.3z" />
   </svg>
 );
 
@@ -77,7 +83,11 @@ function PodiumPrizes() {
                     {p.place}
                   </span>
                 )}
-                {p.champion && <Crown />}
+
+                {p.badge === "crown" && <Crown />}
+                {p.badge === "medal" && (
+                  <span className="text-[#D4AF37]"><Medal /></span>
+                )}
               </div>
 
               <div>
@@ -118,24 +128,29 @@ function TicketPrizes() {
   return (
     <section className="relative mt-8 overflow-hidden bg-[#000000] px-4 pb-20 pt-0 text-[#FFFFFF] sm:px-8">
       <style>{`
-  @import url('https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,500;6..96,700;6..96,900&family=Manrope:wght@400;500;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,500;6..96,700;6..96,900&family=Manrope:wght@400;500;700&display=swap');
 
-  .c2c-display {
-    font-family: 'Bodoni Moda', 'Didot', Georgia, serif;
-  }
+        .c2c-display {
+          font-family: 'Bodoni Moda', 'Didot', Georgia, serif;
+        }
 
-  .c2c-body {
-    font-family: 'Manrope', system-ui, sans-serif;
-  }
+        .c2c-body {
+          font-family: 'Manrope', system-ui, sans-serif;
+        }
 
-  .prize-number {
-    font-family: "Dekatron", sans-serif !important;
-    font-weight: 600 !important;
-    font-style: normal !important;
-  }
+        .prize-number {
+          font-family: "Dekatron", sans-serif !important;
+          font-weight: 600 !important;
+          font-style: normal !important;
+        }
 
-  ...
-`}</style>
+        @keyframes c2c-twinkle {
+          0%, 100% { opacity: 0.2; transform: scale(0.8); }
+          50% { opacity: 0.9; transform: scale(1.1); }
+        }
+        .c2c-twinkle { animation: c2c-twinkle 3.2s ease-in-out infinite; }
+        @media (prefers-reduced-motion: reduce) { .c2c-twinkle { animation: none; opacity: 0.5; } }
+      `}</style>
 
       <div
         aria-hidden="true"
@@ -187,8 +202,8 @@ function TicketPrizes() {
                   <h3 className={`font-mistical font-bold ${p.hero ? "text-2xl sm:text-4xl" : "text-xl sm:text-3xl"}`}>{p.name}</h3>
                   <p
                     className={`font-number mt-1 leading-tight ${p.hero
-                        ? "text-5xl text-[#000000] sm:text-7xl"
-                        : "text-[#D4AF37] text-4xl sm:text-6xl"
+                      ? "text-5xl text-[#000000] sm:text-7xl"
+                      : "text-[#D4AF37] text-4xl sm:text-6xl"
                       }`}
                   >
                     {p.amount}
