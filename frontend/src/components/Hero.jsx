@@ -2113,20 +2113,12 @@ export default function Hero() {
             <div className="space-y-3 pt-3 sm:pt-4 max-w-lg">
 
               <div
-                className={`hero-tagline-wrap flex items-center gap-2.5 ${tier === 'desktop'
-                  ? ''
-                  : 'justify-center'
+                className={`hero-tagline-wrap ${tier === 'desktop' ? '' : 'text-center'
                   }`}
               >
-
-                <span className="text-base text-[#D4AF37] font-semibold font-heading">
-
-                </span>
-
-                <p className="text-lg sm:text-xl md:text-2xl font-light text-[#E5E5E5] tracking-wide font-mistical">
+                <p className="m-0 text-lg sm:text-xl md:text-2xl font-light text-[#E5E5E5] tracking-wide font-mistical">
                   From Core to Code.
                 </p>
-
               </div>
 
               <div className="hero-description-wrap">
