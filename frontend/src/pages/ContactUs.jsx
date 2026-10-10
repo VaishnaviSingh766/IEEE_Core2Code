@@ -1,9 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   MapContainer,
   TileLayer,
   Marker,
-  Popup,
   ZoomControl,
   useMap,
 } from "react-leaflet";
@@ -25,25 +24,27 @@ const sitIcon = new L.DivIcon({
   `,
   iconSize: [42, 42],
   iconAnchor: [21, 21],
-  popupAnchor: [0, -24],
 });
 
 /* =========================================================
-   SIT LOCATION
+   SIDDAGANGA INSTITUTE OF TECHNOLOGY LOCATION
 ========================================================= */
 
-const SIT_POSITION = [13.3379, 77.1013];
+const SIT_POSITION = [13.32692, 77.12606];
 
 /* =========================================================
    MAP CONTROLLER
 ========================================================= */
 
-function MapController() {
+function MapController({ onExplore }) {
   const map = useMap();
 
   const goToSIT = () => {
-    map.flyTo(SIT_POSITION, 16, {
-      duration: 1.8,
+    onExplore();
+
+    map.flyTo(SIT_POSITION, 17, {
+      duration: 2.2,
+      easeLinearity: 0.25,
     });
   };
 
@@ -87,6 +88,8 @@ function MapController() {
 ========================================================= */
 
 export default function ContactUs() {
+  const [mapExplored, setMapExplored] = useState(false);
+
   /* =======================================================
      SEND MESSAGE
   ======================================================= */
@@ -102,7 +105,6 @@ export default function ContactUs() {
     const message = form.elements.message.value.trim();
 
     const fixedToEmail = "ieee@sit.ac.in";
-
     const subject = `${name} - ${phone}`;
 
     const body = `Name: ${name}
@@ -292,9 +294,7 @@ ${message}`;
               to Hear from You
             </h2>
 
-            {/* =================================================
-                FORM
-            ================================================= */}
+            {/* FORM */}
 
             <form
               onSubmit={handleSubmit}
@@ -306,23 +306,12 @@ ${message}`;
                 placeholder="Your Name"
                 required
                 className="
-                  mb-4
-                  h-[58px]
-                  w-full
-                  rounded-[10px]
-                  border
-                  border-[#555]
-                  bg-[#0B0B0B]
-                  px-5
-                  text-[15px]
-                  text-white
-                  outline-none
-                  placeholder:text-[#AAA]
-                  transition-all
-                  duration-200
+                  mb-4 h-[58px] w-full rounded-[10px]
+                  border border-[#555] bg-[#0B0B0B]
+                  px-5 text-[15px] text-white outline-none
+                  placeholder:text-[#AAA] transition-all duration-200
                   focus:border-[#F5C542]
-                  focus:ring-1
-                  focus:ring-[#F5C542]/20
+                  focus:ring-1 focus:ring-[#F5C542]/20
                 "
               />
 
@@ -332,23 +321,12 @@ ${message}`;
                 placeholder="Your Email"
                 required
                 className="
-                  mb-4
-                  h-[58px]
-                  w-full
-                  rounded-[10px]
-                  border
-                  border-[#555]
-                  bg-[#0B0B0B]
-                  px-5
-                  text-[15px]
-                  text-white
-                  outline-none
-                  placeholder:text-[#AAA]
-                  transition-all
-                  duration-200
+                  mb-4 h-[58px] w-full rounded-[10px]
+                  border border-[#555] bg-[#0B0B0B]
+                  px-5 text-[15px] text-white outline-none
+                  placeholder:text-[#AAA] transition-all duration-200
                   focus:border-[#F5C542]
-                  focus:ring-1
-                  focus:ring-[#F5C542]/20
+                  focus:ring-1 focus:ring-[#F5C542]/20
                 "
               />
 
@@ -358,23 +336,12 @@ ${message}`;
                 placeholder="Your Phone Number"
                 required
                 className="
-                  mb-4
-                  h-[58px]
-                  w-full
-                  rounded-[10px]
-                  border
-                  border-[#555]
-                  bg-[#0B0B0B]
-                  px-5
-                  text-[15px]
-                  text-white
-                  outline-none
-                  placeholder:text-[#AAA]
-                  transition-all
-                  duration-200
+                  mb-4 h-[58px] w-full rounded-[10px]
+                  border border-[#555] bg-[#0B0B0B]
+                  px-5 text-[15px] text-white outline-none
+                  placeholder:text-[#AAA] transition-all duration-200
                   focus:border-[#F5C542]
-                  focus:ring-1
-                  focus:ring-[#F5C542]/20
+                  focus:ring-1 focus:ring-[#F5C542]/20
                 "
               />
 
@@ -384,33 +351,15 @@ ${message}`;
                 rows="7"
                 required
                 className="
-                  mb-5
-                  min-h-[205px]
-                  w-full
-                  flex-1
-                  resize-y
-                  rounded-[10px]
-                  border
-                  border-[#555]
-                  bg-[#0B0B0B]
-                  px-5
-                  py-4
-                  text-[15px]
-                  text-white
-                  outline-none
-                  placeholder:text-[#AAA]
-                  transition-all
-                  duration-200
+                  mb-5 min-h-[205px] w-full flex-1 resize-y
+                  rounded-[10px] border border-[#555]
+                  bg-[#0B0B0B] px-5 py-4 text-[15px]
+                  text-white outline-none placeholder:text-[#AAA]
+                  transition-all duration-200
                   focus:border-[#F5C542]
-                  focus:ring-1
-                  focus:ring-[#F5C542]/20
+                  focus:ring-1 focus:ring-[#F5C542]/20
                 "
               />
-
-              {/* =================================================
-                  SEND MESSAGE BUTTON
-                  USING CORE2CODE BUTTON COMPONENT
-              ================================================= */}
 
               <Button
                 className="w-full"
@@ -608,17 +557,9 @@ ${message}`;
 
             <div
               className="
-                relative
-                isolate
-                mt-auto
-                h-[390px]
-                w-full
-                transform-gpu
-                overflow-hidden
-                rounded-[16px]
-                border-2
-                border-[#F5C542]
-                bg-[#02070c]
+                relative isolate mt-auto h-[390px] w-full
+                transform-gpu overflow-hidden rounded-[16px]
+                border-2 border-[#F5C542] bg-[#02070c]
                 shadow-[0_0_35px_rgba(245,197,66,0.12)]
                 sm:h-[430px]
               "
@@ -629,12 +570,7 @@ ${message}`;
                 scrollWheelZoom={true}
                 dragging={true}
                 zoomControl={false}
-                className="
-                  relative
-                  z-0
-                  h-full
-                  w-full
-                "
+                className="relative z-0 h-full w-full"
               >
                 <TileLayer
                   url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -644,110 +580,103 @@ ${message}`;
                 <Marker
                   position={SIT_POSITION}
                   icon={sitIcon}
-                >
-                  <Popup>
-                    <div className="min-w-[190px] text-center font-sans">
-                      <strong className="text-[14px] text-[#111]">
-                        Siddaganga Institute of Technology
-                      </strong>
-
-                      <br />
-
-                      <span className="text-[12px] text-[#555]">
-                        Tumakuru, Karnataka
-                      </span>
-                    </div>
-                  </Popup>
-                </Marker>
+                />
 
                 <ZoomControl position="topright" />
 
-                <MapController />
+                <MapController
+                  onExplore={() => setMapExplored(true)}
+                />
               </MapContainer>
+
+              {/* LOCATION LABEL ONLY — NO YELLOW POPUP */}
 
               <div
                 className="
                   pointer-events-none
-                  absolute
-                  left-4
-                  top-4
-                  z-[1000]
-                  rounded-xl
-                  border
-                  border-[#F5C542]/70
-                  bg-[#05090d]/90
-                  px-4
-                  py-2
-                  shadow-lg
-                  backdrop-blur-md
+                  absolute left-4 top-4 z-[1000]
+                  max-w-[calc(100%-80px)]
+                  rounded-xl border border-[#F5C542]/70
+                  bg-[#05090d]/90 px-4 py-2
+                  shadow-lg backdrop-blur-md
                 "
               >
                 <div
                   className="
-                    text-[10px]
-                    font-bold
-                    uppercase
-                    tracking-[2px]
-                    text-[#F5C542]
+                    text-[10px] font-bold uppercase
+                    tracking-[2px] text-[#F5C542]
                   "
                 >
                   Location
                 </div>
 
                 <div className="mt-1 text-sm font-bold text-white">
-                  India
+                  {mapExplored
+                    ? "Siddaganga Institute of Technology"
+                    : "India"}
                 </div>
+
+                {mapExplored && (
+                  <div className="mt-1 text-[11px] text-[#D0D0D0]">
+                    Tumakuru, Karnataka
+                  </div>
+                )}
               </div>
+
+              {/* MAP STYLING */}
 
               <style>{`
                 .leaflet-container {
-                  background:#02070c !important;
-                  font-family:Arial,Helvetica,sans-serif;
+                  background: #02070c !important;
+                  font-family: Arial, Helvetica, sans-serif;
+                }
+
+                .sit-custom-marker {
+                  background: transparent;
+                  border: none;
+                }
+
+                .sit-marker-circle {
+                  display: flex;
+                  width: 42px;
+                  height: 42px;
+                  align-items: center;
+                  justify-content: center;
+                  border: 3px solid #ffffff;
+                  border-radius: 50%;
+                  background: #F5C542;
+                  color: #050505;
+                  font-size: 22px;
+                  box-shadow:
+                    0 0 0 5px rgba(245, 197, 66, 0.25),
+                    0 0 22px rgba(245, 197, 66, 0.65);
                 }
 
                 .leaflet-control-zoom {
-                  border:1px solid rgba(245,197,66,0.7) !important;
-                  border-radius:12px !important;
-                  overflow:hidden;
-                  box-shadow:0 8px 25px rgba(0,0,0,0.5) !important;
+                  border: 1px solid rgba(245,197,66,0.7) !important;
+                  border-radius: 12px !important;
+                  overflow: hidden;
+                  box-shadow: 0 8px 25px rgba(0,0,0,0.5) !important;
                 }
 
                 .leaflet-control-zoom a {
-                  width:46px !important;
-                  height:46px !important;
-                  line-height:46px !important;
-                  background:rgba(5,9,13,0.94) !important;
-                  color:#F5C542 !important;
-                  border-bottom:1px solid rgba(245,197,66,0.35) !important;
-                  font-size:24px !important;
-                  transition:all 0.2s ease;
+                  width: 46px !important;
+                  height: 46px !important;
+                  line-height: 46px !important;
+                  background: rgba(5,9,13,0.94) !important;
+                  color: #F5C542 !important;
+                  border-bottom: 1px solid rgba(245,197,66,0.35) !important;
+                  font-size: 24px !important;
+                  transition: all 0.2s ease;
                 }
 
                 .leaflet-control-zoom a:last-child {
-                  border-bottom:none !important;
+                  border-bottom: none !important;
                 }
 
                 .leaflet-control-zoom a:hover {
-                  background:#F5C542 !important;
-                  color:#000 !important;
-                }
-
-                .leaflet-popup-content-wrapper,
-                .leaflet-popup-tip {
-                  background:#F5C542 !important;
-                  color:#111 !important;
-                }
-
-                .leaflet-popup-content {
-                  margin:12px 14px !important;
-                }
-
-                .leaflet-popup-close-button {
-                  color:#111 !important;
-                }
-
-                .leaflet-popup-close-button:hover {
-                  color:#000 !important;
+                  background: #F5C542 !important;
+                  color: #000 !important;
                 }
               `}</style>
             </div>
