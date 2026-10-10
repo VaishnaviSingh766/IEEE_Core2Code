@@ -2075,8 +2075,6 @@ export default function Hero() {
 
             <div className="hero-eyebrow-pill inline-flex items-center gap-2.5 w-fit px-3 py-1 rounded-full bg-[#D4AF37]/10 border border-[#D4AF37]/30 text-[10px] sm:text-[11px] tracking-[0.22em] text-[#F0C75E] uppercase mb-4 sm:mb-6 font-heading">
 
-              <span className="w-1.5 h-1.5 rounded-full bg-[#D4AF37] shadow-[0_0_6px_#D4AF37]" />
-
               <span className="font-paragraph">
                 IEEE COMPUTER SOCIETY
               </span>
@@ -2122,7 +2120,7 @@ export default function Hero() {
               >
 
                 <span className="text-base text-[#D4AF37] font-semibold font-heading">
-                  //
+
                 </span>
 
                 <p className="text-lg sm:text-xl md:text-2xl font-light text-[#E5E5E5] tracking-wide font-mistical">
