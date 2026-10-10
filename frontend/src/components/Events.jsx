@@ -142,11 +142,6 @@ const Events = () => {
 
         <div className="pointer-events-none absolute left-1/2 top-1/2 h-[350px] w-[350px] sm:h-[500px] sm:w-[500px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#D4AF37]/[0.035] blur-[120px]" />
 
-        <div className="absolute left-[8%] top-[15%] h-1 w-1 rounded-full bg-[#D4AF37]" />
-        <div className="absolute right-[12%] top-[30%] h-1 w-1 rounded-full bg-[#D4AF37]" />
-        <div className="absolute bottom-[20%] left-[10%] h-1 w-1 rounded-full bg-[#D4AF37]" />
-        <div className="absolute bottom-[12%] right-[8%] h-1 w-1 rounded-full bg-[#D4AF37]" />
-
         <div className="relative mx-auto flex max-w-[920px] flex-col items-center justify-center">
           <div className="mb-8 sm:mb-10">
             <Header>THE EVENT</Header>
@@ -155,10 +150,6 @@ const Events = () => {
           <div className="relative w-full rounded-[24px] sm:rounded-[30px] border border-[#D4AF37]/40 bg-[#000000] p-[1px] shadow-[0_0_60px_rgba(212,175,55,0.05)]">
             <div className="relative overflow-hidden rounded-[23px] sm:rounded-[29px] border border-[#FFFFFF]/10 px-5 py-8 sm:px-10 md:px-14 md:py-14">
               <div className="pointer-events-none absolute right-[-100px] top-[-100px] h-[280px] w-[280px] rounded-full bg-[#D4AF37]/[0.04] blur-[90px]" />
-
-              <div className="absolute left-5 top-12 h-1 w-1 rounded-full bg-[#D4AF37]" />
-              <div className="absolute right-7 top-24 h-1 w-1 rounded-full bg-[#D4AF37]" />
-              <div className="absolute bottom-14 right-7 h-1 w-1 rounded-full bg-[#D4AF37]" />
 
               <h1 className="relative font-mistical text-3xl font-extrabold uppercase leading-none tracking-[-0.04em] text-[#FFFFFF] sm:text-5xl md:text-6xl">
                 core
