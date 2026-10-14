@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { createBrowserRouter, Outlet, RouterProvider } from 'react-router-dom'
+import { createBrowserRouter, Outlet, RouterProvider, useLocation } from 'react-router-dom'
 import Navbar from './components/Navbar'
 import Footer from './components/Footer'
 
@@ -15,16 +15,23 @@ import NotFound from './pages/NotFound'
 import Registration from './pages/Registration'
 
 const Structure = () => {
+  const location = useLocation();
+
   return (
     <div className='bg-black text-white select-none min-h-screen w-full flex flex-col'>
       <Navbar />
+
       <main className='flex-1 w-full flex flex-col'>
         <Outlet />
       </main>
+
       <Footer />
+
+      {location.pathname !== '/registrations' && <Cursor />}
     </div>
   )
 }
+
 
 const router = createBrowserRouter([
   {
@@ -45,7 +52,7 @@ const router = createBrowserRouter([
         element: <ContactUs />
       },
       {
-        path:'/registrations',
+        path: '/registrations',
         element: <Registration />
       }
     ]
@@ -67,7 +74,6 @@ const App = () => {
   return (
     <div className="w-full min-h-screen flex flex-col bg-black text-white">
       <RouterProvider router={router} />
-      <Cursor />
     </div>
   )
 }
