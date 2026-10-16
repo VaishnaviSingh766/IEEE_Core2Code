@@ -112,19 +112,6 @@ const Registration = () => {
             className="absolute inset-x-12 top-0 h-px bg-gradient-to-r from-transparent via-[#D4AF37]/70 to-transparent"
           />
 
-          <div className="mb-6 px-3 text-center sm:px-0">
-            <h2
-              id="ticketing-title"
-              className="font-mistical text-base text-neutral-200"
-            >
-              Choose your ticket
-            </h2>
-            <p className="font-paragraph mt-2 text-sm text-neutral-400">
-              Enter your participant details and complete payment securely
-              through KonfHub.
-            </p>
-          </div>
-
           {widgetState === "loading" && !widget.error && (
             <div
               className="absolute inset-x-2 top-24 z-10 flex min-h-[30rem] items-center justify-center gap-2 rounded-2xl bg-black/30 text-sm text-neutral-400 sm:inset-x-6"
