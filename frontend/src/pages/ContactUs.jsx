@@ -479,46 +479,6 @@ ${message}`;
                       sm:text-[15px]
                     "
                   >
-                    D Jaya Srikar
-                  </div>
-
-                  <div
-                    className="
-                      font-mistical
-                      mt-[2px]
-                      text-[12px]
-                      leading-[1.35]
-                      text-[#F5C542]
-                      sm:text-[13px]
-                    "
-                  >
-                    Chairman
-                  </div>
-
-                  <div
-                    className="
-                      font-number
-                      mt-[2px]
-                      text-[12px]
-                      leading-[1.35]
-                      text-[#999]
-                      sm:text-[13px]
-                    "
-                  >
-                    +91 8217651756
-                  </div>
-                </div>
-
-                <div className="mt-5">
-                  <div
-                    className="
-                      font-paragraph
-                      text-[14px]
-                      leading-[1.35]
-                      text-white
-                      sm:text-[15px]
-                    "
-                  >
                     Chetan Kumar R S
                   </div>
 
@@ -532,7 +492,7 @@ ${message}`;
                       sm:text-[13px]
                     "
                   >
-                    Vice Chairman
+                    Chairman IEEE CS
                   </div>
 
                   <div
@@ -546,6 +506,46 @@ ${message}`;
                     "
                   >
                     +91 7676967922
+                  </div>
+                </div>
+
+                <div className="mt-5">
+                  <div
+                    className="
+                      font-paragraph
+                      text-[14px]
+                      leading-[1.35]
+                      text-white
+                      sm:text-[15px]
+                    "
+                  >
+                    Amogh Kashyap S N
+                  </div>
+
+                  <div
+                    className="
+                      font-mistical
+                      mt-[2px]
+                      text-[12px]
+                      leading-[1.35]
+                      text-[#F5C542]
+                      sm:text-[13px]
+                    "
+                  >
+                    Vice-chairman IEEE CS
+                  </div>
+
+                  <div
+                    className="
+                      font-number
+                      mt-[2px]
+                      text-[12px]
+                      leading-[1.35]
+                      text-[#999]
+                      sm:text-[13px]
+                    "
+                  >
+                    +91 9482024180
                   </div>
                 </div>
               </div>
