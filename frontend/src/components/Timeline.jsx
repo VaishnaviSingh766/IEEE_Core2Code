@@ -5,8 +5,8 @@ import Header from "../utils/Header";
 // th = scroll point (0 to 1) where the row boards
 const DEFAULT_PHASES = [
   { t: "REGISTRATION", d: "15 Oct - 24 Oct 2026", tag: "", th: 0.12, items: [["Registrations open", 1]] },
-  { t: "ONLINE ROUND", d: "24 Oct 2026", tag: "", th: 0.45, items: [["MCQ Round", 1], ["Elimination Phase-1", 0], ["Coding Test", 0],["Elimination Phase-2", 0]] },
-  { t: "FINALE", d: "24 Oct - 25 Oct 2026", tag: "", th: 0.78, items: [["Domain Reveal", 0],["Build Time",0], ["Submission", 0], ["Result Announcement", 0]] },
+  { t: "OFFLINE ROUND", d: "24 Oct 2026", tag: "", th: 0.45, items: [["MCQ Round", 1], ["Elimination Phase-1", 0], ["Coding Test", 0], ["Elimination Phase-2", 0]] },
+  { t: "FINALE (ONLINE)", d: "24 Oct - 25 Oct 2026", tag: "", th: 0.78, items: [["Domain Reveal", 0], ["Build Time", 0], ["Submission", 0], ["Result Announcement", 0]] },
 ];
 /* ===================================== */
 
@@ -257,7 +257,7 @@ export default function Core2CodeTimeline({
           className="font-mistical text-center text-[11px] text-[#D4AF37] transition-opacity duration-[400ms]"
           style={{ opacity: p < 0.03 ? 1 : 0 }}
         >
-          
+
         </div>
       </div>
     </div>

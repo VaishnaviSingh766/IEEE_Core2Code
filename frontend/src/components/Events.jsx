@@ -37,7 +37,7 @@ const Events = () => {
       },
       {
         number: 3,
-        title: "Final Build",
+        title: "Final Build (ONLINE)",
         description:
           "Turn your ideas into a practical solution for a real-world problem.",
         points: [
@@ -75,7 +75,7 @@ const Events = () => {
       },
       {
         number: 3,
-        title: "Final Build",
+        title: "Final Build (ONLINE)",
         description:
           "Solve a real-world problem and transform your idea into a working solution.",
         points: [
@@ -230,11 +230,10 @@ const Events = () => {
                   <button
                     type="button"
                     onClick={() => selectTrack("first")}
-                    className={`font-paragraph flex-1 rounded-lg px-2.5 py-2.5 text-xs transition-all duration-300 sm:px-3 sm:py-3 sm:text-sm ${
-                      selectedTrack === "first"
-                        ? "bg-[#D4AF37] font-semibold text-[#000000]"
-                        : "text-[#FFFFFF]/50 hover:text-[#FFFFFF]"
-                    }`}
+                    className={`font-paragraph flex-1 rounded-lg px-2.5 py-2.5 text-xs transition-all duration-300 sm:px-3 sm:py-3 sm:text-sm ${selectedTrack === "first"
+                      ? "bg-[#D4AF37] font-semibold text-[#000000]"
+                      : "text-[#FFFFFF]/50 hover:text-[#FFFFFF]"
+                      }`}
                   >
                     First year
                   </button>
@@ -242,11 +241,10 @@ const Events = () => {
                   <button
                     type="button"
                     onClick={() => selectTrack("second")}
-                    className={`font-paragraph flex-1 rounded-lg px-2.5 py-2.5 text-xs transition-all duration-300 sm:px-3 sm:py-3 sm:text-sm ${
-                      selectedTrack === "second"
-                        ? "bg-[#D4AF37] font-semibold text-[#000000]"
-                        : "text-[#FFFFFF]/50 hover:text-[#FFFFFF]"
-                    }`}
+                    className={`font-paragraph flex-1 rounded-lg px-2.5 py-2.5 text-xs transition-all duration-300 sm:px-3 sm:py-3 sm:text-sm ${selectedTrack === "second"
+                      ? "bg-[#D4AF37] font-semibold text-[#000000]"
+                      : "text-[#FFFFFF]/50 hover:text-[#FFFFFF]"
+                      }`}
                   >
                     Second & third year
                   </button>
@@ -259,31 +257,28 @@ const Events = () => {
                     className="flex min-w-0 flex-1 flex-col items-center"
                   >
                     <div
-                      className={`font-number flex h-8 w-8 sm:h-9 sm:w-9 items-center justify-center rounded-full border text-xs sm:text-sm transition-all duration-300 ${
-                        selectedRound === 1
-                          ? "border-[#D4AF37] bg-[#D4AF37] text-[#000000] shadow-[0_0_20px_rgba(212,175,55,0.3)]"
-                          : "border-[#FFFFFF]/20 bg-[#000000] text-[#FFFFFF]"
-                      }`}
+                      className={`font-number flex h-8 w-8 sm:h-9 sm:w-9 items-center justify-center rounded-full border text-xs sm:text-sm transition-all duration-300 ${selectedRound === 1
+                        ? "border-[#D4AF37] bg-[#D4AF37] text-[#000000] shadow-[0_0_20px_rgba(212,175,55,0.3)]"
+                        : "border-[#FFFFFF]/20 bg-[#000000] text-[#FFFFFF]"
+                        }`}
                     >
                       1
                     </div>
 
                     <span
-                      className={`font-mistical mt-1.5 sm:mt-2 text-center text-[9px] sm:text-xs font-medium truncate max-w-[75px] sm:max-w-none ${
-                        selectedRound === 1
-                          ? "text-[#D4AF37]"
-                          : "text-[#FFFFFF]/40"
-                      }`}
+                      className={`font-mistical mt-1.5 sm:mt-2 text-center text-[9px] sm:text-xs font-medium truncate max-w-[75px] sm:max-w-none ${selectedRound === 1
+                        ? "text-[#D4AF37]"
+                        : "text-[#FFFFFF]/40"
+                        }`}
                     >
                       The Foundation
                     </span>
                   </button>
 
-                  <div className={`mt-[15px] sm:mt-[18px] h-px flex-1 transition-all duration-500 ${
-                    selectedRound >= 2
-                      ? "bg-[#D4AF37] shadow-[0_0_8px_2px_rgba(212,175,55,0.6)]"
-                      : "bg-[#FFFFFF]/10"
-                  }`} />
+                  <div className={`mt-[15px] sm:mt-[18px] h-px flex-1 transition-all duration-500 ${selectedRound >= 2
+                    ? "bg-[#D4AF37] shadow-[0_0_8px_2px_rgba(212,175,55,0.6)]"
+                    : "bg-[#FFFFFF]/10"
+                    }`} />
 
                   <button
                     type="button"
@@ -291,31 +286,28 @@ const Events = () => {
                     className="flex min-w-0 flex-1 flex-col items-center"
                   >
                     <div
-                      className={`font-number flex h-8 w-8 sm:h-9 sm:w-9 items-center justify-center rounded-full border text-xs sm:text-sm transition-all duration-300 ${
-                        selectedRound === 2
-                          ? "border-[#D4AF37] bg-[#D4AF37] text-[#000000] shadow-[0_0_20px_rgba(212,175,55,0.3)]"
-                          : "border-[#FFFFFF]/20 bg-[#000000] text-[#FFFFFF]"
-                      }`}
+                      className={`font-number flex h-8 w-8 sm:h-9 sm:w-9 items-center justify-center rounded-full border text-xs sm:text-sm transition-all duration-300 ${selectedRound === 2
+                        ? "border-[#D4AF37] bg-[#D4AF37] text-[#000000] shadow-[0_0_20px_rgba(212,175,55,0.3)]"
+                        : "border-[#FFFFFF]/20 bg-[#000000] text-[#FFFFFF]"
+                        }`}
                     >
                       2
                     </div>
 
                     <span
-                      className={`font-mistical mt-1.5 sm:mt-2 text-center text-[9px] sm:text-xs font-medium truncate max-w-[75px] sm:max-w-none ${
-                        selectedRound === 2
-                          ? "text-[#D4AF37]"
-                          : "text-[#FFFFFF]/40"
-                      }`}
+                      className={`font-mistical mt-1.5 sm:mt-2 text-center text-[9px] sm:text-xs font-medium truncate max-w-[75px] sm:max-w-none ${selectedRound === 2
+                        ? "text-[#D4AF37]"
+                        : "text-[#FFFFFF]/40"
+                        }`}
                     >
                       DSA Arena
                     </span>
                   </button>
 
-                  <div className={`mt-[15px] sm:mt-[18px] h-px flex-1 transition-all duration-500 ${
-                    selectedRound >= 3
-                      ? "bg-[#D4AF37] shadow-[0_0_8px_2px_rgba(212,175,55,0.6)]"
-                      : "bg-white/10"
-                  }`} />
+                  <div className={`mt-[15px] sm:mt-[18px] h-px flex-1 transition-all duration-500 ${selectedRound >= 3
+                    ? "bg-[#D4AF37] shadow-[0_0_8px_2px_rgba(212,175,55,0.6)]"
+                    : "bg-white/10"
+                    }`} />
 
                   <button
                     type="button"
@@ -323,23 +315,21 @@ const Events = () => {
                     className="flex min-w-0 flex-1 flex-col items-center"
                   >
                     <div
-                      className={`font-number flex h-8 w-8 sm:h-9 sm:w-9 items-center justify-center rounded-full border text-xs sm:text-sm transition-all duration-300 ${
-                        selectedRound === 3
-                          ? "border-[#D4AF37] bg-[#D4AF37] text-[#000000] shadow-[0_0_20px_rgba(212,175,55,0.3)]"
-                          : "border-[#FFFFFF]/20 bg-[#000000] text-[#FFFFFF]"
-                      }`}
+                      className={`font-number flex h-8 w-8 sm:h-9 sm:w-9 items-center justify-center rounded-full border text-xs sm:text-sm transition-all duration-300 ${selectedRound === 3
+                        ? "border-[#D4AF37] bg-[#D4AF37] text-[#000000] shadow-[0_0_20px_rgba(212,175,55,0.3)]"
+                        : "border-[#FFFFFF]/20 bg-[#000000] text-[#FFFFFF]"
+                        }`}
                     >
                       3
                     </div>
 
                     <span
-                      className={`font-mistical mt-1.5 sm:mt-2 text-center text-[9px] sm:text-xs font-medium truncate max-w-[75px] sm:max-w-none ${
-                        selectedRound === 3
-                          ? "text-[#D4AF37]"
-                          : "text-[#FFFFFF]/40"
-                      }`}
+                      className={`font-mistical mt-1.5 sm:mt-2 text-center text-[9px] sm:text-xs font-medium truncate max-w-[75px] sm:max-w-none ${selectedRound === 3
+                        ? "text-[#D4AF37]"
+                        : "text-[#FFFFFF]/40"
+                        }`}
                     >
-                      Final Build
+                      Final Build (ONLINE)
                     </span>
                   </button>
                 </div>
